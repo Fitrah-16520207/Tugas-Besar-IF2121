@@ -3,7 +3,10 @@
 
 
 /*mengeprint inventory*/
-inventory :- inventory(Invent), printInventory(Invent).
+inventory :- 
+    inventory(Invent), 
+    printInventory(Invent).
+
 printInventory([]) :- !.
 printInventory([[Nama, Jumlah]|T]) :-
     write(Jumlah), write(' '), write(Nama),
@@ -61,8 +64,18 @@ drop(Item, Jumlah) :-
             retract(inventory(Invent)),
             assertz(inventory(NewInv))
         ;
-            write('jumlah item di inventory adan di kurangi')
+            write('jumlah item yang dibuang melebihi jumlah item yang dimiliki')
         )
     ;
         write('Anda tidak memiliki item tersebut di inventory anda')
     ).
+
+/*menambahkan command throwItem*/
+throwItem :-
+    write('Isi inventory kamu: '),
+    nl,inventory(invent),printInventory(invent),
+    write('apa yang ingin kamu buang: '),
+    nl,read(Item),
+    nl,write('masukkan jumlah item yang ingin anda buang: '),
+    nl,read(Jumlah),
+    drop(Item, Jumlah).
