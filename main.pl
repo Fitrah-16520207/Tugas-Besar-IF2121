@@ -2,6 +2,7 @@
 :- include('map.pl').
 :- include('item.pl').
 :- include('menu.pl').
+:- include('pemain.pl').
 
 :- dynamic(state/1).
 
