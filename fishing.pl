@@ -2,13 +2,13 @@
 
 
 fish :-
-    random_fish(tuna,Lv),
-    random_fish(nila,Lv),
-    random_fish(lele,Lv),
-    random_fish(gurame,Lv),
-    random_fish(patin,Lv),
-    random_fish(barracuda,Lv),
-    random_fish(hiu,Lv).
+    random_fish(tuna,Lvl),
+    random_fish(nila,Lvl),
+    random_fish(lele,Lvl),
+    random_fish(gurame,Lvl),
+    random_fish(patin,Lvl),
+    random_fish(barracuda,Lvl),
+    random_fish(hiu,Lvl).
 
 chance_item(tuna,5).
 chance_item(nila,30).
