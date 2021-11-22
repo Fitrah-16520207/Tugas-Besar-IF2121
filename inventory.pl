@@ -1,6 +1,4 @@
 /*deklarasi inventory*/
-:- include('item.pl').
-
 :- dynamic(inventory/1).
 
 
