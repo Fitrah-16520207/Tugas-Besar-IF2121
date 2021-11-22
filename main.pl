@@ -1,10 +1,24 @@
+:- include('inventory.pl').
+:- include('map.pl').
+:- include('item.pl').
+:- include('menu.pl').
+
+:- dynamic(state/1).
 
 
 
 
+state(not_started).
 
+setState(X) :-
+    retractall(state(_)),
+    asserta(state(X)).
 
-
+acak(A,B,X) :-
+    real_time(RT),
+    set_seed(RT),
+    random(A,B,R),
+    X is R.
 
 
 
@@ -13,48 +27,34 @@ startGame :-
     nl,
     read(Command),
     ((
-        Command = start
+        Command = start,
         start
     );
     (
-        Command = map
+        Command = map,
         map
     );
     (
-        Command = status
+        Command = status,
         status
     );
     (
-        Command = w
-        move_w
-    );
-    (
-        Command = s
-        move_s
-    );
-    (
-        Command = d
-        move_d
-    );
-    (
-        Command = a
-        move_a
-    );
-    (
-        Command = help
+        Command = help,
         help
     );
     (
-        Command = quit
+        Command = quit,
         quit
     )
     )
 
 start :-
     reset,
+    setState(free)
     write('Welcome to Harvest Star. Choose your job'),
     read(Job),
     setJob(Job).
+
 
 quit :-
     halt.
