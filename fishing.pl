@@ -22,6 +22,6 @@ random_fish(X,Lv) :-
     chance_item(X,C),
     Chance is C + Lv,
     acak(0,Chance,R),
-    R < Chance,
+    R <= Chance,
     write('Dapat ikan').
 
