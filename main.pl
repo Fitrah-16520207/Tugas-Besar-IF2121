@@ -45,6 +45,9 @@ startGame :-
     (
         Command = quit,
         quit
+    );
+    (
+        write('Command tidak dikenali karena kamu belum memulai game.\nSilakan start untuk memulai game')
     )
     ).
 
@@ -55,18 +58,22 @@ start :-
     write('1. Fisherman.\n'),
     write('2. Farmer\n'),
     write('3. Rancher\n'),
+    write('Input berupa nomor.\n'),
     read(Job),
     ((
         Job = 1,
-        setJob(fisherman)
+        setJob(fisherman),
+        write('Kamu berhasil menjadi fisherman')
     );
     (
         Job = 2,
-        setJob(farmer)
+        setJob(farmer),
+        write('Kamu berhasil menjadi farmer')
     );
     (
         Job = 3,
-        setJob(rancher)
+        setJob(rancher),
+        write('Kamu berhasil menjadi rancher')
     )
     ).
 
