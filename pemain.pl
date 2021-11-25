@@ -57,13 +57,13 @@ baseStats :-
     asserta(playerJob(rancher)).
 
 % Set Rules 
-setState(fisherman) :-
+setJob(fisherman) :-
     asserta(playerJob(fisherman)).
 
-setState(farmer) :-
+setJob(farmer) :-
     asserta(playerJob(farmer)).
 
-setState(rancher) :-
+setJob(rancher) :-
     asserta(playerJob(rancher)).
 
 % 
@@ -110,7 +110,7 @@ earnGold(X) :-
     asserta(gold(NewGold)).
 
 % Level Up System
-levelUp() :-
+levelUp :-
     level(CurrLvl),
 
     retractall(experience(_)),
@@ -127,7 +127,7 @@ levelUp() :-
 
 
 % Status Window
-status() :-
+status :-
     level(Lvl),
     levelFarming(LvlFarm),
     levelFishing(LvlFish),
@@ -143,7 +143,7 @@ status() :-
     gold(Gold),
 
     write('Your status:'), nl,
-    statusJob(), nl,
+    statusJob, nl,
     format('Level: ~d', [Lvl]), nl,
     format('Level farming: ~d', [LvlFarm]), nl,
     format('Exp farming: ~d/~d', [ExpFarm, BExpFarm]), nl,
@@ -154,7 +154,7 @@ status() :-
     format('Exp: ~d/~d', [Exp, BExp]), nl,
     format('Gold: ~d', [Gold]), nl.
 
-statusJob() :-
+statusJob :-
     (
         playerJob(fisherman), !,
         write('Job: Fisherman')

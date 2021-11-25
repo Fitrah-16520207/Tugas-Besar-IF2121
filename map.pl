@@ -4,8 +4,6 @@
 % pojok kanan bawah adalah (10, 15)
 % pagar ada di (0, Ry), (11, Ry) dan (Rx, 0), (Rx, 16) dengan 0<=Ry<=16 dan 0<=Rx<=11
 
-% sementara
-state(free).
 
 :- dynamic(playerPoint/2).
 :- dynamic(playerCell/1).
