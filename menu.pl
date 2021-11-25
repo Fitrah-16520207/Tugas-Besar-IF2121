@@ -1,14 +1,14 @@
 mainMenu :-
-    write('   _   _                           _   \n')
-    write('  | | | | __ _ _ ____   _____  ___| |_ \n')
-    write("  | |_| |/ _` | '__\ \ / / _ \/ __| __|\n")
-    write('  |  _  | (_| | |   \ V /  __/\__ \ |_ \n')
-    write('  |_| |_|\__,_|_|    \_/ \___||___/\__|\n')
-    nl
-    write('Harvest Star!!!')
-    nl
-    write("Let's play and pay our debts together!")
-    nl
+    write('   _   _                           _   \n'),
+    write('  | | | | __ _ _ ____   _____  ___| |_ \n'),
+    write('  | |_| |/ _` | \'__\\ \\ / / _ \\/ __| __|\n'),
+    write('  |  _  | (_| | |   \\ V /  __/\\__ \\ |_ \n'),
+    write('  |_| |_|\\__,_|_|    \\_/ \\___||___/\\__|\n'),
+    nl,
+    write('Harvest Star!!!'),
+    nl,
+    write('Let`s play and pay our debts together!'),
+    nl,
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
     write('%                              ~Harvest Star~                                  %\n'),
     write('% 1. start  : untuk memulai petualanganmu                                      %\n'),
@@ -42,13 +42,10 @@ help :-
     write('% - market       : menjual atau membeli barang di pasar ketika kamu berada di tile M%\n'),
     write('% - house        : masuk ke rumah ketika kamu berada di tile rumah                  %\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
-    nl
+    nl,
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
     write('%                           ~Tujuan Permainan~                                      %\n'),
     write('%Kamu dinyatakan menang jika kamu berhasil mengumpulkan uang sebesar 20000 gold     %\n'),
     write('%dalam jangka waktu 1 tahun.                                                        %\n'),
     write('%Jika gagal mengumpulkan 20000 gold dalam satu tahun maka kamu dinyatakan kalah     %\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Good Luck%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n').
-
-
-
