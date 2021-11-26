@@ -4,11 +4,6 @@ dapet_ikan(belum).
 set_dapet_ikan(X) :-
     retractall(dapet_ikan(_)),
     asserta(dapet_ikan(X)).
-acak(A,B,X) :-
-    real_time(RT),
-    set_seed(RT),
-    random(A,B,R),
-    X is R.
 
 fish(0):-
     write('Anda tidak punya umpan untuk memancing'),!.
@@ -24,17 +19,19 @@ fish(J):-
     read(X),
     fishing(X).
 
-fishing(legend) :- dapet_ikan(belum),random_fish(hiu,1).
-fishing(legend) :- dapet_ikan(belum),random_fish(barracuda,1).
-fishing(rare) :- dapet_ikan(belum),random_fish(tuna,1).
-fishing(good) :- dapet_ikan(belum),random_fish(patin,1).
-fishing(good) :- dapet_ikan(belum),random_fish(gurame,1).
-fishing(normal) :- dapet_ikan(belum),random_fish(nila,1).
-fishing(normal) :- dapet_ikan(belum),random_fish(lele,1).
+fishing(legend) :- dapet_ikan(belum),random_fish(hiu,Lvl).
+fishing(legend) :- dapet_ikan(belum),random_fish(barracuda,Lvl).
+fishing(rare) :- dapet_ikan(belum),random_fish(tuna,Lvl).
+fishing(rare) :- dapet_ikan(belum),random_fish(salmon,Lvl).
+fishing(good) :- dapet_ikan(belum),random_fish(patin,Lvl).
+fishing(good) :- dapet_ikan(belum),random_fish(gurame,Lvl).
+fishing(normal) :- dapet_ikan(belum),random_fish(nila,Lvl).
+fishing(normal) :- dapet_ikan(belum),random_fish(lele,Lvl).
 fishing(_) :- dapet_ikan(belum),write('Tidak dapat ikan\n').
 fishing(_) :- set_dapet_ikan(belum).
 
 chance_item(tuna,5).
+chance_item(salmon,8).
 chance_item(nila,30).
 chance_item(lele,50).
 chance_item(gurame,10).

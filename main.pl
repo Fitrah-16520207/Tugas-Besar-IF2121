@@ -21,11 +21,11 @@ setState(X) :-
     retractall(state(_)),
     asserta(state(X)).
 
-% acak(A,B,X) :-
-%     real_time(RT),
-%     set_seed(RT),
-%     random(A,B,R),
-%     X is R.
+acak(A,B,X) :-
+    real_time(RT),
+    set_seed(RT),
+    random(A,B,R),
+    X is R.
 
 quit :-
     halt.
