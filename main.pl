@@ -75,5 +75,6 @@ start :-
         setJob(rancher),
         write('Kamu berhasil menjadi rancher')
     )
-    ).
+    ),
+    baseStats.
 
