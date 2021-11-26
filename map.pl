@@ -291,3 +291,71 @@ cellCheck(R, C) :-
 cellCheck(_, _) :-
     retractall(playerCell(_)),
     asserta(playerCell('-')).
+
+teleport :-
+  state(free),
+  write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+  write('%                              ~Teleport Menu~                                 %\n'),
+  write('% 1. marketplace                                                               %\n'),
+  write('% 2. quest                                                                     %\n'),
+  write('% 3. ranching                                                                  %\n'),
+  write('% 4. house                                                                     %\n'),
+  write('% 5. waterTile                                                                 %\n'),
+  write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+  nl, nl,
+  write('Kamu mau teleport ke mana? '),
+  read(Tujuan),
+  (
+    (
+      (Tujuan = marketplace; Tujuan = 1), !,
+      marketplacePoint(X, Y),
+      retractall(playerCell(_)),
+      retractall(playerPoint(_, _)),
+      asserta(playerCell('M')),
+      asserta(playerPoint(X, Y)),
+      map,
+      write('Kamu berhasil teleport ke marketplace\n')
+    );
+    (
+      (Tujuan = quest; Tujuan = 2), !,
+      questPoint(X, Y),
+      retractall(playerCell(_)),
+      retractall(playerPoint(_, _)),
+      asserta(playerCell('Q')),
+      asserta(playerPoint(X, Y)),
+      map,
+      write('Kamu berhasil teleport ke quest\n')
+    );
+    (
+      (Tujuan = ranching; Tujuan = 3), !,
+      ranchPoint(X, Y),
+      retractall(playerCell(_)),
+      retractall(playerPoint(_, _)),
+      asserta(playerCell('R')),
+      asserta(playerPoint(X, Y)),
+      map,
+      write('Kamu berhasil teleport ke ranching\n')
+    );
+    (
+      (Tujuan = house; Tujuan = 4), !,
+      housePoint(X, Y),
+      retractall(playerCell(_)),
+      retractall(playerPoint(_, _)),
+      asserta(playerCell('H')),
+      asserta(playerPoint(X, Y)),
+      map,
+      write('Kamu berhasil teleport ke house\n')
+    );
+    (
+      (Tujuan = waterTile; Tujuan = 5),
+      retractall(playerCell(_)),
+      retractall(playerPoint(_, _)),
+      asserta(playerCell('o')),
+      asserta(playerPoint(6, 8)),
+      map,
+      write('Kamu berhasil teleport ke dekat water tile\n')
+    );
+    (
+      write('Tidak ada portal di tempat pilihanmu, teleport dibatalkan.\n')
+    )
+  ).

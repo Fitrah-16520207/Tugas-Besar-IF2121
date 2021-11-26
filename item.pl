@@ -47,6 +47,7 @@ itemPrice(egg,50).
 itemPrice(wol,200).
 itemPrice(milk,50).
 itemPrice(tuna,200).
+itemPrice(tuna,175).
 itemPrice(nila,50).
 itemPrice(lele,30).
 itemPrice(gurame,80).
