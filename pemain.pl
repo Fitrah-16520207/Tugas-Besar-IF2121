@@ -16,11 +16,6 @@
 :- dynamic(experienceFarming/1).
 :- dynamic(experienceRanching/1).
 
-:- dynamic(baseExp/1).
-:- dynamic(baseExpFish/1).
-:- dynamic(baseExpFarm/1).
-:- dynamic(baseExpRanch/1).
-
 :- dynamic(gold/1).
 :- dynamic(days/1).
 
@@ -48,23 +43,17 @@ baseStats :-
     asserta(experienceFarming(0)),
     asserta(experienceRanching(0)),
 
-    asserta(baseExp(15)),
-    asserta(baseExpFarm(7)),
-    asserta(baseExpFish(7)),
-    asserta(baseExpRanch(7)),
+    asserta(levelUpCap(15)),
+    asserta(levelUpCapFarming(7)),
+    asserta(levelUpCapFishing(7)),
+    asserta(levelUpCapRanching(7)),
     asserta(gold(1000)),
 
-    asserta(playerJob(rancher)).
+    asserta(days(1)).
 
 % Set Rules 
-setState(fisherman) :-
-    asserta(playerJob(fisherman)).
-
-setState(farmer) :-
-    asserta(playerJob(farmer)).
-
-setState(rancher) :-
-    asserta(playerJob(rancher)).
+setJob(X) :-
+    asserta(playerJob(X)).
 
 % 
 earnExp(X) :-
@@ -112,19 +101,79 @@ earnGold(X) :-
 % Level Up System
 levelUp() :-
     level(CurrLvl),
+    experience(CurrExp),
+    levelUpCap(LUC),
 
     retractall(experience(_)),
     retractall(level(_)),
     retractall(levelUpCap(_)),
 
     NewLvl is CurrLvl + 1,
+    NewExp is CurrExp - LUC,
     NewLUC is 7 * (2 ** NewLvl) + NewLvl,
 
     asserta(level(NewLvl)),
     asserta(levelUpCap(NewLUC)),
+    asserta(experience(NewExp)),
 
-    format('Congratulation, now your level is ~w', [NewLvl]).
+    format('Congratulation, now your level is ~w', [NewLvl]), !.
 
+levelUpFarming() :-
+    levelFarming(CurrLvl),
+    experienceFarming(CurrExp),
+    levelUpCapFarming(LUC),
+    
+    retractall(levelFarming(_)),
+    retractall(experienceFarming(_)),
+    retractall(levelUpCapFarming(_)),
+
+    NewLvl is CurrLvl + 1,
+    NewExp is CurrExp - LUC,
+    NewLUC is 7 * (2 ** NewLvl) + NewLvl,
+
+    asserta(levelFarming(NewLvl)),
+    asserta(levelUpCapFarming(NewLUC)),
+    asserta(experienceFarming(NewExp)),
+
+    format('Congratulation, now your farming level is ~w', [NewLvl]), !.
+
+levelUpFishing() :-
+    levelFishing(CurrLvl),
+    experienceFishing(CurrExp),
+    levelUpCapFishing(LUC),
+    
+    retractall(levelFishing(_)),
+    retractall(experienceFishing(_)),
+    retractall(levelUpCapFishing(_)),
+
+    NewLvl is CurrLvl + 1,
+    NewExp is CurrExp - LUC,
+    NewLUC is 7 * (2 ** NewLvl) + NewLvl,
+
+    asserta(levelFishing(NewLvl)),
+    asserta(levelUpCapFishing(NewLUC)),
+    asserta(experienceFishing(NewExp)),
+
+    format('Congratulation, now your fishing level is ~w', [NewLvl]), !.
+
+levelUpRanching() :-
+    levelRanching(CurrLvl),
+    experienceRanching(CurrExp),
+    levelUpCapRanching(LUC),
+    
+    retractall(levelRanching(_)),
+    retractall(experienceRanching(_)),
+    retractall(levelUpCapRanching(_)),
+
+    NewLvl is CurrLvl + 1,
+    NewExp is CurrExp - LUC,
+    NewLUC is 7 * (2 ** NewLvl) + NewLvl,
+
+    asserta(levelRanching(NewLvl)),
+    asserta(levelUpCapRanching(NewLUC)),
+    asserta(experienceRanching(NewExp)),
+
+    format('Congratulation, now your ranching level is ~w', [NewLvl]), !.
 
 % Status Window
 status() :-
@@ -136,34 +185,41 @@ status() :-
     experienceFarming(ExpFarm),
     experienceFishing(ExpFish),
     experienceRanching(ExpRanch),
-    baseExp(BExp),
-    baseExpFarm(BExpFarm),
-    baseExpFish(BExpFish),
-    baseExpRanch(BExpRanch),
+    levelUpCap(LUC),
+    levelUpCapFarming(LUCFarm),
+    levelUpCapFishing(LUCFish),
+    levelUpCapRanching(LUCRanch),
     gold(Gold),
 
     write('Your status:'), nl,
     statusJob(), nl,
     format('Level: ~d', [Lvl]), nl,
     format('Level farming: ~d', [LvlFarm]), nl,
-    format('Exp farming: ~d/~d', [ExpFarm, BExpFarm]), nl,
+    format('Exp farming: ~d/~d', [ExpFarm, LUCFarm]), nl,
     format('Level fishing: ~d', [LvlFish]), nl,
-    format('Exp fishing: ~d/~d', [ExpFish, BExpFish]), nl,
+    format('Exp fishing: ~d/~d', [ExpFish, LUCFish]), nl,
     format('Level ranching: ~d', [LvlRanch]), nl,
-    format('Exp ranching: ~d/~d', [ExpRanch, BExpRanch]), nl,
-    format('Exp: ~d/~d', [Exp, BExp]), nl,
-    format('Gold: ~d', [Gold]), nl.
+    format('Exp ranching: ~d/~d', [ExpRanch, LUCRanch]), nl,
+    format('Exp: ~d/~d', [Exp, LUC]), nl,
+    format('Gold: ~d', [Gold]), nl, !. 
 
 statusJob() :-
     (
-        playerJob(fisherman), !,
+        playerJob(fisherman),
         write('Job: Fisherman')
     );
     (
-        playerJob(farmer), !,
+        playerJob(farmer),
         write('Job: Farmer')   
     );
     (
-        playerJob(rancher), !,
+        playerJob(rancher),
         write('Job: Rancher')    
     ).
+
+addDays() :-
+    days(CurrDays),
+    retractall(days(_)),
+
+    NewDays is CurrDays + 1,
+    asserta(days(NewDays)).
