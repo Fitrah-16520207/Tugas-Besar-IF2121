@@ -14,11 +14,16 @@ dig :-
 
 dig :-
     state(free),
+    inventory(Invent),
     playerCell(C),
     C = ('-'),
-    playerPoint(X,Y),
-    asserta(diggedTilePoint(X, Y)),
-    write('lokasi berhasil digali').
+    (member(['shovel',_], Invent) ->
+        playerPoint(X,Y),
+        asserta(diggedTilePoint(X, Y)),
+        write('lokasi berhasil digali')
+    ;
+        write('Anda harus punya shovel untuk mengggali')
+    ).
 
 plant :-
     state(not_started),!,
