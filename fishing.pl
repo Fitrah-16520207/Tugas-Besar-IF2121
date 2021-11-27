@@ -7,9 +7,14 @@ set_dapet_ikan(X) :-
 
 fish(0):-
     write('Anda tidak punya umpan untuk memancing'),!.
-
+fish(_) :-
+    state(not_started), !,
+    write('Command tidak dikenali karena kamu belum memulai permainan').
 fish(J):-
+    state(free),
     J>0,
+    playerPoint(R, C),
+    NewR is R + 1,waterTilePoint(NewR, C),
     write('You have : \n'),
     write('normal fishing rod\n'),
     write('good fishing rod\n'),
@@ -18,15 +23,61 @@ fish(J):-
     write('Choose fishing rod\n'),
     read(X),
     fishing(X).
-
-fishing(legend) :- dapet_ikan(belum),random_fish(hiu,Lvl).
-fishing(legend) :- dapet_ikan(belum),random_fish(barracuda,Lvl).
-fishing(rare) :- dapet_ikan(belum),random_fish(tuna,Lvl).
-fishing(rare) :- dapet_ikan(belum),random_fish(salmon,Lvl).
-fishing(good) :- dapet_ikan(belum),random_fish(patin,Lvl).
-fishing(good) :- dapet_ikan(belum),random_fish(gurame,Lvl).
-fishing(normal) :- dapet_ikan(belum),random_fish(nila,Lvl).
-fishing(normal) :- dapet_ikan(belum),random_fish(lele,Lvl).
+fish(J):-
+    state(free),
+    J>0,
+    playerPoint(R, C),
+    NewR is R - 1,waterTilePoint(NewR, C),
+    write('You have : \n'),
+    write('normal fishing rod\n'),
+    write('good fishing rod\n'),
+    write('rare fishing rod\n'),
+    write('legend fishing rod\n'),
+    write('Choose fishing rod\n'),
+    read(X),
+    fishing(X).
+fish(J):-
+    state(free),
+    J>0,
+    playerPoint(R, C),
+    NewC is C + 1,waterTilePoint(R, NewC),
+    write('You have : \n'),
+    write('normal fishing rod\n'),
+    write('good fishing rod\n'),
+    write('rare fishing rod\n'),
+    write('legend fishing rod\n'),
+    write('Choose fishing rod\n'),
+    read(X),
+    fishing(X).
+fish(J):-
+    state(free),
+    J>0,
+    playerPoint(R, C),
+    NewC is C - 1,waterTilePoint(R, NewC),
+    write('You have : \n'),
+    write('normal fishing rod\n'),
+    write('good fishing rod\n'),
+    write('rare fishing rod\n'),
+    write('legend fishing rod\n'),
+    write('Choose fishing rod\n'),
+    read(X),
+    fishing(X).
+fish(_):-
+    write('Kamu tidak berada di sekitar danau').
+fishing(legend) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(hiu,LvlFish).
+fishing(legend) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(barracuda,LvlFish).
+fishing(rare) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(tuna,LvlFish).
+fishing(rare) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(salmon,LvlFish).
+fishing(good) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(tuna,LvlFish).
+fishing(good) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(salmon,LvlFish).
+fishing(normal) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(tuna,LvlFish).
+fishing(normal) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(salmon,LvlFish).
+fishing(good) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(patin,LvlFish).
+fishing(good) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(gurame,LvlFish).
+fishing(normal) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(patin,LvlFish).
+fishing(normal) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(gurame,LvlFish).
+fishing(_) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(nila,LvlFish).
+fishing(_) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(lele,LvlFish).
 fishing(_) :- dapet_ikan(belum),write('Tidak dapat ikan\n').
 fishing(_) :- set_dapet_ikan(belum).
 

@@ -14,6 +14,7 @@ item(turkey,ranching).
 item(egg,ranching).
 item(wol,ranching).
 item(milk,ranching).
+item(bait,fishing).
 item(tuna,fishing).
 item(nila,fishing).
 item(lele,fishing).
@@ -48,6 +49,7 @@ itemPrice(wol,200).
 itemPrice(milk,50).
 itemPrice(tuna,200).
 itemPrice(tuna,175).
+itemPrice(bait,5).
 itemPrice(nila,50).
 itemPrice(lele,30).
 itemPrice(gurame,80).
