@@ -1,7 +1,3 @@
-%mengimpor map
-:- include('map.pl').
-:- include('inventory.pl').
-
 %deklarasi farming
 :- dynamic(farming/1).
 
