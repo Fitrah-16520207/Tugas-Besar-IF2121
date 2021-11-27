@@ -65,7 +65,7 @@ baseStats :-
 % Set Rules 
 setJob(fisherman) :-
     asserta(playerJob(fisherman)),
-    asserta(inventory([[fishing_rod, 1], [bait, 1]])),
+    asserta(inventory([[normal_rod, 1], [bait, 1]])),
     write('Kamu berhasil menjadi fisherman\n'),
     write('Sebagai fisherman, kamu berhak memperoleh 1 buah pancingan biasa dan 1 bait\n').
 

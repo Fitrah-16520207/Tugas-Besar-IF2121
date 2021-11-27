@@ -26,7 +26,7 @@ item(hiu,fishing).
 item(pari,fishing).
 % tool
 item(bait,fishing).
-item(fishing_rod,fishing).
+item(normal_rod,fishing).
 item(good_rod,fishing).
 item(rare_rod,fishing).
 item(legend_rod,fishing).
@@ -46,7 +46,7 @@ buyable(sheep).
 buyable(cow).
 buyable(turkey).
 buyable(bait).
-buyable(fishing_rod).
+buyable(normal_rod).
 buyable(good_rod).
 buyable(rare_rod).
 buyable(legend_rod).
@@ -83,7 +83,7 @@ itemPrice(hiu,10000).
 itemPrice(pari,1000).
 % tool
 itemPrice(bait,5).
-itemPrice(fishing_rod,500).
+itemPrice(normal_rod,500).
 itemPrice(good_rod,2000).
 itemPrice(rare_rod,4000).
 itemPrice(legend_rod,10000).

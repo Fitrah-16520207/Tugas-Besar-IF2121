@@ -5,65 +5,77 @@ set_dapet_ikan(X) :-
     retractall(dapet_ikan(_)),
     asserta(dapet_ikan(X)).
 
-fish(0):-
-    write('Anda tidak punya umpan untuk memancing'),!.
-fish(_) :-
-    state(not_started), !,
-    write('Command tidak dikenali karena kamu belum memulai permainan').
-fish(J):-
-    state(free),
-    J>0,
+fish:-
     playerPoint(R, C),
     NewR is R + 1,waterTilePoint(NewR, C),
-    write('You have : \n'),
-    write('normal fishing rod\n'),
-    write('good fishing rod\n'),
-    write('rare fishing rod\n'),
-    write('legend fishing rod\n'),
-    write('Choose fishing rod\n'),
-    read(X),
-    fishing(X).
-fish(J):-
     state(free),
-    J>0,
+    jumlahBarang(bait,X),
+    X>0,
+    drop(bait),
+    mancing.
+fish:-
     playerPoint(R, C),
     NewR is R - 1,waterTilePoint(NewR, C),
-    write('You have : \n'),
-    write('normal fishing rod\n'),
-    write('good fishing rod\n'),
-    write('rare fishing rod\n'),
-    write('legend fishing rod\n'),
-    write('Choose fishing rod\n'),
-    read(X),
-    fishing(X).
-fish(J):-
     state(free),
-    J>0,
+    jumlahBarang(bait,X),
+    X>0,
+    drop(bait),
+    mancing.
+fish:-
     playerPoint(R, C),
     NewC is C + 1,waterTilePoint(R, NewC),
-    write('You have : \n'),
-    write('normal fishing rod\n'),
-    write('good fishing rod\n'),
-    write('rare fishing rod\n'),
-    write('legend fishing rod\n'),
-    write('Choose fishing rod\n'),
-    read(X),
-    fishing(X).
-fish(J):-
     state(free),
-    J>0,
+    jumlahBarang(bait,X),
+    X>0,
+    drop(bait),
+    mancing.
+fish:-
     playerPoint(R, C),
     NewC is C - 1,waterTilePoint(R, NewC),
-    write('You have : \n'),
-    write('normal fishing rod\n'),
-    write('good fishing rod\n'),
-    write('rare fishing rod\n'),
-    write('legend fishing rod\n'),
-    write('Choose fishing rod\n'),
+    state(free),
+    jumlahBarang(bait,X),
+    X>0,
+    drop(bait),
+    mancing.
+fish:-
+    jumlahBarang(bait,X),
+    X>0,
+    write('Kamu tidak berada di sekitar danau'),!.
+fish:-
+    state(free),
+    cekBarang(bait),nl,
+    write('Anda tidak punya umpan untuk memancing'),!.
+fish:-
+    state(not_started), !,
+    write('Command tidak dikenali karena kamu belum memulai permainan').
+mancing:-
+    write('Pancingan yang kamu punya: \n'),
+    printRod(good_rod),
+    printRod(normal_rod),
+    printRod(rare_rod),
+    printRod(legend_rod),
+    pancingan.
+
+printRod(X) :-
+    inventory(Invent),
+    (member([X, _], Invent) ->
+        write(' '), write(X),nl
+    ;
+        write('')
+    ).
+pancingan:-
+    write('Pilih pancingan yang akan kamu gunakan dengan mengetik nama pancingan'),nl,
     read(X),
+    jumlahBarang(X,Y),
+    Y>0,
     fishing(X).
-fish(_):-
-    write('Kamu tidak berada di sekitar danau').
+pancingan:-
+    write('Pilih pancingan yang akan kamu gunakan dengan mengetik nama pancingan'),ml,
+    read(X),
+    jumlahBarang(X,Y),
+    Y<1,
+    write('Kamu tidak mempunyai pancingan ini').
+
 fishing(legend) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(hiu,LvlFish).
 fishing(legend) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(barracuda,LvlFish).
 fishing(rare) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(tuna,LvlFish).
@@ -92,11 +104,12 @@ canche_item(hiu,1).
 
 random_fish(X,Lv) :-
     chance_item(X,C),
-    Chance is C + Lv,
+    Chance is C + Lv*5,
     acak(0,100,R),
     R =< Chance,
     write('Dapat ikan '),
     write(X),
+    addItem(X,1),
     set_dapet_ikan(udah),
     fail.
 
