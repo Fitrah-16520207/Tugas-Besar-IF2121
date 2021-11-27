@@ -72,13 +72,23 @@ drop(Item, Jumlah) :-
 
 /*menambahkan command throwItem*/
 throwItem :-
+    inventory(Invent),
     write('Isi inventory kamu: '),
-    nl,inventory(invent),printInventory(invent),
+    nl,inventory,
     write('apa yang ingin kamu buang: '),
     nl,read(Item),
     nl,write('masukkan jumlah item yang ingin anda buang: '),
     nl,read(Jumlah),
-    drop(Item, Jumlah).
+    (member([Item,JumlahInv], Invent) ->
+        (Jumlah =< JumlahInv -> 
+            drop(Item, Jumlah),
+            write('item berhasil dibuang')
+        ;
+            write('jumlah item yang dibuang melebihi jumlah item yang dimiliki')
+        )
+    ;
+        write('item tidak ada di inventory')
+    ).
 
 %menambahkan command cekBarang untuk memeriksa apakah barang ada atau tidak
 cekBarang :- 
