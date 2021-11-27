@@ -71,6 +71,7 @@ cekJumlah('carrot'):-
         playerPoint(X, Y),
         retract(diggedTilePoint(X,Y)),
         asserta(carrotTilePoint(X,Y)),
+        write('carrot berhasil ditanam'),
         drop('carrot_seed')
     ;
         write('Anda tidak memiliki carrot_seed')
@@ -82,6 +83,7 @@ cekJumlah('potato'):-
         playerPoint(X, Y),
         retract(diggedTilePoint(X,Y)),
         asserta(potatoTilePoint(X,Y)),
+        write('potato berhasil ditanam'),
         drop('potato_seed')
     ;
         write('Anda tidak memiliki potato_seed')
@@ -93,6 +95,7 @@ cekJumlah('tomato'):-
         playerPoint(X, Y),
         retract(diggedTilePoint(X,Y)),
         asserta(tomatoTilePoint(X,Y)),
+        write('tomato berhasil ditanam'),
         drop('tomato_seed')
     ;
         write('Anda tidak memiliki tomato_seed')
@@ -104,31 +107,42 @@ cekJumlah('rice'):-
         playerPoint(X, Y),
         retract(diggedTilePoint(X,Y)),
         asserta(riceTilePoint(X,Y)),
+        write('rice berhasil ditanam'),
         drop('rice_seed')
     ;
         write('Anda tidak memiliki rice_seed')
     ).
 
-panen :-
+harvest :-
     state(free),
-    playerCell(X),
-    X \= ('p'), !,
-    write('Tidak ada tanaman yang dipanen').
-
-panen :-
-    state(free),
-    playerCell(X),
-    X \= ('c'), !,
-    write('Tidak ada tanaman yang dipanen').
-
-panen :-
-    state(free),
-    playerCell(X),
-    X \= ('t'), !,
-    write('Tidak ada tanaman yang dipanen').
-
-panen :-
-    state(free),
-    playerCell(X),
-    X \= ('r'), !,
-    write('Tidak ada tanaman yang dipanen').
+    playerCell(C),
+    ((
+        C = ('c'),
+        addItem('carrot',3),
+        write('carrot berhasil dipanen'),
+        playerPoint(X,Y),
+        retract(carrotTilePoint(X,Y))
+    );
+    (   
+        C = ('p'),
+        addItem('potato',3),
+        write('potato berhasil dipanen'),
+        playerPoint(X,Y),
+        retract(potatoTilePoint(X,Y))
+    );
+    (
+        C = ('t'),
+        addItem('tomato',3),
+        write('tomato berhasil dipanen'),
+        playerPoint(X,Y),
+        retract(tomatoTilePoint(X,Y))
+    );
+    (
+        C = ('r'),
+        addItem('rice', 5),
+        write('rice berhasil dipanen'),
+        playerPoint(X,Y),
+        retract(riceTilePoint(X,Y))
+    );
+        write('Tidak ada tanaman yang dipanen')
+    ).
