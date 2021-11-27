@@ -67,19 +67,19 @@ setJob(fisherman) :-
     asserta(playerJob(fisherman)),
     asserta(inventory([[normal_rod, 1], [bait, 8]])),
     write('Kamu berhasil menjadi fisherman\n'),
-    write('Sebagai fisherman, kamu berhak memperoleh 1 buah pancingan biasa dan 1 bait\n').
+    write('Sebagai fisherman, kamu berhak memperoleh satu buah pancingan biasa dan delapan umpan\n').
 
 setJob(farmer) :-
     asserta(playerJob(farmer)),
-    asserta(inventory([[shovel, 1], [rice_seed, 1]])),
+    asserta(inventory([[shovel, 1], [rice_seed, 3]])),
     write('Kamu berhasil menjadi farmer\n'),
-    write('Sebagai farmer, kamu berhak memperoleh 1 buah sekop dan 1 biji padi\n').
+    write('Sebagai farmer, kamu berhak memperoleh satu buah sekop dan tiga biji padi\n').
 
 setJob(rancher) :-
     asserta(playerJob(rancher)),
-    asserta(inventory([[chicken, 1]])),
+    asserta(inventory([[chicken, 2]])),
     write('Kamu berhasil menjadi rancher\n'),
-    write('Sebagai rancher, kamu berhak memperoleh satu ekor ayam\n').
+    write('Sebagai rancher, kamu berhak memperoleh dua ekor ayam\n').
 
 
 % Sistem menambahkan EXP
@@ -145,7 +145,7 @@ levelUp :-
 
     format('Congratulation, now your level is ~w', [NewLvl]), !.
 
-levelUpFarming() :-
+levelUpFarming :-
     levelFarming(CurrLvl),
     experienceFarming(CurrExp),
     levelUpCapFarming(LUC),
@@ -164,7 +164,7 @@ levelUpFarming() :-
 
     format('Congratulation, now your farming level is ~w', [NewLvl]), !.
 
-levelUpFishing() :-
+levelUpFishing :-
     levelFishing(CurrLvl),
     experienceFishing(CurrExp),
     levelUpCapFishing(LUC),
@@ -183,7 +183,7 @@ levelUpFishing() :-
 
     format('Congratulation, now your fishing level is ~w', [NewLvl]), !.
 
-levelUpRanching() :-
+levelUpRanching :-
     levelRanching(CurrLvl),
     experienceRanching(CurrExp),
     levelUpCapRanching(LUC),
@@ -245,7 +245,7 @@ statusJob :-
     ).
 
 % Menambahkan hari
-addDays() :-
+addDays :-
     days(CurrDays),
     retractall(days(_)),
 

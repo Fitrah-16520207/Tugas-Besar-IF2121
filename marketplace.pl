@@ -34,7 +34,11 @@ marketplace :-
     write('- sell\n').
 
 buy :-
-    write(anu).
+    state(free),
+    stateMarket('di dalam'),
+    write('Apa yang ingin kamu beli?\n'),
+    buyable(X),
+    write(X), nl.
 
 sell :-
     state(free),
