@@ -100,3 +100,10 @@ cekBarang :-
     ;
         write('barang tidak ada di inventory')
     ).
+
+%rule untuk mengetahui jumlah barang
+jumlahBarang(Namabarang, C) :-
+    inventory(Invent),
+    (member([Namabarang, JumlahInv], Invent) ->
+        C is JumlahInv
+    ).
