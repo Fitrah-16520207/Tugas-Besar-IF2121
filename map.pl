@@ -18,6 +18,7 @@
 % 'c' : carrot
 % 't' : tomato
 % 'r' : rice
+% '-' : tanah
 
 % awal permainan, pemain akan berada di rumah
 playerCell('H').
