@@ -18,6 +18,7 @@
 % 'c' : carrot
 % 't' : tomato
 % 'r' : rice
+% '-' : tanah
 
 % awal permainan, pemain akan berada di rumah
 playerCell('H').
@@ -283,7 +284,7 @@ cellCheck(R, C) :-
     !,
     write('Kamu sekarang ada di kebun tomat').
 cellCheck(R, C) :-
-    diggedTilePoint(R, C),
+    riceTilePoint(R, C),
     retractall(playerCell(_)),
     asserta(playerCell('r')),
     !,
