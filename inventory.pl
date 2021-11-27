@@ -79,3 +79,14 @@ throwItem :-
     nl,write('masukkan jumlah item yang ingin anda buang: '),
     nl,read(Jumlah),
     drop(Item, Jumlah).
+
+%menambahkan command cekBarang untuk memeriksa apakah barang ada atau tidak
+cekBarang :- 
+    inventory(Invent),
+    write('masukkan item yang akan di cek: '),nl,
+    read(Barang),
+    (member([Barang,_], Invent) ->
+        write('barang ada di inventory')
+    ;
+        write('barang tidak ada di inventory')
+    ).
