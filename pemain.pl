@@ -52,19 +52,27 @@ baseStats :-
     asserta(baseExpFarm(7)),
     asserta(baseExpFish(7)),
     asserta(baseExpRanch(7)),
-    asserta(gold(1000)),
-
-    asserta(playerJob(rancher)).
+    asserta(gold(1000)).
 
 % Set Rules 
 setJob(fisherman) :-
-    asserta(playerJob(fisherman)).
+    asserta(playerJob(fisherman)),
+    asserta(inventory([[fishing_rod, 1], [bait, 1]])),
+    write('Kamu berhasil menjadi fisherman\n'),
+    write('Sebagai fisherman, kamu berhak memperoleh 1 buah pancingan biasa dan 1 bait\n').
 
 setJob(farmer) :-
-    asserta(playerJob(farmer)).
+    asserta(playerJob(farmer)),
+    asserta(inventory([[shovel, 1], [rice_seed, 1]])),
+    write('Kamu berhasil menjadi farmer\n'),
+    write('Sebagai farmer, kamu berhak memperoleh 1 buah sekop dan 1 biji padi\n').
 
 setJob(rancher) :-
-    asserta(playerJob(rancher)).
+    asserta(playerJob(rancher)),
+    asserta(inventory([[chicken, 1]])),
+    write('Kamu berhasil menjadi rancher\n'),
+    write('Sebagai rancher, kamu berhak memperoleh satu ekor ayam\n').
+
 
 % 
 earnExp(X) :-

@@ -62,18 +62,15 @@ start :-
     read(Job),
     ((
         Job = 1,
-        setJob(fisherman),
-        write('Kamu berhasil menjadi fisherman')
+        setJob(fisherman)
     );
     (
         Job = 2,
-        setJob(farmer),
-        write('Kamu berhasil menjadi farmer')
+        setJob(farmer)
     );
     (
         Job = 3,
-        setJob(rancher),
-        write('Kamu berhasil menjadi rancher')
+        setJob(rancher)
     )
     ),
     baseStats.
