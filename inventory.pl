@@ -91,11 +91,9 @@ throwItem :-
     ).
 
 %menambahkan command cekBarang untuk memeriksa apakah barang ada atau tidak
-cekBarang :- 
+cekBarang(Namaitem) :- 
     inventory(Invent),
-    write('masukkan item yang akan di cek: '),nl,
-    read(Barang),
-    (member([Barang,_], Invent) ->
+    (member([Namaitem,_], Invent) ->
         write('barang ada di inventory')
     ;
         write('barang tidak ada di inventory')
