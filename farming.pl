@@ -1,6 +1,8 @@
 %deklarasi farming
 :- dynamic(farming/1).
 
+
+%untuk prosedure dig
 %mengecek apakah tanah bisa digali atau tidak
 dig :-
     state(not_started),!,
@@ -25,6 +27,8 @@ dig :-
         write('Anda harus punya shovel untuk mengggali')
     ).
 
+
+%untuk prosedure plant 
 plant :-
     state(not_started),!,
     write('Permainan belum dimulai').
@@ -39,6 +43,11 @@ plant :-
     state(free),
     playerCell(C),
     C = ('='),
+    write('seed yang anda miliki :'),nl,
+    printTanaman('carrot'),
+    printTanaman('potato'),
+    printTanaman('tomato'),
+    printTanaman('rice'),
     write('Tanaman apa yang akan anda tanam:'),nl,
 
     read(Tanam),
@@ -114,6 +123,41 @@ cekJumlah('rice'):-
         write('Anda tidak memiliki rice_seed')
     ).
 
+printTanaman('carrot') :-
+    inventory(Invent),
+    (member(['carrot_seed', JumlahT], Invent) ->
+        write(JumlahT), write(' '), write('carrot'),nl
+    ;
+        write('')
+    ).
+
+printTanaman('potato') :-
+    inventory(Invent),
+    (member(['potato_seed', JumlahT], Invent) ->
+        write(JumlahT), write(' '), write('potato'),nl
+    ;
+        write('')
+    ).
+
+printTanaman('tomato') :-
+    inventory(Invent),
+    (member(['tomato_seed', JumlahT], Invent) ->
+        write(JumlahT), write(' '), write('tomato'),nl
+    ;
+        write('')
+    ).
+
+printTanaman('rice') :-
+    inventory(Invent),
+    (member(['rice_seed', JumlahT], Invent) ->
+        write(JumlahT), write(' '), write('rice'),nl
+    ;
+        write('')
+    ).
+
+
+
+%untuk prosedur harvest
 harvest :-
     state(free),
     inventory(Invent),
@@ -163,5 +207,7 @@ harvest :-
             write('inventory penuh, item tidak bisa dipanen')
         )
     );
-        write('Tidak ada tanaman yang dipanen')
+        (
+            write('Tidak ada tanaman yang dipanen')
+        )
     ).
