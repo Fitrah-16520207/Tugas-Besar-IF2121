@@ -19,19 +19,30 @@
 :- dynamic(gold/1).
 :- dynamic(days/1).
 
+% Reset semua status yang dimiliki
 reset :-
     retractall(playerName(_)),
     retractall(playerJob(_)),
+
     retractall(level(_)),
     retractall(levelFishing(_)),
     retractall(levelFarming(_)),
     retractall(levelRanching(_)),
+
+    retractall(levelUpCap(_)),
+    retractall(levelUpCapFarming(_)),
+    retractall(levelUpCapFishing(_)),
+    retractall(levelRanching(_)),
+
     retractall(experience(_)),
     retractall(experienceFishing(_)),
     retractall(experienceFarming(_)),
     retractall(experienceRanching(_)),
-    retractall(gold(_)).
 
+    retractall(gold(_)),
+    retractall(days(_)).
+
+% Set semua status dengan state awal permainan
 baseStats :-
     asserta(level(1)),
     asserta(levelFishing(1)),
@@ -61,7 +72,7 @@ setJob(farmer) :-
 setJob(rancher) :-
     asserta(playerJob(rancher)).
 
-% 
+% Sistem menambahkan EXP
 earnExp(X) :-
     experience(CurrExp),
     NewExp is CurrExp + X,
@@ -223,6 +234,7 @@ statusJob :-
         write('Job: Rancher')    
     ).
 
+% Menambahkan hari
 addDays() :-
     days(CurrDays),
     retractall(days(_)),
