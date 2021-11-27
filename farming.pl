@@ -115,34 +115,52 @@ cekJumlah('rice'):-
 
 harvest :-
     state(free),
+    inventory(Invent),
+    jumlahItem(Invent, IC),
     playerCell(C),
     ((
         C = ('c'),
-        addItem('carrot',3),
-        write('carrot berhasil dipanen'),
-        playerPoint(X,Y),
-        retract(carrotTilePoint(X,Y))
+        (IC + 3 =< 100 ->
+            addItem('carrot',3),
+            write('carrot berhasil dipanen'),
+            playerPoint(X,Y),
+            retract(carrotTilePoint(X,Y))
+        ;
+            write('inventory penuh, item tidak bisa dipanen')
+        )
     );
     (   
         C = ('p'),
-        addItem('potato',3),
-        write('potato berhasil dipanen'),
-        playerPoint(X,Y),
-        retract(potatoTilePoint(X,Y))
+        (IC + 3 =< 100 ->
+            addItem('potato',3),
+            write('potato berhasil dipanen'),
+            playerPoint(X,Y),
+            retract(potatoTilePoint(X,Y))
+        ;
+            write('inventory penuh, item tidak bisa dipanen')
+        )
     );
     (
         C = ('t'),
-        addItem('tomato',3),
-        write('tomato berhasil dipanen'),
-        playerPoint(X,Y),
-        retract(tomatoTilePoint(X,Y))
+        (IC + 3 =< 100 ->
+            addItem('tomato',3),
+            write('tomato berhasil dipanen'),
+            playerPoint(X,Y),
+            retract(tomatoTilePoint(X,Y))
+        ;
+            write('inventory penuh, item tidak bisa dipanen')
+        )
     );
     (
         C = ('r'),
-        addItem('rice', 5),
-        write('rice berhasil dipanen'),
-        playerPoint(X,Y),
-        retract(riceTilePoint(X,Y))
+        (IC + 5 =< 100 ->
+            addItem('rice', 5),
+            write('rice berhasil dipanen'),
+            playerPoint(X,Y),
+            retract(riceTilePoint(X,Y))
+        ;
+            write('inventory penuh, item tidak bisa dipanen')
+        )
     );
         write('Tidak ada tanaman yang dipanen')
     ).
