@@ -5,6 +5,8 @@
 /*mengeprint inventory*/
 inventory :- 
     inventory(Invent), 
+    jumlahItem(Invent, IC),
+    write('inventory kamu ('),write(IC),write('/100)'),nl, 
     printInventory(Invent).
 
 printInventory([]) :- !.

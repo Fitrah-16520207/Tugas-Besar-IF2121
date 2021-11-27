@@ -169,9 +169,9 @@ harvest :-
             addItem('carrot',3),
             write('carrot berhasil dipanen'),
             playerPoint(X,Y),
-            retract(carrotTilePoint(X,Y))
+            retract(carrotTilePoint(X,Y)),!
         ;
-            write('inventory penuh, item tidak bisa dipanen')
+            write('inventory penuh, item tidak bisa dipanen'),!
         )
     );
     (   
@@ -180,9 +180,9 @@ harvest :-
             addItem('potato',3),
             write('potato berhasil dipanen'),
             playerPoint(X,Y),
-            retract(potatoTilePoint(X,Y))
+            retract(potatoTilePoint(X,Y)),!
         ;
-            write('inventory penuh, item tidak bisa dipanen')
+            write('inventory penuh, item tidak bisa dipanen'),!
         )
     );
     (
@@ -191,9 +191,9 @@ harvest :-
             addItem('tomato',3),
             write('tomato berhasil dipanen'),
             playerPoint(X,Y),
-            retract(tomatoTilePoint(X,Y))
+            retract(tomatoTilePoint(X,Y)),!
         ;
-            write('inventory penuh, item tidak bisa dipanen')
+            write('inventory penuh, item tidak bisa dipanen'),!
         )
     );
     (
@@ -202,12 +202,12 @@ harvest :-
             addItem('rice', 5),
             write('rice berhasil dipanen'),
             playerPoint(X,Y),
-            retract(riceTilePoint(X,Y))
+            retract(riceTilePoint(X,Y)),!
         ;
-            write('inventory penuh, item tidak bisa dipanen')
+            write('inventory penuh, item tidak bisa dipanen'),!
         )
     );
         (
-            write('Tidak ada tanaman yang dipanen')
+            write('Tidak ada tanaman yang dipanen'),!
         )
     ).
