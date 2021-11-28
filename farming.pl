@@ -85,7 +85,8 @@ cekJumlah('carrot'):-
         write('carrot berhasil ditanam'),
         drop('carrot_seed'),
         days(A),
-        MasaPanen is A + 6,
+        acak(6,7,M),
+        MasaPanen is A + M,
         asserta(panen(X,Y,MasaPanen))
     ;
         write('Anda tidak memiliki carrot_seed')
@@ -100,7 +101,8 @@ cekJumlah('potato'):-
         write('potato berhasil ditanam'),
         drop('potato_seed'),
         days(A),
-        MasaPanen is A + 3,
+        acak(3,4,M),
+        MasaPanen is A + M,
         asserta(panen(X,Y,MasaPanen))
     ;
         write('Anda tidak memiliki potato_seed')
@@ -115,7 +117,8 @@ cekJumlah('tomato'):-
         write('tomato berhasil ditanam'),
         drop('tomato_seed'),
         days(A),
-        MasaPanen is A + 2,
+        acak(2,3,M),
+        MasaPanen is A + M,
         asserta(panen(X,Y,MasaPanen))
     ;
         write('Anda tidak memiliki tomato_seed')
@@ -130,7 +133,8 @@ cekJumlah('rice'):-
         write('rice berhasil ditanam'),
         drop('rice_seed'),
         days(A),
-        MasaPanen is A + 3,
+        acak(2,3,M),
+        MasaPanen is A + M,
         asserta(panen(X,Y,MasaPanen))
     ;
         write('Anda tidak memiliki rice_seed')
@@ -182,8 +186,9 @@ harvest :-
         playerPoint(X,Y),
         panen(X,Y,A),
         (A =< D ->
-            (IC + 3 =< 100 ->
-                addItem('carrot',3),
+            acak(2,6,N),
+            (IC + N =< 100 ->
+                addItem('carrot',N),
                 write('carrot berhasil dipanen'),
                 retract(carrotTilePoint(X,Y)),!
             ;
@@ -201,8 +206,9 @@ harvest :-
         playerPoint(X,Y),
         panen(X,Y,A),
         (A =< D ->
-            (IC + 3 =< 100 ->
-                addItem('potato',3),
+            acak(1,4,N),
+            (IC + N =< 100 ->
+                addItem('potato',N),
                 write('potato berhasil dipanen'),
                 retract(potatoTilePoint(X,Y)),!
             ;
@@ -220,8 +226,9 @@ harvest :-
         playerPoint(X,Y),
         panen(X,Y,A),
         (A =< D ->
-            (IC + 3 =< 100 ->
-                addItem('tomato',3),
+            acak(1,4,N),
+            (IC + N =< 100 ->
+                addItem('tomato',N),
                 write('tomato berhasil dipanen'),
                 retract(tomatoTilePoint(X,Y)),!
             ;
@@ -239,8 +246,9 @@ harvest :-
         playerPoint(X,Y),
         panen(X,Y,A),
         (A =< D ->
-            (IC + 5 =< 100 ->
-                addItem('rice', 5),
+            acak(3,6,N),
+            (IC + N =< 100 ->
+                addItem('rice', N),
                 write('rice berhasil dipanen'),
                 retract(riceTilePoint(X,Y)),!
             ;
@@ -261,6 +269,7 @@ usefertilizer :-
     state(free),
     playerCell('p'),
     write('pupuk yang anda miliki: \n'),
+    printPupuk('fertilizer'),
     printPupuk('good_fertilizer'),
     printPupuk('best_fertilizer'),
     printPupuk('instant_fertilizer'),
@@ -268,10 +277,21 @@ usefertilizer :-
     read(Pupuk),
     (
         (
-            Pupuk = ('good_fertilizer'),
+            Pupuk = ('fertilizer'),
             playerPoint(X,Y),
             panen(X,Y,A),
             NewA is A-1,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('good_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            Potong is round(A*0.5),
+            NewA is A-Potong,
             retract(panen(X,Y,A)),
             asserta(panen(X,Y,NewA)),
             drop('good_fertilizer')
@@ -281,130 +301,8 @@ usefertilizer :-
             Pupuk = ('best_fertilizer'),
             playerPoint(X,Y),
             panen(X,Y,A),
-            NewA is A-2,
-            retract(panen(X,Y,A)),
-            asserta(panen(X,Y,NewA)),
-            drop('best_fertilizer')
-        )
-    ;
-        (
-            Pupuk = ('instant_fertilizer'),
-            playerPoint(X,Y),
-            panen(X,Y,A),
-            retract(panen(X,Y,A)),
-            drop('instant_fertilizer')
-        )
-    ;
-        write('masukkan pupuk salah')
-    ).
-
-usefertilizer :-
-    state(free),
-    playerCell('c'),
-    write('pupuk yang anda miliki: \n'),
-    printPupuk('good_fertilizer'),
-    printPupuk('best_fertilizer'),
-    printPupuk('instant_fertilizer'),
-    write('pupuk apa yang anda gunakan : \n'),
-    read(Pupuk),
-    (
-        (
-            Pupuk = ('good_fertilizer'),
-            playerPoint(X,Y),
-            panen(X,Y,A),
-            NewA is A-1,
-            retract(panen(X,Y,A)),
-            asserta(panen(X,Y,NewA)),
-            drop('good_fertilizer')
-        )
-    ;
-        (
-            Pupuk = ('best_fertilizer'),
-            playerPoint(X,Y),
-            panen(X,Y,A),
-            NewA is A-2,
-            retract(panen(X,Y,A)),
-            asserta(panen(X,Y,NewA)),
-            drop('best_fertilizer')
-        )
-    ;
-        (
-            Pupuk = ('instant_fertilizer'),
-            playerPoint(X,Y),
-            panen(X,Y,A),
-            retract(panen(X,Y,A)),
-            drop('instant_fertilizer')
-        )
-    ;
-        write('masukkan pupuk salah')
-    ).
-
-usefertilizer :-
-    state(free),
-    playerCell('t'),
-    write('pupuk yang anda miliki: \n'),
-    printPupuk('good_fertilizer'),
-    printPupuk('best_fertilizer'),
-    printPupuk('instant_fertilizer'),
-    write('pupuk apa yang anda gunakan : \n'),
-    read(Pupuk),
-    (
-        (
-            Pupuk = ('good_fertilizer'),
-            playerPoint(X,Y),
-            panen(X,Y,A),
-            NewA is A-1,
-            retract(panen(X,Y,A)),
-            asserta(panen(X,Y,NewA)),
-            drop('good_fertilizer')
-        )
-    ;
-        (
-            Pupuk = ('best_fertilizer'),
-            playerPoint(X,Y),
-            panen(X,Y,A),
-            NewA is A-2,
-            retract(panen(X,Y,A)),
-            asserta(panen(X,Y,NewA)),
-            drop('best_fertilizer')
-        )
-    ;
-        (
-            Pupuk = ('instant_fertilizer'),
-            playerPoint(X,Y),
-            panen(X,Y,A),
-            retract(panen(X,Y,A)),
-            drop('instant_fertilizer')
-        )
-    ;
-        write('masukkan pupuk salah')
-    ).
-
-usefertilizer :-
-    state(free),
-    playerCell('r'),
-    write('pupuk yang anda miliki: \n'),
-    printPupuk('good_fertilizer'),
-    printPupuk('best_fertilizer'),
-    printPupuk('instant_fertilizer'),
-    write('pupuk apa yang anda gunakan : \n'),
-    read(Pupuk),
-    (
-        (
-            Pupuk = ('good_fertilizer'),
-            playerPoint(X,Y),
-            panen(X,Y,A),
-            NewA is A-1,
-            retract(panen(X,Y,A)),
-            asserta(panen(X,Y,NewA)),
-            drop('good_fertilizer')
-        )
-    ;
-        (
-            Pupuk = ('best_fertilizer'),
-            playerPoint(X,Y),
-            panen(X,Y,A),
-            NewA is A-2,
+            Potong is round(A*0.75),
+            NewA is A-Potong,
             retract(panen(X,Y,A)),
             asserta(panen(X,Y,NewA)),
             drop('best_fertilizer')
@@ -420,6 +318,179 @@ usefertilizer :-
         )
     ;
         write('masukkan pupuk salah')
+    ).
+
+usefertilizer :-
+    state(free),
+    playerCell('c'),
+    write('pupuk yang anda miliki: \n'),
+    printPupuk('fertilizer'),
+    printPupuk('good_fertilizer'),
+    printPupuk('best_fertilizer'),
+    printPupuk('instant_fertilizer'),
+    write('pupuk apa yang anda gunakan : \n'),
+    read(Pupuk),
+    (
+        (
+            Pupuk = ('fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            NewA is A-1,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('good_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            Potong is round(A*0.5),
+            NewA is A-Potong,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('good_fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('best_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            Potong is round(A*0.75),
+            NewA is A-Potong,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('best_fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('instant_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,1)),
+            drop('instant_fertilizer')
+        )
+    ;
+        write('masukkan pupuk salah')
+    ).
+
+usefertilizer :-
+    state(free),
+    playerCell('t'),
+    write('pupuk yang anda miliki: \n'),
+    printPupuk('fertilizer'),
+    printPupuk('good_fertilizer'),
+    printPupuk('best_fertilizer'),
+    printPupuk('instant_fertilizer'),
+    write('pupuk apa yang anda gunakan : \n'),
+    read(Pupuk),
+    (
+        (
+            Pupuk = ('fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            NewA is A-1,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('good_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            Potong is round(A*0.5),
+            NewA is A-Potong,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('good_fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('best_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            Potong is round(A*0.75),
+            NewA is A-Potong,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('best_fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('instant_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,1)),
+            drop('instant_fertilizer')
+        )
+    ;
+        write('masukkan pupuk salah')
+    ).
+
+usefertilizer :-
+    state(free),
+    playerCell('r'),
+    write('pupuk yang anda miliki: \n'),
+    printPupuk('fertilizer'),
+    printPupuk('good_fertilizer'),
+    printPupuk('best_fertilizer'),
+    printPupuk('instant_fertilizer'),
+    write('pupuk apa yang anda gunakan : \n'),
+    read(Pupuk),
+    (
+        (
+            Pupuk = ('fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            NewA is A-1,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('good_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            Potong is round(A*0.5),
+            NewA is A-Potong,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('good_fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('best_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            Potong is round(A*0.75),
+            NewA is A-Potong,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('best_fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('instant_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,1)),
+            drop('instant_fertilizer')
+        )
+    ;
+        write('masukkan pupuk salah')
+    ).
+
+printPupuk('fertilizer') :-
+    inventory(Invent),
+    (member(['fertilizer', JumlahT], Invent) ->
+        write(JumlahT), write(' '), write('fertilizer'),nl
+    ;
+        write('')
     ).
 
 printPupuk('good_fertilizer') :-
