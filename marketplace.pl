@@ -275,10 +275,10 @@ sell :-
                         );
                         SellValue is Qty * Harga
                     ),
-                    earnGold(SellValue),
                     format('Kamu menjual ~w', [Qty]),
                     format(' ~w\n', [Item]),
                     format('Kamu memperoleh ~w Gold\n', [SellValue]),
+                    earnGold(SellValue),
                     drop(Item, Qty)
                 )
             )
