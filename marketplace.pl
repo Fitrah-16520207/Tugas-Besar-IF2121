@@ -205,8 +205,9 @@ buy :-
                                     NewGold is UangYangAda - TotalBayar,
                                     retractall(gold(_)),
                                     asserta(gold(NewGold)), nl,
-                                    write('Transaksi berhasil'),
-                                    addItem(Item, Qty)
+                                    write('Transaksi berhasil\n'),
+                                    addItem(Item, Qty),
+                                    checkBuyRanch
                                 )
                             )
                         )
