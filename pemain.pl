@@ -147,9 +147,12 @@ earnGold(X) :-
 
 % Level Up System
 levelUp :-
+
     level(CurrLvl),
     experience(CurrExp),
     levelUpCap(LUC),
+
+    CurrExp >= LUC, !,
 
     retractall(experience(_)),
     retractall(level(_)),
@@ -157,18 +160,21 @@ levelUp :-
 
     NewLvl is CurrLvl + 1,
     NewExp is CurrExp - LUC,
-    NewLUC is 7 * (2 ** NewLvl) + NewLvl,
+    NewLUC is round(7 * (2 ** NewLvl) + NewLvl),
 
     asserta(level(NewLvl)),
     asserta(levelUpCap(NewLUC)),
     asserta(experience(NewExp)),
 
-    format('Selamat, level kamu sekarang adalah ~w', [NewLvl]), !.
+    format('Selamat, level kamu sekarang adalah ~w\n', [NewLvl]), !.
+levelUp.
 
 levelUpFarming :-
     levelFarming(CurrLvl),
     experienceFarming(CurrExp),
     levelUpCapFarming(LUC),
+
+    CurrExp >= LUC, !,
     
     retractall(levelFarming(_)),
     retractall(experienceFarming(_)),
@@ -176,35 +182,39 @@ levelUpFarming :-
 
     NewLvl is CurrLvl + 1,
     NewExp is CurrExp - LUC,
-    NewLUC is 7 * (2 ** NewLvl) + NewLvl,
+    NewLUC is round(3 * (2 ** NewLvl) + NewLvl),
+    integer(NewLUC),
 
     asserta(levelFarming(NewLvl)),
     asserta(levelUpCapFarming(NewLUC)),
     asserta(experienceFarming(NewExp)),
 
-    format('Selamat, sekarang level farming kamu adalah : ~w', [NewLvl]), !, nl,
+    format('Selamat, sekarang level farming kamu adalah ~w', [NewLvl]), !, nl,
     (
         (
             NewLvl = 3, !,
             unlockedItem(carrot_seed),
             unlockedItem(best_fertilizer),
-            write('Carrot Seed dan Best Fertilizer telah terbuka, silakan cek marketplace untuk lebih detail')
+            write('Carrot Seed dan Best Fertilizer telah terbuka, silakan cek marketplace untuk lebih detail\n')
         );
         (
             NewLvl = 7, !,
             unlockedItem(rice_seed),
             unlockedItem(instant_fertilizer),
-            write('Rice Seed dan Instant Fertilizer telah terbuka, silakan cek marketplace untuk lebih detail')
+            write('Rice Seed dan Instant Fertilizer telah terbuka, silakan cek marketplace untuk lebih detail\n')
         );
         (
             write('')
         )
     ).
+levelUpCapFarming.
 
 levelUpFishing :-
     levelFishing(CurrLvl),
     experienceFishing(CurrExp),
     levelUpCapFishing(LUC),
+
+    CurrExp >= LUC, !,
     
     retractall(levelFishing(_)),
     retractall(experienceFishing(_)),
@@ -212,7 +222,8 @@ levelUpFishing :-
 
     NewLvl is CurrLvl + 1,
     NewExp is CurrExp - LUC,
-    NewLUC is 7 * (2 ** NewLvl) + NewLvl,
+    NewLUC is round(3 * (2 ** NewLvl) + NewLvl),
+    
 
     asserta(levelFishing(NewLvl)),
     asserta(levelUpCapFishing(NewLUC)),
@@ -223,22 +234,25 @@ levelUpFishing :-
         (
             NewLvl = 3, !,
             unlockedItem(rare_rod),
-            write('Rare Rod telah terbuka, silakan cek marketplace untuk lebih detail')
+            write('Rare Rod telah terbuka, silakan cek marketplace untuk lebih detail\n')
         );
         (
             NewLvl = 7, !,
             unlockedItem(legend_rod),
-            write('Legend Rode telah terbuka, silakan cek marketplace untuk lebih detail')
+            write('Legend Rode telah terbuka, silakan cek marketplace untuk lebih detail\n')
         );
         (
             write('')
         )
     ).
+levelUpCapFishing.
 
 levelUpRanching :-
     levelRanching(CurrLvl),
     experienceRanching(CurrExp),
     levelUpCapRanching(LUC),
+
+    CurrExp >= LUC, !,
     
     retractall(levelRanching(_)),
     retractall(experienceRanching(_)),
@@ -246,28 +260,29 @@ levelUpRanching :-
 
     NewLvl is CurrLvl + 1,
     NewExp is CurrExp - LUC,
-    NewLUC is 7 * (2 ** NewLvl) + NewLvl,
+    NewLUC is round(3 * (2 ** NewLvl) + NewLvl),
 
     asserta(levelRanching(NewLvl)),
     asserta(levelUpCapRanching(NewLUC)),
     asserta(experienceRanching(NewExp)),
 
-    format('Selamat, sekarang level fishing kamu adalah ~w', [NewLvl]), !, nl,
+    format('Selamat, sekarang level ranching kamu adalah ~w', [NewLvl]), !, nl,
     (
         (
             NewLvl = 3, !,
             unlockedItem(sheep),
-            write('Sheep telah terbuka, silakan cek marketplace untuk lebih detail')
+            write('Sheep telah terbuka, silakan cek marketplace untuk lebih detail\n')
         );
         (
             NewLvl = 7, !,
             unlockedItem(cow),
-            write('Cow telah terbuka, silakan cek marketplace untuk lebih detail')
+            write('Cow telah terbuka, silakan cek marketplace untuk lebih detail\n')
         );
         (
             write('')
         )
     ).
+levelUpCapRanching.
 
 checkLevelUp :-
     experience(Exp),
@@ -281,7 +296,8 @@ checkLevelUp :-
     (
         (
             Exp >= LUC,
-            levelUp
+            levelUp,
+            checkLevelUp
         );
         (
             Exp < LUC
@@ -290,7 +306,8 @@ checkLevelUp :-
     (
         (
             ExpFarm >= LUCFarm,
-            levelUpFarming
+            levelUpFarming,
+            checkLevelUp
         );
         (
             ExpFarm < LUCFarm
@@ -299,7 +316,8 @@ checkLevelUp :-
     (
         (
             ExpFish >= LUCFish,
-            levelUpFarming
+            levelUpFarming,
+            checkLevelUp
         );
         (
             ExpFish < LUCFish
@@ -308,7 +326,8 @@ checkLevelUp :-
     (
         (
             ExpRanch >= LUCRanch,
-            levelUpRanching
+            levelUpRanching,
+            checkLevelUp
         );
         (
             ExpRanch < LUCRanch
@@ -333,15 +352,15 @@ status :-
 
     write('Your status:'), nl,
     statusJob, nl,
-    format('Level: ~d', [Lvl]), nl,
-    format('Level farming: ~d', [LvlFarm]), nl,
-    format('Exp farming: ~d/~d', [ExpFarm, LUCFarm]), nl,
-    format('Level fishing: ~d', [LvlFish]), nl,
-    format('Exp fishing: ~d/~d', [ExpFish, LUCFish]), nl,
-    format('Level ranching: ~d', [LvlRanch]), nl,
-    format('Exp ranching: ~d/~d', [ExpRanch, LUCRanch]), nl,
-    format('Exp: ~d/~d', [Exp, LUC]), nl,
-    format('Gold: ~d', [Gold]), nl, !. 
+    format('Level: ~w', [Lvl]), nl,
+    format('Level farming: ~w', [LvlFarm]), nl,
+    format('Exp farming: ~w/~w', [ExpFarm, LUCFarm]), nl,
+    format('Level fishing: ~w', [LvlFish]), nl,
+    format('Exp fishing: ~w/~w', [ExpFish, LUCFish]), nl,
+    format('Level ranching: ~w', [LvlRanch]), nl,
+    format('Exp ranching: ~w/~w', [ExpRanch, LUCRanch]), nl,
+    format('Exp: ~w/~w', [Exp, LUC]), nl,
+    format('Gold: ~w', [Gold]), nl, !. 
 
 statusJob :-
     (
