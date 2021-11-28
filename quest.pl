@@ -121,77 +121,82 @@ printQuest :-
     format('    Hadiah       : ~d Gold dan ~d Exp', [Gold, Exp]), nl, nl,
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%').
 
-earnReward :-
-    activeQuest(_, _, _, Gold, Exp),
-    earnExp(Exp),
-    earnGold(Gold).
-
-cekActiveQuest :-
-    activeQuest(Fish, Farm, Ranch, _, _),
+    earnReward :-
+        activeQuest(_, _, _, Gold, Exp),
+        earnExp(Exp),
+        earnGold(Gold),
+        format('Selamat quest telah selesai dilaksanakan\nKamu mendapatkan hadiah ~w Gold dan ~w EXP\n', [Gold, Exp]). 
+        
+        cekActiveQuest :-
+            activeQuest(Fish, Farm, Ranch, _, _),
     Fish = 0,
     Farm = 0,
     Ranch = 0,
     earnReward,
     removeActiveQuest, !.
 
+updateActiveQuest(_) :-
+    \+activeQuest(_, _, _, _, _), !.
 updateActiveQuest(Item, Total) :-
     activeQuest(Fish, Farm, Ranch, Gold, Exp),
     (
         (
-            Item = 'fish',
-            NewFish is Fish - Total,
-            NewFish >= 0,
+            Item = fish,
+            TempFish is Fish - Total,
+            TempFish >= 0,
             !,
+            NewFish is TempFish,
             removeActiveQuest,
             asserta(activeQuest(NewFish, Farm, Ranch, Gold, Exp))
         );
         (
-            Item = 'fish',
-            NewFish is Fish - Total,
-            NewFish < 0,
+            Item = fish,
+            TempFish is Fish - Total,
+            TempFish < 0,
             NewFish is 0,
             !,
             removeActiveQuest,
             asserta(activeQuest(NewFish, Farm, Ranch, Gold, Exp))
         );
         (
-            Item = 'farm',
-            NewFarm is Farm - Total,
-            NewFarm >= 0,
+            Item = farm,
+            TempFarm is Farm - Total,
+            TempFarm >= 0,
             !,
+            NewFarm is TempFarm,
             removeActiveQuest,
             asserta(activeQuest(Fish, NewFarm, Ranch, Gold, Exp))
         );
         (
-            Item = 'farm',
-            NewFarm is Farm - Total,
-            NewFarm < 0,
+            Item = farm,
+            TempFarm is Farm - Total,
+            TempFarm < 0,
             NewFarm is 0,
             !,
             removeActiveQuest,
             asserta(activeQuest(Fish, NewFarm, Ranch, Gold, Exp))
         );
         (
-            Item = 'ranch',
-            NewRanch is Fish - Total,
-            NewFish >= 0,
+            Item = ranch,
+            TempRanch is Ranch - Total,
+            TempRanch >= 0,
             !,
+            NewRanch is TempRanch,
             removeActiveQuest,
-            asserta(activeQuest(NewFish, Farm, NewRanch, Gold, Exp))
+            asserta(activeQuest(Fish, Farm, NewRanch, Gold, Exp))
         );
         (
-            Item = 'ranch',
-            NewRanch is Fish - Total,
-            NewFish < 0,
-            NewFish is 0,
+            Item = ranch,
+            TempRanch is Ranch - Total,
+            TempRanch < 0,
+            NewRanch is 0,
             !,
             removeActiveQuest,
-            asserta(activeQuest(NewFish, Farm, NewRanch, Gold, Exp))
+            asserta(activeQuest(Fish, Farm, NewRanch, Gold, Exp))
         )
     ),
     cekActiveQuest,
     !.
-updateActiveQuest(_).
 
 quest :-
     \+state(free), !,
@@ -213,7 +218,7 @@ quest :-
     setState(quest),
     generateQuest,
     printQuestBoard, nl, nl,
-    write('Pilih Quest yang diinginkan \nInput sesuai dengan nomor Quest yang diinginkan, \nInput yang lainnya untuk keluar.'),
+    write('Pilih Quest yang diinginkan \nInput sesuai dengan nomor Quest yang diinginkan, \nInput yang lainnya untuk keluar.\n'),
     read(Query),
     (
         integer(Query),

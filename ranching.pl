@@ -69,7 +69,8 @@ ranchChicken :-
             format('Kamu mendapatkan ~d telur\n',[Count]),
             Exp is Count * 3,
             earnRanchingExp(Exp),
-            format('Kamu mendapatkan ~d EXP\n',[Exp])
+            format('Kamu mendapatkan ~d EXP\n',[Exp]),
+            updateActiveQuest(ranch, Count)
         );
         (
             Count = 0,
@@ -99,7 +100,8 @@ ranchCow :-
             format('Kamu mendapatkan ~d susu\n',[Count]),
             Exp is Count * 10,
             earnRanchingExp(Exp),
-            format('Kamu mendapatkan ~d EXP\n',[Exp])
+            format('Kamu mendapatkan ~d EXP\n',[Exp]),
+            updateActiveQuest(ranch, Count)
         );
         (
             Count = 0,
@@ -129,7 +131,8 @@ ranchSheep :-
             format('Kamu mendapatkan ~d wol\n',[Count]),
             Exp is Count * 15,
             earnRanchingExp(Exp),
-            format('Kamu mendapatkan ~d EXP\n',[Exp])
+            format('Kamu mendapatkan ~d EXP\n',[Exp]),
+            updateActiveQuest(ranch, Count)
         );
         (
             Count = 0,
