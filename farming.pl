@@ -187,7 +187,9 @@ harvest :-
                 write('carrot berhasil dipanen'),
                 retract(carrotTilePoint(X,Y)),!
             ;
-                write('inventory penuh, item tidak bisa dipanen'),!
+                write('inventory penuh, item tidak bisa dipanen\n'),
+                Sisa is A-D,
+                write('bisa dipanen dalam : '),write(Sisa),write(' hari'),!
             )
         ;
             write('Tanaman belum siap panen'),!
@@ -207,7 +209,9 @@ harvest :-
                 write('inventory penuh, item tidak bisa dipanen'),!
             )
         ;
-            write('Tanaman belum siap panen'),!
+            write('Tanaman belum siap panen\n'),
+            Sisa is A-D,
+            write('bisa dipanen dalam : '),write(Sisa),write(' hari'),!
         )
     );
     (
@@ -221,7 +225,9 @@ harvest :-
                 write('tomato berhasil dipanen'),
                 retract(tomatoTilePoint(X,Y)),!
             ;
-                write('inventory penuh, item tidak bisa dipanen'),!
+                write('inventory penuh, item tidak bisa dipanen\n'),
+                Sisa is A-D,
+                write('bisa dipanen dalam : '),write(Sisa),write(' hari'),!
             )
         ;
             write('Tanaman belum siap panen'),!
@@ -241,10 +247,201 @@ harvest :-
                 write('inventory penuh, item tidak bisa dipanen'),!
             )
         ;
-            write('Tanaman belum siap panen'),!
+            write('Tanaman belum siap panen\n'),
+            Sisa is A-D,
+            write('bisa dipanen dalam : '),write(Sisa),write(' hari'),!
         )
     );
         (
             write('Tidak ada tanaman yang dipanen'),!
         )
+    ).
+
+usefertilizer :-
+    state(free),
+    playerCell('p'),
+    write('pupuk yang anda miliki: \n'),
+    printPupuk('good_fertilizer'),
+    printPupuk('best_fertilizer'),
+    printPupuk('instant_fertilizer'),
+    write('pupuk apa yang anda gunakan : \n'),
+    read(Pupuk),
+    (
+        (
+            Pupuk = ('good_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            NewA is A-1,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('good_fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('best_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            NewA is A-2,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('best_fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('instant_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            retract(panen(X,Y,A)),
+            drop('instant_fertilizer')
+        )
+    ;
+        write('masukkan pupuk salah')
+    ).
+
+usefertilizer :-
+    state(free),
+    playerCell('c'),
+    write('pupuk yang anda miliki: \n'),
+    printPupuk('good_fertilizer'),
+    printPupuk('best_fertilizer'),
+    printPupuk('instant_fertilizer'),
+    write('pupuk apa yang anda gunakan : \n'),
+    read(Pupuk),
+    (
+        (
+            Pupuk = ('good_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            NewA is A-1,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('good_fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('best_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            NewA is A-2,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('best_fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('instant_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            retract(panen(X,Y,A)),
+            drop('instant_fertilizer')
+        )
+    ;
+        write('masukkan pupuk salah')
+    ).
+
+usefertilizer :-
+    state(free),
+    playerCell('t'),
+    write('pupuk yang anda miliki: \n'),
+    printPupuk('good_fertilizer'),
+    printPupuk('best_fertilizer'),
+    printPupuk('instant_fertilizer'),
+    write('pupuk apa yang anda gunakan : \n'),
+    read(Pupuk),
+    (
+        (
+            Pupuk = ('good_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            NewA is A-1,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('good_fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('best_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            NewA is A-2,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('best_fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('instant_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            retract(panen(X,Y,A)),
+            drop('instant_fertilizer')
+        )
+    ;
+        write('masukkan pupuk salah')
+    ).
+
+usefertilizer :-
+    state(free),
+    playerCell('r'),
+    write('pupuk yang anda miliki: \n'),
+    printPupuk('good_fertilizer'),
+    printPupuk('best_fertilizer'),
+    printPupuk('instant_fertilizer'),
+    write('pupuk apa yang anda gunakan : \n'),
+    read(Pupuk),
+    (
+        (
+            Pupuk = ('good_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            NewA is A-1,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('good_fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('best_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            NewA is A-2,
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,NewA)),
+            drop('best_fertilizer')
+        )
+    ;
+        (
+            Pupuk = ('instant_fertilizer'),
+            playerPoint(X,Y),
+            panen(X,Y,A),
+            retract(panen(X,Y,A)),
+            asserta(panen(X,Y,1)),
+            drop('instant_fertilizer')
+        )
+    ;
+        write('masukkan pupuk salah')
+    ).
+
+printPupuk('good_fertilizer') :-
+    inventory(Invent),
+    (member(['good_fertilizer', JumlahT], Invent) ->
+        write(JumlahT), write(' '), write('good_fertilizer'),nl
+    ;
+        write('')
+    ).
+
+printPupuk('best_fertilizer') :-
+    inventory(Invent),
+    (member(['best_fertilizer', JumlahT], Invent) ->
+        write(JumlahT), write(' '), write('best_fertilizer'),nl
+    ;
+        write('')
+    ).
+
+printPupuk('instant_fertilizer') :-
+    inventory(Invent),
+    (member(['instant_fertilizer', JumlahT], Invent) ->
+        write(JumlahT), write(' '), write('instant_fertilizer'),nl
+    ;
+        write('')
     ).
