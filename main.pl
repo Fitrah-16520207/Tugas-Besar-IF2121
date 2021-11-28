@@ -7,7 +7,7 @@
 :- include('menu.pl').
 :- include('pemain.pl').
 :- include('quest.pl').
-%:- include('ranching.pl').
+:- include('ranching.pl').
 :- include('house.pl').
 
 :- dynamic(state/1).
