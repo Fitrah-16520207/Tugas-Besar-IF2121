@@ -72,8 +72,7 @@ pancingan:-
 pancingan:-
     write('Pilih pancingan yang akan kamu gunakan dengan mengetik nama pancingan'),ml,
     read(X),
-    jumlahBarang(X,Y),
-    Y<1,
+    cekBarang(X),nl,
     write('Kamu tidak mempunyai pancingan ini').
 
 fishing(legend) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(hiu,LvlFish).

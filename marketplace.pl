@@ -93,7 +93,8 @@ marketplace :-
     format('Kamu punya uang segini : ~w\n', [UangYangAda]),
     write('Apa yang ingin kamu lakukan?\n'),
     write('- buy\n'),
-    write('- sell\n').
+    write('- sell\n'),
+    write('- exitMarket\n').
 
 buy :-
     % state(free),

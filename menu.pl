@@ -23,6 +23,7 @@ mainMenu :-
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n').
 
 help :-
+    state(free),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
     write('%                           ~Perintah Permainan~                                    %\n'),
     write('% - map          : menampilkan peta                                                 %\n'),
@@ -39,7 +40,7 @@ help :-
     write('% - plant        : menanam tanaman di tanah yang sudah kamu gali                    %\n'),
     write('% - fish         : memancing ikan ketika kamu berada di sekitar tile air            %\n'),
     write('% - ranch        : menampilkan hewan ternak yang kamu punya                         %\n'),
-    write('% - market       : menjual atau membeli barang di pasar ketika kamu berada di tile M%\n'),
+    write('% - marketplace  : menjual atau membeli barang di pasar ketika kamu berada di tile M%\n'),
     write('% - house        : masuk ke rumah ketika kamu berada di tile rumah                  %\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
     nl,
@@ -48,4 +49,102 @@ help :-
     write('%Kamu dinyatakan menang jika kamu berhasil mengumpulkan uang sebesar 20000 gold     %\n'),
     write('%dalam jangka waktu 1 tahun.                                                        %\n'),
     write('%Jika gagal mengumpulkan 20000 gold dalam satu tahun maka kamu dinyatakan kalah     %\n'),
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Good Luck%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n').
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Good Luck%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),fail,nl.
+help :- 
+    state(not_started),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                              ~Harvest Star~                                  %\n'),
+    write('% 1. start  : untuk memulai petualanganmu                                      %\n'),
+    write('% 2. help   : menampilkan segala bantuan                                       %\n'),
+    write('% 3. quit   : keluar dari game                                                 %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
+help :-
+    stateMarket('di dalam'),
+    playerCell(C),
+    C = ('M'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                              ~Market~                                             %\n'),
+    write('% - buy          : membeli barang yang ada di pasar                                 %\n'),
+    write('% - sell         : menjual barang yang kamu punya                                   %\n'),
+    write('% - exitMarket   : keluar dari market                                               %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
+help :-
+    stateMarket('di luar'),
+    playerCell(C),
+    C = ('M'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                              ~Market~                                             %\n'),
+    write('% - marketplace  : masuk ke dalam market                                            %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
+help:-
+    playerPoint(R, C),
+    NewR is R + 1,waterTilePoint(NewR, C),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                              ~Fishing~                                            %\n'),
+    write('% - fish  : memancing ikan di sekitar water tile                                    %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),fail.
+help:-
+    playerPoint(R, C),
+    NewR is R - 1,waterTilePoint(NewR, C),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                              ~Fishing~                                            %\n'),
+    write('% - fish  : memancing ikan di sekitar water tile                                    %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),fail.
+help:-
+    playerPoint(R, C),
+    NewC is C + 1,waterTilePoint(R, NewC),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                              ~Fishing~                                            %\n'),
+    write('% - fish  : memancing ikan di sekitar water tile                                    %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),fail.
+help:-
+    playerPoint(R, C),
+    NewC is C - 1,waterTilePoint(R, NewC),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                              ~Fishing~                                            %\n'),
+    write('% - fish  : memancing ikan di sekitar water tile                                    %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),fail.
+help :-
+    playerCell(C),
+    C = ('c'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                              ~Farming~                                            %\n'),
+    write('% - harvest       : panen tanaman yang kamu tanam                                   %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
+help :-
+    playerCell(C),
+    C = ('p'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                              ~Farming~                                            %\n'),
+    write('% - harvest       : panen tanaman yang kamu tanam                                   %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
+help :-
+    playerCell(C),
+    C = ('t'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                              ~Farming~                                            %\n'),
+    write('% - harvest       : panen tanaman yang kamu tanam                                   %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
+help :-
+    playerCell(C),
+    C = ('r'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                              ~Farming~                                            %\n'),
+    write('% - harvest       : panen tanaman yang kamu tanam                                   %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
+
+help :-
+    playerCell(C),
+    C = ('='),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                              ~Farming~                                            %\n'),
+    write('% - dig          : menggali tanah agar bisa ditanam                                 %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
+
+help :-
+    playerCell(C),
+    C = ('-'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                              ~Farming~                                            %\n'),
+    write('% - plant          : menanam benih tumbuhan yang kamu punya                         %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
