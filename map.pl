@@ -254,7 +254,7 @@ cellCheck(R, C) :-
     asserta(playerCell('M')),
     !,
     write('Kamu sekarang ada di pasar'), nl,
-    write('Tulis marketplace. untuk masuk ke rumah').
+    write('Tulis marketplace. untuk masuk ke market').
 cellCheck(R, C) :-
     questPoint(R, C),
     retractall(playerCell(_)),

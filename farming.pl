@@ -23,6 +23,7 @@ dig :-
     (member(['shovel',_], Invent) ->
         playerPoint(X,Y),
         asserta(diggedTilePoint(X, Y)),
+        cellCheck(X,Y),
         write('Lokasi berhasil digali')
     ;
         write('Kamu harus punya shovel untuk mengggali')
