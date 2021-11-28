@@ -144,7 +144,6 @@ w :-
     retractall(playerPoint(_, _)),
     asserta(playerPoint(NewR, C)),
     !,
-    map,
     write('Kamu berhasil bergerak ke utara'), nl,
     cellCheck(NewR, C).
 
@@ -174,7 +173,6 @@ s :-
     retractall(playerPoint(_, _)),
     asserta(playerPoint(NewR, C)),
     !,
-    map,
     write('Kamu berhasil bergerak ke selatan'), nl,
     cellCheck(NewR, C).
 
@@ -204,7 +202,6 @@ a :-
     retractall(playerPoint(_, _)),
     asserta(playerPoint(R, NewC)),
     !,
-    map,
     write('Kamu berhasil bergerak ke barat'), nl,
     cellCheck(R, NewC).
 
@@ -234,7 +231,6 @@ d :-
     retractall(playerPoint(_, _)),
     asserta(playerPoint(R, NewC)),
     !,
-    map,
     write('Kamu berhasil bergerak ke timur'), nl,
     cellCheck(R, NewC).
 
@@ -333,7 +329,7 @@ teleport :-
       retractall(playerPoint(_, _)),
       asserta(playerCell('M')),
       asserta(playerPoint(X, Y)),
-      map,
+
       write('Kamu berhasil teleport ke marketplace\n')
     );
     (
@@ -343,7 +339,7 @@ teleport :-
       retractall(playerPoint(_, _)),
       asserta(playerCell('Q')),
       asserta(playerPoint(X, Y)),
-      map,
+
       write('Kamu berhasil teleport ke quest\n')
     );
     (
@@ -353,7 +349,7 @@ teleport :-
       retractall(playerPoint(_, _)),
       asserta(playerCell('R')),
       asserta(playerPoint(X, Y)),
-      map,
+
       write('Kamu berhasil teleport ke ranching\n')
     );
     (
@@ -363,7 +359,7 @@ teleport :-
       retractall(playerPoint(_, _)),
       asserta(playerCell('H')),
       asserta(playerPoint(X, Y)),
-      map,
+
       write('Kamu berhasil teleport ke house\n')
     );
     (
@@ -372,7 +368,7 @@ teleport :-
       retractall(playerPoint(_, _)),
       asserta(playerCell('o')),
       asserta(playerPoint(6, 8)),
-      map,
+
       write('Kamu berhasil teleport ke dekat water tile\n')
     );
     (
