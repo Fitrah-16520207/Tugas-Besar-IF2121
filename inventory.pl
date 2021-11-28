@@ -6,7 +6,7 @@
 inventory :- 
     inventory(Invent), 
     jumlahItem(Invent, IC),
-    write('inventory kamu ('),write(IC),write('/100)'),nl, 
+    write('Inventory kamu ('),write(IC),write('/100)'),nl, 
     printInventory(Invent).
 
 printInventory([]) :- !.
@@ -43,7 +43,7 @@ addItem(Item, Jumlah) :-
             assertz(inventory(NewInv))
         )
     ;
-        write('tidak bisa menambahkan barang, inventory penuh')
+        write('Tidak bisa menambahkan barang, inventory penuh')
     ).
 
 /* mengurangi item */
@@ -66,10 +66,10 @@ drop(Item, Jumlah) :-
             retract(inventory(Invent)),
             assertz(inventory(NewInv))
         ;
-            write('jumlah item yang dibuang melebihi jumlah item yang dimiliki')
+            write('Jumlah item yang dibuang melebihi jumlah item yang dimiliki')
         )
     ;
-        write('Anda tidak memiliki item tersebut di inventory anda')
+        write('Kamu tidak memiliki item tersebut di inventory kamu')
     ).
 
 /*menambahkan command throwItem*/
@@ -77,28 +77,28 @@ throwItem :-
     inventory(Invent),
     write('Isi inventory kamu: '),
     nl,inventory,
-    write('apa yang ingin kamu buang: '),
+    write('Apa yang ingin kamu buang: '),
     nl,read(Item),
-    nl,write('masukkan jumlah item yang ingin anda buang: '),
+    nl,write('Masukkan jumlah item yang ingin kamu buang: '),
     nl,read(Jumlah),
     (member([Item,JumlahInv], Invent) ->
         (Jumlah =< JumlahInv -> 
             drop(Item, Jumlah),
-            write('item berhasil dibuang')
+            write('Item berhasil dibuang')
         ;
-            write('jumlah item yang dibuang melebihi jumlah item yang dimiliki')
+            write('Jumlah item yang dibuang melebihi jumlah item yang dimiliki')
         )
     ;
-        write('item tidak ada di inventory')
+        write('Item tidak ada di inventory')
     ).
 
 %menambahkan command cekBarang untuk memeriksa apakah barang ada atau tidak
 cekBarang(Namaitem) :- 
     inventory(Invent),
     (member([Namaitem,_], Invent) ->
-        write('barang ada di inventory')
+        write('Barang ada di inventory')
     ;
-        write('barang tidak ada di inventory')
+        write('Barang tidak ada di inventory')
     ).
 
 %rule untuk mengetahui jumlah barang

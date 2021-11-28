@@ -23,9 +23,9 @@ dig :-
     (member(['shovel',_], Invent) ->
         playerPoint(X,Y),
         asserta(diggedTilePoint(X, Y)),
-        write('lokasi berhasil digali')
+        write('Lokasi berhasil digali')
     ;
-        write('kamu harus punya shovel untuk mengggali')
+        write('Kamu harus punya shovel untuk mengggali')
     ).
 
 
@@ -44,7 +44,7 @@ plant :-
     state(free),
     playerCell(C),
     C = ('='),
-    write('seed yang kamu miliki :'),nl,
+    write('Seed yang kamu miliki :'),nl,
     printTanaman('carrot'),
     printTanaman('potato'),
     printTanaman('tomato'),
@@ -68,12 +68,12 @@ plant :-
         Tanam = 'rice',
         cekJumlah('rice')
     );
-        write('input salah'),nl,
-        write('ketikkan "carrot." untuk menanam carrot'),nl,
-        write('ketikkan "potato." untuk menanam potato'),nl,
-        write('ketikkan "tomato." untuk menanam tomato'),nl,
-        write('ketikkan "rice." untuk menanam rice'),nl,
-        write('untuk mengecek seed yang dimiliki gunakan command "inventory."')
+        write('Input salah'),nl,
+        write('Ketikkan "carrot." untuk menanam carrot'),nl,
+        write('Ketikkan "potato." untuk menanam potato'),nl,
+        write('Ketikkan "tomato." untuk menanam tomato'),nl,
+        write('Ketikkan "rice." untuk menanam rice'),nl,
+        write('Untuk mengecek seed yang dimiliki gunakan command "inventory."')
     ).
 
 cekJumlah('carrot'):-
@@ -89,7 +89,7 @@ cekJumlah('carrot'):-
         MasaPanen is A + M,
         asserta(panen(X,Y,MasaPanen))
     ;
-        write('kamu tidak memiliki carrot_seed')
+        write('Kamu tidak memiliki carrot_seed')
     ).
 
 cekJumlah('potato'):-
@@ -105,7 +105,7 @@ cekJumlah('potato'):-
         MasaPanen is A + M,
         asserta(panen(X,Y,MasaPanen))
     ;
-        write('kamu tidak memiliki potato_seed')
+        write('Kamu tidak memiliki potato_seed')
     ).
 
 cekJumlah('tomato'):-
@@ -121,7 +121,7 @@ cekJumlah('tomato'):-
         MasaPanen is A + M,
         asserta(panen(X,Y,MasaPanen))
     ;
-        write('kamu tidak memiliki tomato_seed')
+        write('Kamu tidak memiliki tomato_seed')
     ).
 
 cekJumlah('rice'):-
@@ -137,7 +137,7 @@ cekJumlah('rice'):-
         MasaPanen is A + M,
         asserta(panen(X,Y,MasaPanen))
     ;
-        write('kamu tidak memiliki rice_seed')
+        write('Kamu tidak memiliki rice_seed')
     ).
 
 printTanaman('carrot') :-
@@ -201,7 +201,7 @@ harvest :-
                     write('kamu mendapatkan 2 exp'),!
                 )
             ;
-                write('inventory penuh, item tidak bisa dipanen\n'),!
+                write('Inventory penuh, item tidak bisa dipanen\n'),!
             )
         ;
             write('Tanaman belum siap panen'),
@@ -230,12 +230,12 @@ harvest :-
                     write('kamu mendapatkan 2 exp'),!
                 )
             ;
-                write('inventory penuh, item tidak bisa dipanen'),!
+                write('Inventory penuh, item tidak bisa dipanen'),!
             )
         ;
             write('Tanaman belum siap panen\n'),
             Sisa is A-D,
-            write('bisa dipanen dalam : '),write(Sisa),write(' hari'),!
+            write('Bisa dipanen dalam : '),write(Sisa),write(' hari'),!
         )
     );
     (
@@ -253,18 +253,18 @@ harvest :-
                 (
                     E = ('farmer'),
                     earnFarmingExp(3),
-                    write('kamu mendapatkan 3 exp'),!
+                    write('Kamu mendapatkan 3 exp'),!
                 ;
                     earnFarmingExp(2),
-                    write('kamu mendapatkan 2 exp'),!
+                    write('Kamu mendapatkan 2 exp'),!
                 )
             ;
-                write('inventory penuh, item tidak bisa dipanen\n'),!
+                write('Inventory penuh, item tidak bisa dipanen\n'),!
             )
         ;
             write('Tanaman belum siap panen'),
             Sisa is A-D,
-            write('bisa dipanen dalam : '),write(Sisa),write(' hari'),!
+            write('Bisa dipanen dalam : '),write(Sisa),write(' hari'),!
         )
     );
     (
@@ -288,12 +288,12 @@ harvest :-
                     write('kamu mendapatkan 2 exp'),!
                 )
             ;
-                write('inventory penuh, item tidak bisa dipanen'),!
+                write('Inventory penuh, item tidak bisa dipanen'),!
             )
         ;
             write('Tanaman belum siap panen\n'),
             Sisa is A-D,
-            write('bisa dipanen dalam : '),write(Sisa),write(' hari'),!
+            write('Bisa dipanen dalam : '),write(Sisa),write(' hari'),!
         )
     );
         (
@@ -304,12 +304,12 @@ harvest :-
 usefertilizer :-
     state(free),
     playerCell('p'),
-    write('pupuk yang kamu miliki: \n'),
+    write('Pupuk yang kamu miliki: \n'),
     printPupuk('fertilizer'),
     printPupuk('good_fertilizer'),
     printPupuk('best_fertilizer'),
     printPupuk('instant_fertilizer'),
-    write('pupuk apa yang kamu gunakan : \n'),
+    write('Pupuk apa yang kamu gunakan : \n'),
     read(Pupuk),
     (
         (
@@ -353,18 +353,18 @@ usefertilizer :-
             drop('instant_fertilizer')
         )
     ;
-        write('masukkan pupuk salah')
+        write('Masukkan pupuk salah')
     ).
 
 usefertilizer :-
     state(free),
     playerCell('c'),
-    write('pupuk yang kamu miliki: \n'),
+    write('Pupuk yang kamu miliki: \n'),
     printPupuk('fertilizer'),
     printPupuk('good_fertilizer'),
     printPupuk('best_fertilizer'),
     printPupuk('instant_fertilizer'),
-    write('pupuk apa yang kamu gunakan : \n'),
+    write('Pupuk apa yang kamu gunakan : \n'),
     read(Pupuk),
     (
         (
@@ -408,18 +408,18 @@ usefertilizer :-
             drop('instant_fertilizer')
         )
     ;
-        write('masukkan pupuk salah')
+        write('Masukkan pupuk salah')
     ).
 
 usefertilizer :-
     state(free),
     playerCell('t'),
-    write('pupuk yang kamu miliki: \n'),
+    write('Pupuk yang kamu miliki: \n'),
     printPupuk('fertilizer'),
     printPupuk('good_fertilizer'),
     printPupuk('best_fertilizer'),
     printPupuk('instant_fertilizer'),
-    write('pupuk apa yang kamu gunakan : \n'),
+    write('Pupuk apa yang kamu gunakan : \n'),
     read(Pupuk),
     (
         (
@@ -463,18 +463,18 @@ usefertilizer :-
             drop('instant_fertilizer')
         )
     ;
-        write('masukkan pupuk salah')
+        write('Masukkan pupuk salah')
     ).
 
 usefertilizer :-
     state(free),
     playerCell('r'),
-    write('pupuk yang kamu miliki: \n'),
+    write('Pupuk yang kamu miliki: \n'),
     printPupuk('fertilizer'),
     printPupuk('good_fertilizer'),
     printPupuk('best_fertilizer'),
     printPupuk('instant_fertilizer'),
-    write('pupuk apa yang kamu gunakan : \n'),
+    write('Pupuk apa yang kamu gunakan : \n'),
     read(Pupuk),
     (
         (
@@ -518,7 +518,7 @@ usefertilizer :-
             drop('instant_fertilizer')
         )
     ;
-        write('masukkan pupuk salah')
+        write('Masukkan pupuk salah')
     ).
 
 printPupuk('fertilizer') :-

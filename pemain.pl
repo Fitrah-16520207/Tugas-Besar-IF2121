@@ -143,7 +143,7 @@ levelUp :-
     asserta(levelUpCap(NewLUC)),
     asserta(experience(NewExp)),
 
-    format('Congratulation, now your level is ~w', [NewLvl]), !.
+    format('Selamat, level kamu sekarang adalah ~w', [NewLvl]), !.
 
 levelUpFarming :-
     levelFarming(CurrLvl),
@@ -162,19 +162,19 @@ levelUpFarming :-
     asserta(levelUpCapFarming(NewLUC)),
     asserta(experienceFarming(NewExp)),
 
-    format('Congratulation, now your farming level is ~w', [NewLvl]), !, nl,
+    format('Selamat, sekarang level farming kamu adalah : ~w', [NewLvl]), !, nl,
     (
         (
             NewLvl = 3, !,
             unlockedItem(carrot_seed),
             unlockedItem(best_fertilizer),
-            write('Carrot Seed and Best Fertilizer have been unlocked, please check marketplace for detail')
+            write('Carrot Seed dan Best Fertilizer telah terbuka, silakan cek marketplace untuk lebih detail')
         );
         (
             NewLvl = 7, !,
             unlockedItem(rice_seed),
             unlockedItem(instant_fertilizer),
-            write('Rice Seed and Instant Fertilizer have been unlocked, please check marketplace for a detail')
+            write('Rice Seed dan Instant Fertilizer telah terbuka, silakan cek marketplace untuk lebih detail')
         );
         (
             write('')
@@ -198,17 +198,17 @@ levelUpFishing :-
     asserta(levelUpCapFishing(NewLUC)),
     asserta(experienceFishing(NewExp)),
 
-    format('Congratulation, now your fishing level is ~w', [NewLvl]), !, nl,
+    format('Selamat, sekarang level fishing kamu adalah ~w', [NewLvl]), !, nl,
     (
         (
             NewLvl = 3, !,
             unlockedItem(rare_rod),
-            write('Rare Rod has been unlocked, please check marketplace for detail')
+            write('Rare Rod telah terbuka, silakan cek marketplace untuk lebih detail')
         );
         (
             NewLvl = 7, !,
             unlockedItem(legend_rod),
-            write('Legend Rode has been unlocked, please check marketplace for a detail')
+            write('Legend Rode telah terbuka, silakan cek marketplace untuk lebih detail')
         );
         (
             write('')
@@ -232,17 +232,17 @@ levelUpRanching :-
     asserta(levelUpCapRanching(NewLUC)),
     asserta(experienceRanching(NewExp)),
 
-    format('Congratulation, now your ranching level is ~w', [NewLvl]), !, nl,
+    format('Selamat, sekarang level fishing kamu adalah ~w', [NewLvl]), !, nl,
     (
         (
             NewLvl = 3, !,
             unlockedItem(sheep),
-            write('Sheep has been unlocked, please check marketplace for detail')
+            write('Sheep telah terbuka, silakan cek marketplace untuk lebih detail')
         );
         (
             NewLvl = 7, !,
             unlockedItem(cow),
-            write('Cow has been unlocked, please check marketplace for a detail')
+            write('Cow telah terbuka, silakan cek marketplace untuk lebih detail')
         );
         (
             write('')

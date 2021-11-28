@@ -6,19 +6,19 @@ house :-
     state(free),
     playerCell(X),
     X \= 'H',!,
-    write('Anda harus berada di house terlebih dahulu').
+    write('Kamu harus berada di house terlebih dahulu').
 
 house :-
     state(house),
     playerCell('H'),!,
-    write('kamu sudah ada di dalam rumah').
+    write('Kamu sudah ada di dalam rumah').
 
 house :-
     state(free),
     playerCell('H'),
     setState(house),!,
     write('Selama datang dirumah !!! \n'),
-    write('apa yang ingin anda lakukan : \n'),
+    write('Apa yang ingin kamu lakukan : \n'),
     write('1. sleep\n'),
     write('2. exitHouse\n'),
     read(Pilihan),
@@ -30,19 +30,19 @@ house :-
         Pilihan = ('exitHouse'),
         exitHouse
     );
-        write('masukkan command "sleep." atau "exitHouse."')
+        write('Masukkan command "sleep." atau "exitHouse."')
     ).
 
 sleep :-
     state(house),
-    write('Anda mulai menuju kasur dan mulai menutup mata, Anda pun tertidur dengan lelap\n'),
+    write('Kamu mulai menuju kasur dan mulai menutup mata, kamu pun tertidur dengan lelap\n'),
     addDays, days(X),
-    write('sekarang adalah hari ke -'),write(' '),write(X),nl,
-    write('semoga hari anda menyenangkan').
+    write('Sekarang adalah hari ke -'),write(' '),write(X),nl,
+    write('Semoga hari kamu menyenangkan').
 
 exitHouse :-
     setState(free), !,
-    write('Anda telah berada di luar rumah').
+    write('Kamu telah berada di luar rumah').
     
 
 

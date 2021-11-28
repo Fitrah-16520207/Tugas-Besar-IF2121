@@ -206,7 +206,7 @@ quest :-
     state(free),
     activeQuest(_, _, _, _, _),
     !,
-    write('Kamu belum menyelesaikan Quest Anda!\n').
+    write('Kamu belum menyelesaikan Quest kamu!\n').
 
 quest :-
     state(free),
