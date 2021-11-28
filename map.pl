@@ -312,7 +312,7 @@ teleport :-
   state(free),
   bisaTeleport(bisa),
   write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
-  write('%                     ~Teleport Menu by peri gigi~                             %\n'),
+  write('%                     ~Teleport Menu by peri tidur~                            %\n'),
   write('% 1. marketplace                                                               %\n'),
   write('% 2. quest                                                                     %\n'),
   write('% 3. ranching                                                                  %\n'),
