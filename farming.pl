@@ -192,12 +192,12 @@ harvest :-
                 write('carrot berhasil dipanen'),
                 retract(carrotTilePoint(X,Y)),!
             ;
-                write('inventory penuh, item tidak bisa dipanen\n'),
-                Sisa is A-D,
-                write('bisa dipanen dalam : '),write(Sisa),write(' hari'),!
+                write('inventory penuh, item tidak bisa dipanen\n'),!
             )
         ;
-            write('Tanaman belum siap panen'),!
+            write('Tanaman belum siap panen'),
+            Sisa is A-D,
+            write('bisa dipanen dalam : '),write(Sisa),write(' hari'),!
         )
     );
     (   
@@ -232,12 +232,12 @@ harvest :-
                 write('tomato berhasil dipanen'),
                 retract(tomatoTilePoint(X,Y)),!
             ;
-                write('inventory penuh, item tidak bisa dipanen\n'),
-                Sisa is A-D,
-                write('bisa dipanen dalam : '),write(Sisa),write(' hari'),!
+                write('inventory penuh, item tidak bisa dipanen\n'),!
             )
         ;
-            write('Tanaman belum siap panen'),!
+            write('Tanaman belum siap panen'),
+            Sisa is A-D,
+            write('bisa dipanen dalam : '),write(Sisa),write(' hari'),!
         )
     );
     (
