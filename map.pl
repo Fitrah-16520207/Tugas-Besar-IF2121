@@ -311,7 +311,7 @@ cellCheck(_, _) :-
 teleport :-
   state(free),
   write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
-  write('%                              ~Teleport Menu~                                 %\n'),
+  write('%                     ~Teleport Menu by peri gigi~                             %\n'),
   write('% 1. marketplace                                                               %\n'),
   write('% 2. quest                                                                     %\n'),
   write('% 3. ranching                                                                  %\n'),
