@@ -23,6 +23,41 @@ lockedInventoryMarket([
     [instant_fertilizer,100, 7, farming]
 ]).
 
+priceList([
+    [potato_seed,40],
+    [tomato_seed,50],
+    [carrot_seed,60],
+    [rice_seed,70],
+    [potato,80],
+    [tomato,100],
+    [carrot,120],
+    [rice,150],
+    [chicken,200],
+    [turkey,750],
+    [sheep,1500],
+    [cow,2000],
+    [egg,50],
+    [milk,50],
+    [wol,200],
+    [lele,30],
+    [nila,50],
+    [gurame,80],
+    [patin,80],
+    [tuna,200],
+    [pari,1000],
+    [barracuda,7500],
+    [hiu,10000],
+    [bait,5],
+    [normal_rod,500],
+    [good_rod,2000],
+    [rare_rod,4000],
+    [legend_rod,10000],
+    [shovel,300],
+    [good_fertilizer,40],
+    [best_fertilizer,70],
+    [instant_fertilizer,100]
+]).
+
 addItemMarket(Item) :-
     inventoryMarket(Invent),
     itemPrice(Item, Harga),
@@ -46,7 +81,6 @@ unlockedItem(Item) :-
 printInventoryMarket([], Number) :-
     lockedInventoryMarket(LIM),
     printLockedInventoryMarket(LIM, Number).
-
 printInventoryMarket([[Nama, Harga]|T], Number) :-
     format('~w. ', [Number]),
     write(Nama), tab(1), format('(~w Gold)', [Harga]),
@@ -59,6 +93,23 @@ printLockedInventoryMarket([[Nama, Harga, Lvl, Type]|T], Number) :-
     write(Nama), tab(1), format('(~w Gold)', [Harga]), tab(3), format('Unlock Item Lvl ~w ', [Lvl]), write(Type),
     IncNumber is Number + 1,
     nl, printLockedInventoryMarket(T, IncNumber).
+
+printPriceList([], _Number) :- !.
+printPriceList([[Nama, Harga]|T], Number) :-
+    format('~w. ', [Number]),
+    write(Nama), tab(1),
+    (
+        (
+            buyable(Nama),
+            HargaBuyable is Harga // 2,
+            format('(~w Gold)', [HargaBuyable])
+        );
+        (
+            format('(~w Gold)', [Harga])
+        )
+    ),
+    IncNumber is Number + 1,
+    nl, printPriceList(T, IncNumber).
 
 itemNth(1, [[Nama, _Harga]|_T], Nama).
 itemNth(N, [[_Nama, _Harga]|T], Item) :-
@@ -201,6 +252,9 @@ sell :-
 sell :-
     state(free),
     stateMarket('di dalam'),
+    write('Berikut daftar harga jual item\n'),
+    priceList(PL),
+    printPriceList(PL, 1),
     write('Ini adalah daftar item yang ada di item kamu\n'),
     inventory,
     write('Apa item yang ingin kamu jual? :'), tab(2),

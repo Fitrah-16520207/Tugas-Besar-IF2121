@@ -71,21 +71,21 @@ itemPrice(carrot,120).
 itemPrice(rice,150).
 % ranching
 itemPrice(chicken,200).
+itemPrice(turkey,750).
 itemPrice(sheep,1500).
 itemPrice(cow,2000).
-itemPrice(turkey,750).
 itemPrice(egg,50).
-itemPrice(wol,200).
 itemPrice(milk,50).
+itemPrice(wol,200).
 % fishing
-itemPrice(tuna,200).
-itemPrice(nila,50).
 itemPrice(lele,30).
+itemPrice(nila,50).
 itemPrice(gurame,80).
 itemPrice(patin,80).
+itemPrice(tuna,200).
+itemPrice(pari,1000).
 itemPrice(barracuda,7500).
 itemPrice(hiu,10000).
-itemPrice(pari,1000).
 % tool
 itemPrice(bait,5).
 itemPrice(normal_rod,500).
