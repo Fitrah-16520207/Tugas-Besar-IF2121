@@ -27,6 +27,9 @@ addItem(_, Jumlah) :-
     write('Jumlah item harus lebih dari 0'), 
     fail.
 addItem(Item, Jumlah) :-
+    \+inventory(_), !,
+    asserta(inventory([[Item, Jumlah]])).
+addItem(Item, Jumlah) :-
     item(Item, _),
     inventory(Invent),
     jumlahItem(Invent, IC),

@@ -90,7 +90,8 @@ earnExp(X) :-
     experience(CurrExp),
     NewExp is CurrExp + X,
     retractall(experience(_)),
-    asserta(experience(NewExp)).
+    asserta(experience(NewExp)),
+    checkLevelUp.
 
 earnFishingExp(X) :-
     experience(CurrExp),
@@ -100,7 +101,8 @@ earnFishingExp(X) :-
     retractall(experience(_)),
     retractall(experienceFishing(_)),
     asserta(experience(NewExp)),
-    asserta(experienceFishing(NewExpFish)).
+    asserta(experienceFishing(NewExpFish)),
+    checkLevelUp.
 
 earnFarmingExp(X) :-
     experience(CurrExp),
@@ -110,7 +112,8 @@ earnFarmingExp(X) :-
     retractall(experience(_)),
     retractall(experienceFarming(_)),
     asserta(experience(NewExp)),
-    asserta(experienceFishing(NewExpFarm)).
+    asserta(experienceFishing(NewExpFarm)),
+    checkLevelUp.
 
 earnRanchingExp(X) :-
     experience(CurrExp),
@@ -120,7 +123,8 @@ earnRanchingExp(X) :-
     retractall(experience(_)),
     retractall(experienceRanching(_)),
     asserta(experience(NewExp)),
-    asserta(experienceRanching(NewExpRanch)).
+    asserta(experienceRanching(NewExpRanch)),
+    checkLevelUp.
 
 earnGold(X) :-
     gold(CurrGold),
@@ -262,6 +266,52 @@ levelUpRanching :-
         );
         (
             write('')
+        )
+    ).
+
+checkLevelUp :-
+    experience(Exp),
+    levelUpCap(LUC),
+    experienceFarming(ExpFarm),
+    levelUpCapFarming(LUCFarm),
+    experienceFishing(ExpFish),
+    levelUpCapFishing(LUCFish),
+    experienceRanching(ExpRanch),
+    levelUpCapRanching(LUCRanch),
+    (
+        (
+            Exp >= LUC,
+            levelUp
+        );
+        (
+            Exp < LUC
+        )
+    ),
+    (
+        (
+            ExpFarm >= LUCFarm,
+            levelUpFarming
+        );
+        (
+            ExpFarm < LUCFarm
+        )
+    ),
+    (
+        (
+            ExpFish >= LUCFish,
+            levelUpFarming
+        );
+        (
+            ExpFish < LUCFish
+        )
+    ),
+    (
+        (
+            ExpRanch >= LUCRanch,
+            levelUpRanching
+        );
+        (
+            ExpRanch < LUCRanch
         )
     ).
 
