@@ -53,20 +53,20 @@ generateQuest :-
     removeAvailableQuest,
     (
         random(0, 10, Fish),
-        round(Fish*3/2, Exp1),
-        round(Fish*50, Gold1),
+        Exp1 is round(Fish*3/2),
+        Gold1 is Fish*50,
         addQuest([Fish, 0, 0, Gold1, Exp1])
     ),
     (
         random(0, 5, Farm),
-        round(Farm * 5 / 3, Exp2),
-        round(Farm*75, Gold2),
+        Exp2 is round(Farm * 5 / 3),
+        Gold2 is Farm*75,
         addQuest([0, Farm, 0, Gold2, Exp2])
     ),
     (
         random(0, 7, Ranch),
-        round(Ranch*2, Exp3),
-        round(Ranch*100, Gold3),
+        Exp3 is Ranch*2,
+        Gold3 is Ranch*100,
         addQuest([0, 0, Ranch, Gold3, Exp3])
     ),
     (
@@ -75,9 +75,9 @@ generateQuest :-
             random(0, 5, Farm1),
             random(0, 7, Ranch1),
             TotalGold is Fish1 * 50 + Farm1 * 75 + Ranch1 * 100,
-            round(Fish1*3/2, ExpFish),
-            round(Farm1*5/3, ExpFarm),
-            round(Ranch1*2, ExpRanch),
+            ExpFish is round(Fish1*3/2),
+            ExpFarm is round(Farm1*5/3),
+            ExpRanch is Ranch1*2,
             TotalExp is ExpFish + ExpFarm + ExpRanch,
             addQuest([Fish1, Farm1, Ranch1, TotalGold, TotalExp])
             )
@@ -213,7 +213,7 @@ quest :-
     setState(quest),
     generateQuest,
     printQuestBoard, nl, nl,
-    write("Pilih Quest yang diinginkan \nInput sesuai dengan nomor Quest yang diinginkan,\n Input yang lainnya untuk keluar."),
+    write('Pilih Quest yang diinginkan \nInput sesuai dengan nomor Quest yang diinginkan, \nInput yang lainnya untuk keluar.'),
     read(Query),
     (
         integer(Query),
