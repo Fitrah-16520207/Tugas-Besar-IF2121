@@ -85,7 +85,7 @@ cekJumlah('carrot'):-
         write('carrot berhasil ditanam'),
         drop('carrot_seed'),
         days(A),
-        MasaPanen is A + 3,
+        MasaPanen is A + 6,
         asserta(panen(X,Y,MasaPanen))
     ;
         write('Anda tidak memiliki carrot_seed')
@@ -100,7 +100,7 @@ cekJumlah('potato'):-
         write('potato berhasil ditanam'),
         drop('potato_seed'),
         days(A),
-        MasaPanen is A + 2,
+        MasaPanen is A + 3,
         asserta(panen(X,Y,MasaPanen))
     ;
         write('Anda tidak memiliki potato_seed')
@@ -115,7 +115,7 @@ cekJumlah('tomato'):-
         write('tomato berhasil ditanam'),
         drop('tomato_seed'),
         days(A),
-        MasaPanen is A + 3,
+        MasaPanen is A + 2,
         asserta(panen(X,Y,MasaPanen))
     ;
         write('Anda tidak memiliki tomato_seed')
@@ -130,7 +130,7 @@ cekJumlah('rice'):-
         write('rice berhasil ditanam'),
         drop('rice_seed'),
         days(A),
-        MasaPanen is A + 4,
+        MasaPanen is A + 3,
         asserta(panen(X,Y,MasaPanen))
     ;
         write('Anda tidak memiliki rice_seed')
