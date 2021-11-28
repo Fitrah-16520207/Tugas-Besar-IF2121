@@ -192,16 +192,16 @@ levelUpFarming :-
     format('Selamat, sekarang level farming kamu adalah ~w', [NewLvl]), !, nl,
     (
         (
-            NewLvl = 3, !,
+            NewLvl = 3,
             unlockedItem(carrot_seed),
             unlockedItem(best_fertilizer),
-            write('Carrot Seed dan Best Fertilizer telah terbuka, silakan cek marketplace untuk lebih detail\n')
+            write('Carrot Seed dan Best Fertilizer telah terbuka, silakan cek marketplace untuk lebih detail\n'), !
         );
         (
-            NewLvl = 7, !,
+            NewLvl = 7,
             unlockedItem(rice_seed),
             unlockedItem(instant_fertilizer),
-            write('Rice Seed dan Instant Fertilizer telah terbuka, silakan cek marketplace untuk lebih detail\n')
+            write('Rice Seed dan Instant Fertilizer telah terbuka, silakan cek marketplace untuk lebih detail\n'), !
         );
         (
             write('')
@@ -232,14 +232,14 @@ levelUpFishing :-
     format('Selamat, sekarang level fishing kamu adalah ~w', [NewLvl]), !, nl,
     (
         (
-            NewLvl = 3, !,
+            NewLvl = 3,
             unlockedItem(rare_rod),
-            write('Rare Rod telah terbuka, silakan cek marketplace untuk lebih detail\n')
+            write('Rare Rod telah terbuka, silakan cek marketplace untuk lebih detail\n'), !
         );
         (
-            NewLvl = 7, !,
+            NewLvl = 7,
             unlockedItem(legend_rod),
-            write('Legend Rode telah terbuka, silakan cek marketplace untuk lebih detail\n')
+            write('Legend Rode telah terbuka, silakan cek marketplace untuk lebih detail\n'), !
         );
         (
             write('')
@@ -269,17 +269,17 @@ levelUpRanching :-
     format('Selamat, sekarang level ranching kamu adalah ~w', [NewLvl]), !, nl,
     (
         (
-            NewLvl = 3, !,
+            NewLvl = 3, 
             unlockedItem(sheep),
-            write('Sheep telah terbuka, silakan cek marketplace untuk lebih detail\n')
+            write('Sheep telah terbuka, silakan cek marketplace untuk lebih detail\n'), !
         );
         (
-            NewLvl = 7, !,
+            NewLvl = 7,
             unlockedItem(cow),
-            write('Cow telah terbuka, silakan cek marketplace untuk lebih detail\n')
+            write('Cow telah terbuka, silakan cek marketplace untuk lebih detail\n'), !
         );
         (
-            write('')
+            write(''), !
         )
     ).
 levelUpCapRanching.
