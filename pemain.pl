@@ -136,7 +136,7 @@ earnGold(X) :-
             NewGold > 19999,
             setState(finished),
             write('HOREEE!!!\n'),
-            write('Kamu telah berhasil mengumpulkan uang sebanyak ~w Gold\n', [NewGold]),
+            format('Kamu telah berhasil mengumpulkan uang sebanyak ~w Gold\n', [NewGold]),
             write('Kamu telah mampu untuk membayar segala utangmu, yeayy\n'),
             write('Permainan Selesai')
         );
