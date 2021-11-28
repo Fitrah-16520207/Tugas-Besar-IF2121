@@ -126,7 +126,20 @@ earnGold(X) :-
     gold(CurrGold),
     NewGold is CurrGold + X,
     retractall(gold(_)),
-    asserta(gold(NewGold)).
+    asserta(gold(NewGold)),
+    (
+        (
+            NewGold > 19999,
+            setState(finished),
+            write('HOREEE!!!\n'),
+            write('Kamu telah berhasil mengumpulkan uang sebanyak ~w Gold\n', [NewGold]),
+            write('Kamu telah mampu untuk membayar segala utangmu, yeayy\n'),
+            write('Permainan Selesai')
+        );
+        (
+            write('')
+        )
+    ).
 
 % Level Up System
 levelUp :-
@@ -298,6 +311,19 @@ statusJob :-
 addDays :-
     days(CurrDays),
     retractall(days(_)),
-
     NewDays is CurrDays + 1,
-    asserta(days(NewDays)).
+    asserta(days(NewDays)),
+    (
+        (
+            NewDays > 120,
+            setState(finished),
+            write('Hari ternyata berlalu begitu cepat\n'),
+            write('Hari ini tepat satu tahun telah kamu lalui\n'),
+            write('Namun apa daya, uang kamu belum cukup untuk membayar segala utangmu\n'),
+            write('Kamu telah gagal!!!\n'),
+            write('Permainan Selesai')
+        );
+        (
+            write('')
+        )
+    ).

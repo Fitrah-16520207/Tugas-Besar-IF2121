@@ -310,8 +310,9 @@ cellCheck(_, _) :-
 
 teleport :-
   state(free),
+  bisaTeleport(bisa),
   write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
-  write('%                              ~Teleport Menu~                                 %\n'),
+  write('%                     ~Teleport Menu by peri tidur~                            %\n'),
   write('% 1. marketplace                                                               %\n'),
   write('% 2. quest                                                                     %\n'),
   write('% 3. ranching                                                                  %\n'),
@@ -375,3 +376,7 @@ teleport :-
       write('Tidak ada portal di tempat pilihanmu, teleport dibatalkan.\n')
     )
   ).
+teleport :-
+  state(free),
+  bisaTeleport(enggak),
+  write('Kamu tidak mendapat kemampuan teleport').
