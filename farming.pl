@@ -25,7 +25,7 @@ dig :-
         asserta(diggedTilePoint(X, Y)),
         write('lokasi berhasil digali')
     ;
-        write('Anda harus punya shovel untuk mengggali')
+        write('kamu harus punya shovel untuk mengggali')
     ).
 
 
@@ -44,12 +44,12 @@ plant :-
     state(free),
     playerCell(C),
     C = ('='),
-    write('seed yang anda miliki :'),nl,
+    write('seed yang kamu miliki :'),nl,
     printTanaman('carrot'),
     printTanaman('potato'),
     printTanaman('tomato'),
     printTanaman('rice'),
-    write('Tanaman apa yang akan anda tanam:'),nl,
+    write('Tanaman apa yang akan kamu tanam:'),nl,
 
     read(Tanam),
     ((
@@ -89,7 +89,7 @@ cekJumlah('carrot'):-
         MasaPanen is A + M,
         asserta(panen(X,Y,MasaPanen))
     ;
-        write('Anda tidak memiliki carrot_seed')
+        write('kamu tidak memiliki carrot_seed')
     ).
 
 cekJumlah('potato'):-
@@ -105,7 +105,7 @@ cekJumlah('potato'):-
         MasaPanen is A + M,
         asserta(panen(X,Y,MasaPanen))
     ;
-        write('Anda tidak memiliki potato_seed')
+        write('kamu tidak memiliki potato_seed')
     ).
 
 cekJumlah('tomato'):-
@@ -121,7 +121,7 @@ cekJumlah('tomato'):-
         MasaPanen is A + M,
         asserta(panen(X,Y,MasaPanen))
     ;
-        write('Anda tidak memiliki tomato_seed')
+        write('kamu tidak memiliki tomato_seed')
     ).
 
 cekJumlah('rice'):-
@@ -137,7 +137,7 @@ cekJumlah('rice'):-
         MasaPanen is A + M,
         asserta(panen(X,Y,MasaPanen))
     ;
-        write('Anda tidak memiliki rice_seed')
+        write('kamu tidak memiliki rice_seed')
     ).
 
 printTanaman('carrot') :-
@@ -189,8 +189,17 @@ harvest :-
             acak(2,6,N),
             (IC + N =< 100 ->
                 addItem('carrot',N),
-                write('carrot berhasil dipanen'),
-                retract(carrotTilePoint(X,Y)),!
+                write('carrot berhasil dipanen\n'),
+                retract(carrotTilePoint(X,Y)),
+                playerJob(E),
+                (
+                    E = ('farmer'),
+                    earnFarmingExp(3),
+                    write('kamu mendapatkan 3 exp'),!
+                ;
+                    earnFarmingExp(2),
+                    write('kamu mendapatkan 2 exp'),!
+                )
             ;
                 write('inventory penuh, item tidak bisa dipanen\n'),!
             )
@@ -209,8 +218,17 @@ harvest :-
             acak(1,4,N),
             (IC + N =< 100 ->
                 addItem('potato',N),
-                write('potato berhasil dipanen'),
-                retract(potatoTilePoint(X,Y)),!
+                write('potato berhasil dipanen\n'),
+                retract(potatoTilePoint(X,Y)),
+                playerJob(E),
+                (
+                    E = ('farmer'),
+                    earnFarmingExp(3),
+                    write('kamu mendapatkan 3 exp'),!
+                ;
+                    earnFarmingExp(2),
+                    write('kamu mendapatkan 2 exp'),!
+                )
             ;
                 write('inventory penuh, item tidak bisa dipanen'),!
             )
@@ -229,8 +247,17 @@ harvest :-
             acak(1,4,N),
             (IC + N =< 100 ->
                 addItem('tomato',N),
-                write('tomato berhasil dipanen'),
-                retract(tomatoTilePoint(X,Y)),!
+                write('tomato berhasil dipanen\n'),
+                retract(tomatoTilePoint(X,Y)),
+                playerJob(E),
+                (
+                    E = ('farmer'),
+                    earnFarmingExp(3),
+                    write('kamu mendapatkan 3 exp'),!
+                ;
+                    earnFarmingExp(2),
+                    write('kamu mendapatkan 2 exp'),!
+                )
             ;
                 write('inventory penuh, item tidak bisa dipanen\n'),!
             )
@@ -249,8 +276,17 @@ harvest :-
             acak(3,6,N),
             (IC + N =< 100 ->
                 addItem('rice', N),
-                write('rice berhasil dipanen'),
-                retract(riceTilePoint(X,Y)),!
+                write('rice berhasil dipanen\n'),
+                retract(riceTilePoint(X,Y)),
+                playerJob(E),
+                (
+                    E = ('farmer'),
+                    earnFarmingExp(3),
+                    write('kamu mendapatkan 3 exp'),!
+                ;
+                    earnFarmingExp(2),
+                    write('kamu mendapatkan 2 exp'),!
+                )
             ;
                 write('inventory penuh, item tidak bisa dipanen'),!
             )
@@ -268,12 +304,12 @@ harvest :-
 usefertilizer :-
     state(free),
     playerCell('p'),
-    write('pupuk yang anda miliki: \n'),
+    write('pupuk yang kamu miliki: \n'),
     printPupuk('fertilizer'),
     printPupuk('good_fertilizer'),
     printPupuk('best_fertilizer'),
     printPupuk('instant_fertilizer'),
-    write('pupuk apa yang anda gunakan : \n'),
+    write('pupuk apa yang kamu gunakan : \n'),
     read(Pupuk),
     (
         (
@@ -323,12 +359,12 @@ usefertilizer :-
 usefertilizer :-
     state(free),
     playerCell('c'),
-    write('pupuk yang anda miliki: \n'),
+    write('pupuk yang kamu miliki: \n'),
     printPupuk('fertilizer'),
     printPupuk('good_fertilizer'),
     printPupuk('best_fertilizer'),
     printPupuk('instant_fertilizer'),
-    write('pupuk apa yang anda gunakan : \n'),
+    write('pupuk apa yang kamu gunakan : \n'),
     read(Pupuk),
     (
         (
@@ -378,12 +414,12 @@ usefertilizer :-
 usefertilizer :-
     state(free),
     playerCell('t'),
-    write('pupuk yang anda miliki: \n'),
+    write('pupuk yang kamu miliki: \n'),
     printPupuk('fertilizer'),
     printPupuk('good_fertilizer'),
     printPupuk('best_fertilizer'),
     printPupuk('instant_fertilizer'),
-    write('pupuk apa yang anda gunakan : \n'),
+    write('pupuk apa yang kamu gunakan : \n'),
     read(Pupuk),
     (
         (
@@ -433,12 +469,12 @@ usefertilizer :-
 usefertilizer :-
     state(free),
     playerCell('r'),
-    write('pupuk yang anda miliki: \n'),
+    write('pupuk yang kamu miliki: \n'),
     printPupuk('fertilizer'),
     printPupuk('good_fertilizer'),
     printPupuk('best_fertilizer'),
     printPupuk('instant_fertilizer'),
-    write('pupuk apa yang anda gunakan : \n'),
+    write('pupuk apa yang kamu gunakan : \n'),
     read(Pupuk),
     (
         (
