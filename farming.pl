@@ -88,6 +88,7 @@ cekJumlah('carrot'):-
         days(A),
         acak(6,7,M),
         MasaPanen is A + M,
+        cellCheck(X,Y),
         asserta(panen(X,Y,MasaPanen))
     ;
         write('Kamu tidak memiliki carrot_seed')
@@ -104,6 +105,7 @@ cekJumlah('potato'):-
         days(A),
         acak(3,4,M),
         MasaPanen is A + M,
+        cellCheck(X,Y),
         asserta(panen(X,Y,MasaPanen))
     ;
         write('Kamu tidak memiliki potato_seed')
@@ -120,6 +122,7 @@ cekJumlah('tomato'):-
         days(A),
         acak(2,3,M),
         MasaPanen is A + M,
+        cellCheck(X,Y),
         asserta(panen(X,Y,MasaPanen))
     ;
         write('Kamu tidak memiliki tomato_seed')
@@ -136,6 +139,7 @@ cekJumlah('rice'):-
         days(A),
         acak(2,3,M),
         MasaPanen is A + M,
+        cellCheck(X,Y),
         asserta(panen(X,Y,MasaPanen))
     ;
         write('Kamu tidak memiliki rice_seed')
