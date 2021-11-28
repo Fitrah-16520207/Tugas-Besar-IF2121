@@ -1,3 +1,46 @@
+:- dynamic(inventoryMarket/1).
+inventoryMarket([
+    % [nama item, harga]
+    [potato_seed,40],
+    [carrot_seed,60],
+    [tomato_seed,50],
+    [rice_seed,70],
+    [chicken,200],
+    [sheep,1500],
+    [cow,2000],
+    [turkey,750],
+    [shovel,300],
+    [bait,5],
+    [good_rod,2000],
+    [good_fertilizer,40]
+]).
+
+:- dynamic(lockedInventoryMarket/1).
+lockedInventoryMarket([
+    [rare_rod,4000],
+    [legend_rod,10000],
+    [best_fertilizer,70],
+    [instant_fertilizer,100]
+]).
+
+addItemMarket(Item) :-
+    inventoryMarket(Invent),
+    itemPrice(Item, Harga),
+    append(Invent, [[Item, Harga]], NewInvent),
+    retract(inventoryMarket(Invent)),
+    assertz(inventoryMarket(NewInvent)).
+
+deletelockedItemMarket(Item) :-
+    lockedInventoryMarket(Invent),
+    itemPrice(Item, Harga),
+    delete(Invent, [Item, Harga], NewInvent),
+    retract(lockedInventoryMarket(Invent)),
+    assertz(lockedInventoryMarket(NewInvent)).
+
+unlockedItem(Item) :-
+    addItemMarket(Item),
+    deletelockedItemMarket(Item).
+
 :- dynamic(stateMarket/1).
 % dapat berupa
 % 'di dalam' : ketika di market tapi belum nulis command marketplace.
@@ -34,11 +77,10 @@ marketplace :-
     write('- sell\n').
 
 buy :-
-    state(free),
-    stateMarket('di dalam'),
+    % state(free),
+    % stateMarket('di dalam'),
     write('Apa yang ingin kamu beli?\n'),
-    buyable(X),
-    write(X), nl.
+    nl.
 
 sell :-
     state(free),

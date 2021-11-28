@@ -55,6 +55,11 @@ buyable(good_fertilizer).
 buyable(best_fertilizer).
 buyable(instant_fertilizer).
 
+% PERINGATAN
+% SETIAP KALI MENGUBAH HARGA ITEM
+% MAKA HARGA ITEM PADA INVENTORY MARKET
+% JUGA HARUS DIPERBARUI (MANUAL GAN SORRY :V)
+
 % farming
 itemPrice(potato_seed,40).
 itemPrice(carrot_seed,60).
