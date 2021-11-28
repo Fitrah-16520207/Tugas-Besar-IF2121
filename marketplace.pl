@@ -87,7 +87,7 @@ marketplace :-
     state(free),
     playerCell('M'),
     stateMarket('di dalam'), !,
-    write('Kamu sudah berada di dalam pasar sayang').
+    write('Kamu sudah berada di dalam pasar').
 
 marketplace :-
     state(free),
@@ -104,8 +104,24 @@ marketplace :-
     write('- exitMarket\n').
 
 buy :-
-    % state(free),
-    % stateMarket('di dalam'),
+    state(not_started),!,
+    write('Permainan belum dimulai').
+
+buy :-
+    state(free),
+    playerCell(X),
+    X \= 'M', !,
+    write('Kamu harus berada di marketplace terlebih dahulu').
+
+buy :-
+    state(free),
+    playerCell('M'),
+    stateMarket('di luar'), !,
+    write('Kamu harus masuk dulu ke dalam marketplace').
+
+buy :-
+    state(free),
+    stateMarket('di dalam'),
     write('Apa yang ingin kamu beli?\n'),
     inventoryMarket(InventMart),
     printInventoryMarket(InventMart, 1),
@@ -121,7 +137,8 @@ buy :-
             itemPrice(Item, Harga),
             TotalBayar is Harga * Qty,
             format('Kamu akan membeli ~w ', [Item]), format('sebanyak ~w.\n', [Qty]),
-            format('total pembayaran adalah : ~w Gold\n', [TotalBayar]),
+            format('Total pembayaran adalah : ~w Gold\n', [TotalBayar]),
+            write('Pastikan kapasitas inventorymu masih cukup\n'),
             write('Lanjut pembayaran (Y/N) : '), read(Input), nl,
             (
                 (
@@ -133,11 +150,23 @@ buy :-
                             write('Transaksi dibatalkan')
                         );
                         (
-                            NewGold is UangYangAda - TotalBayar,
-                            retractall(gold(_)),
-                            asserta(gold(NewGold)), nl,
-                            write('Transaksi berhasil'),
-                            addItem(Item, Qty)
+                            (
+                                (
+                                    inventory(Invent),
+                                    jumlahItem(Invent, IC),
+                                    SisaKapasitas is 100 - IC,
+                                    SisaKapasitas < Qty, !,
+                                    write('Sisa Kapasitasmu tidak cukup untuk menampung item sebanyak itu\n'),
+                                    write('Transaksi dibatalkan\n')
+                                );
+                                (
+                                    NewGold is UangYangAda - TotalBayar,
+                                    retractall(gold(_)),
+                                    asserta(gold(NewGold)), nl,
+                                    write('Transaksi berhasil'),
+                                    addItem(Item, Qty)
+                                )
+                            )
                         )
                     )
                 );
@@ -154,6 +183,22 @@ buy :-
     nl.
 
 sell :-
+    state(not_started),!,
+    write('Permainan belum dimulai').
+
+sell :-
+    state(free),
+    playerCell(X),
+    X \= 'M', !,
+    write('Kamu harus berada di marketplace terlebih dahulu').
+
+sell :-
+    state(free),
+    playerCell('M'),
+    stateMarket('di luar'), !,
+    write('Kamu harus masuk dulu ke dalam marketplace').
+
+sell :-
     state(free),
     stateMarket('di dalam'),
     write('Ini adalah daftar item yang ada di item kamu\n'),
@@ -165,7 +210,7 @@ sell :-
         (
             % Item tidak ada di dalam inventory
             \+ member([Item, _JumlahItem], Invent), !,
-            write('Kami tidak dapat menjual barang tersebut karena tidak ada di inventory kamu\n')
+            write('Kami tidak dapat membeli barang tersebut karena tidak ada di inventory kamu\n')
         );
         (
             % item ada di inventory
@@ -196,6 +241,22 @@ sell :-
             )
         )
     ).
+
+exitMarket :-
+    state(not_started),!,
+    write('Permainan belum dimulai').
+
+exitMarket :-
+    state(free),
+    playerCell(X),
+    X \= 'M', !,
+    write('Kamu harus berada di marketplace terlebih dahulu').
+
+exitMarket :-
+    state(free),
+    playerCell('M'),
+    stateMarket('di luar'), !,
+    write('Kamu sudah ada di luar marketplace').
 
 exitMarket :-
     stateMarket('di dalam'),
