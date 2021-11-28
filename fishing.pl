@@ -99,7 +99,7 @@ chance_item(lele,50).
 chance_item(gurame,10).
 chance_item(patin,10).
 chance_item(barracuda,2).
-canche_item(hiu,1).
+chance_item(hiu,1).
 
 random_fish(X,Lv) :-
     chance_item(X,C),
