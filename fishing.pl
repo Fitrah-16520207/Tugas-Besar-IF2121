@@ -119,7 +119,7 @@ random_fish(X,Lv,normal) :-
     write(X),nl,
     addItem(X,1),
     set_dapet_ikan(udah),
-    Exp is 5*LvlFish,
+    Exp is 10*LvlFish,
     earnFishingExp(Exp),
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     fail.
@@ -132,7 +132,7 @@ random_fish(X,Lv,good) :-
     write(X),
     addItem(X,1),
     set_dapet_ikan(udah),
-    Exp is 5*LvlFish,
+    Exp is 15*LvlFish,
     earnFishingExp(Exp),
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     fail.
@@ -145,7 +145,7 @@ random_fish(X,Lv,rare) :-
     write(X),
     addItem(X,1),
     set_dapet_ikan(udah),
-    Exp is 5*LvlFish,
+    Exp is 20*LvlFish,
     earnFishingExp(Exp),
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     fail.
@@ -158,7 +158,7 @@ random_fish(X,Lv,legend) :-
     write(X),
     addItem(X,1),
     set_dapet_ikan(udah),
-    Exp is 5*LvlFish,
+    Exp is 25*LvlFish,
     earnFishingExp(Exp),
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     fail.
