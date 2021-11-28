@@ -15,6 +15,8 @@ item(turkey,ranching).
 item(egg,ranching).
 item(wol,ranching).
 item(milk,ranching).
+item(potionBreedCow, ranching).
+item(potionBreedSheep, ranching).
 % fishing
 item(tuna,fishing).
 item(salmon,fishing).
@@ -48,6 +50,8 @@ buyable(sheep).
 buyable(cow).
 buyable(turkey).
 buyable(bait).
+buyable(potionBreedCow).
+buyable(potionBreedSheep).
 buyable(normal_rod).
 buyable(good_rod).
 buyable(rare_rod).
@@ -79,7 +83,9 @@ itemPrice(cow,2000).
 itemPrice(turkey,750).
 itemPrice(egg,50).
 itemPrice(wol,200).
-itemPrice(milk,50).
+itemPrice(milk,50). 
+itemPrice(potionBreedCow,5000). 
+itemPrice(potionBreedSheep,5000). 
 % fishing
 itemPrice(lele,30).
 itemPrice(nila,50).
