@@ -1,4 +1,5 @@
 mainMenu :-
+    state(free),
     write('   _   _                           _   \n'),
     write('  | | | | __ _ _ ____   _____  ___| |_ \n'),
     write('  | |_| |/ _` | \'__\\ \\ / / _ \\/ __| __|\n'),
@@ -20,8 +21,26 @@ mainMenu :-
     write('% 7. a      : Gerak ke barat 1 langkah                                         %\n'),
     write('% 8. help   : Menampilkan segala bantuan                                       %\n'),
     write('% 9. quit   : Keluar dari game                                                 %\n'),
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n').
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
 
+mainMenu :-
+    state(not_started),
+    write('   _   _                           _   \n'),
+    write('  | | | | __ _ _ ____   _____  ___| |_ \n'),
+    write('  | |_| |/ _` | \'__\\ \\ / / _ \\/ __| __|\n'),
+    write('  |  _  | (_| | |   \\ V /  __/\\__ \\ |_ \n'),
+    write('  |_| |_|\\__,_|_|    \\_/ \\___||___/\\__|\n'),
+    nl,
+    write('Harvest Star!!!'),
+    nl,
+    write('Let`s play and pay our debts together!'),
+    nl,
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                              ~Harvest Star~                                  %\n'),
+    write('% 1. start  : Untuk memulai petualanganmu                                      %\n'),
+    write('% 2. help   : Menampilkan segala bantuan                                       %\n'),
+    write('% 3. quit   : Keluar dari game                                                 %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
 help :-
     state(free),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
@@ -55,9 +74,10 @@ help :-
     state(not_started),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
     write('%                              ~Harvest Star~                                  %\n'),
-    write('% 1. start.  : Untuk memulai petualanganmu                                     %\n'),
-    write('% 2. help.   : Menampilkan segala bantuan                                      %\n'),
-    write('% 3. quit.   : Keluar dari game                                                %\n'),
+    write('% 1. startGame   : Membuka menu awal game                                      %\n'),
+    write('% 1. start.      : Untuk memulai petualanganmu                                 %\n'),
+    write('% 2. help.       : Menampilkan segala bantuan                                  %\n'),
+    write('% 3. quit.       : Keluar dari game                                            %\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
 help :-
     state(market),
@@ -181,9 +201,18 @@ help :-
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
 help :-
     playerCell(C),
+    state(house),
     C = ('H'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
     write('%                              ~Housing~                                             %\n'),
     write('% - sleep.          : Tidur hingga besok                                             %\n'),
     write('% - exitHouse.      : Keluar dari rumah                                              %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
+help :-
+    playerCell(C),
+    state(free),
+    C = ('H'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                              ~Housing~                                             %\n'),
+    write('% - house.          : Masuk ke rumah                                                 %\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.

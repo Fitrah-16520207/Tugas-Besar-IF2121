@@ -7,7 +7,7 @@
 :- include('menu.pl').
 :- include('pemain.pl').
 :- include('quest.pl').
-:- include('ranching.pl').
+%:- include('ranching.pl').
 :- include('house.pl').
 
 :- dynamic(state/1).
@@ -61,7 +61,7 @@ start :-
     setState(free),
     write('Selamat Datand di Harvest Star. Pilih pekerjaanmu\n'),
     write('1. Fisherman.\n'),
-    write('     Kamu akan menjadi pemancing handal yang dibekali dengan\n'),
+    write('     Kamu akan menjadi pemancing handal yang dibekali dengan'),nl,
     write('         1. Satu buah pancingan biasa\n'),
     write('         2. Delapan buah umpan\n'),
     write('2. Farmer\n'),
@@ -86,5 +86,6 @@ start :-
         setJob(rancher)
     )
     ),
+    mainMenu,
     baseStats.
 
