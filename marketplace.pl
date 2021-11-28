@@ -13,14 +13,14 @@ inventoryMarket([
 
 :- dynamic(lockedInventoryMarket/1).
 lockedInventoryMarket([
-    [carrot_seed,60],
-    [rice_seed,70],
-    [sheep,1500],
-    [cow,2000],
-    [rare_rod,4000],
-    [legend_rod,10000],
-    [best_fertilizer,70],
-    [instant_fertilizer,100]
+    [carrot_seed,60, ' Unlock Lvl 3 Farming'],
+    [rice_seed,70, ' Unlock Lvl 7 Farming'],
+    [sheep,1500, ' Unlock Lvl 3 Ranching'],
+    [cow,2000, ' Unlock Lvl 7 Ranching'],
+    [rare_rod,4000, ' Unlock Lvl 3 Fishing'],
+    [legend_rod,10000, ' Unlock Lvl 7 Fishing'],
+    [best_fertilizer,70, ' Unlock Lvl 3 Farming'],
+    [instant_fertilizer,100, ' Unlock Lvl 7 Farming']
 ]).
 
 addItemMarket(Item) :-
@@ -32,14 +32,30 @@ addItemMarket(Item) :-
 
 deletelockedItemMarket(Item) :-
     lockedInventoryMarket(Invent),
-    itemPrice(Item, Harga),
-    delete(Invent, [Item, Harga], NewInvent),
+    delete(Invent, [Item, _, _], NewInvent),
     retract(lockedInventoryMarket(Invent)),
     assertz(lockedInventoryMarket(NewInvent)).
 
 unlockedItem(Item) :-
     addItemMarket(Item),
     deletelockedItemMarket(Item).
+
+printInventoryMarket([], Number) :-
+    lockedInventoryMarket(LIM),
+    printLockedInventoryMarket(LIM, Number).
+
+printInventoryMarket([[Nama, Harga]|T], Number) :-
+    format('~w. ', [Number]),
+    write(Nama), tab(1), format('(~w Gold)', [Harga]),
+    IncNumber is Number + 1,
+    nl, printInventoryMarket(T, IncNumber).
+
+printLockedInventoryMarket([], _) :- !.
+printLockedInventoryMarket([[Nama, Harga, Keterangan]|T], Number) :-
+    format('~w. ', [Number]),
+    write(Nama), tab(1), format('(~w Gold)', [Harga]), write(Keterangan),
+    IncNumber is Number + 1,
+    nl, printLockedInventoryMarket(T, IncNumber).
 
 :- dynamic(stateMarket/1).
 % dapat berupa
@@ -80,6 +96,8 @@ buy :-
     % state(free),
     % stateMarket('di dalam'),
     write('Apa yang ingin kamu beli?\n'),
+    inventoryMarket(InventMart),
+    printInventoryMarket(InventMart, 1),
     nl.
 
 sell :-
