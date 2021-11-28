@@ -3,25 +3,25 @@
 stateHouse('di luar').
 
 house :-
-    state(not_started),
+    state(not_started),!,
     write('Permainan belum dimulai').
 
 house :-
     state(free),
     playerCell(X),
-    X \= 'H',
+    X \= 'H',!,
     write('Anda harus berada di house terlebih dahulu').
 
 house :-
     state(free),
-    playerCell('H'),
     stateHouse('di dalam'),
+    playerCell('H'),!,
     write('kamu sudah ada di dalam rumah').
 
 house :-
     state(free),
     playerCell('H'),
-    stateHouse('di luar'),
+    stateHouse('di luar'),!,
     retractall(stateHouse(_)),
     asserta(stateHouse('di dalam')),
     write('Selama datang dirumah !!! \n'),
@@ -37,7 +37,7 @@ house :-
         Pilihan = ('exitHouse'),
         exitHouse
     );
-        write('masukkan command "sleep: atau "exitHouse"')
+        write('masukkan command "sleep." atau "exitHouse."')
     ).
 
 sleep :-
