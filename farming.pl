@@ -1,5 +1,6 @@
 %deklarasi farming
 :- dynamic(farming/1).
+:- dynamic(panen/3).
 
 
 %untuk prosedure dig
@@ -82,7 +83,10 @@ cekJumlah('carrot'):-
         retract(diggedTilePoint(X,Y)),
         asserta(carrotTilePoint(X,Y)),
         write('carrot berhasil ditanam'),
-        drop('carrot_seed')
+        drop('carrot_seed'),
+        days(A),
+        MasaPanen is A + 3,
+        asserta(panen(X,Y,MasaPanen))
     ;
         write('Anda tidak memiliki carrot_seed')
     ).
@@ -94,7 +98,10 @@ cekJumlah('potato'):-
         retract(diggedTilePoint(X,Y)),
         asserta(potatoTilePoint(X,Y)),
         write('potato berhasil ditanam'),
-        drop('potato_seed')
+        drop('potato_seed'),
+        days(A),
+        MasaPanen is A + 2,
+        asserta(panen(X,Y,MasaPanen))
     ;
         write('Anda tidak memiliki potato_seed')
     ).
@@ -106,7 +113,10 @@ cekJumlah('tomato'):-
         retract(diggedTilePoint(X,Y)),
         asserta(tomatoTilePoint(X,Y)),
         write('tomato berhasil ditanam'),
-        drop('tomato_seed')
+        drop('tomato_seed'),
+        days(A),
+        MasaPanen is A + 3,
+        asserta(panen(X,Y,MasaPanen))
     ;
         write('Anda tidak memiliki tomato_seed')
     ).
@@ -118,7 +128,10 @@ cekJumlah('rice'):-
         retract(diggedTilePoint(X,Y)),
         asserta(riceTilePoint(X,Y)),
         write('rice berhasil ditanam'),
-        drop('rice_seed')
+        drop('rice_seed'),
+        days(A),
+        MasaPanen is A + 4,
+        asserta(panen(X,Y,MasaPanen))
     ;
         write('Anda tidak memiliki rice_seed')
     ).
@@ -165,46 +178,70 @@ harvest :-
     playerCell(C),
     ((
         C = ('c'),
-        (IC + 3 =< 100 ->
-            addItem('carrot',3),
-            write('carrot berhasil dipanen'),
-            playerPoint(X,Y),
-            retract(carrotTilePoint(X,Y)),!
+        days(D),
+        playerPoint(X,Y),
+        panen(X,Y,A),
+        (A =< D ->
+            (IC + 3 =< 100 ->
+                addItem('carrot',3),
+                write('carrot berhasil dipanen'),
+                retract(carrotTilePoint(X,Y)),!
+            ;
+                write('inventory penuh, item tidak bisa dipanen'),!
+            )
         ;
-            write('inventory penuh, item tidak bisa dipanen'),!
+            write('Tanaman belum siap panen'),!
         )
     );
     (   
         C = ('p'),
-        (IC + 3 =< 100 ->
-            addItem('potato',3),
-            write('potato berhasil dipanen'),
-            playerPoint(X,Y),
-            retract(potatoTilePoint(X,Y)),!
+        days(D),
+        playerPoint(X,Y),
+        panen(X,Y,A),
+        (A =< D ->
+            (IC + 3 =< 100 ->
+                addItem('potato',3),
+                write('potato berhasil dipanen'),
+                retract(potatoTilePoint(X,Y)),!
+            ;
+                write('inventory penuh, item tidak bisa dipanen'),!
+            )
         ;
-            write('inventory penuh, item tidak bisa dipanen'),!
+            write('Tanaman belum siap panen'),!
         )
     );
     (
         C = ('t'),
-        (IC + 3 =< 100 ->
-            addItem('tomato',3),
-            write('tomato berhasil dipanen'),
-            playerPoint(X,Y),
-            retract(tomatoTilePoint(X,Y)),!
+        days(D),
+        playerPoint(X,Y),
+        panen(X,Y,A),
+        (A =< D ->
+            (IC + 3 =< 100 ->
+                addItem('tomato',3),
+                write('tomato berhasil dipanen'),
+                retract(tomatoTilePoint(X,Y)),!
+            ;
+                write('inventory penuh, item tidak bisa dipanen'),!
+            )
         ;
-            write('inventory penuh, item tidak bisa dipanen'),!
+            write('Tanaman belum siap panen'),!
         )
     );
     (
         C = ('r'),
-        (IC + 5 =< 100 ->
-            addItem('rice', 5),
-            write('rice berhasil dipanen'),
-            playerPoint(X,Y),
-            retract(riceTilePoint(X,Y)),!
+        days(D),
+        playerPoint(X,Y),
+        panen(X,Y,A),
+        (A =< D ->
+            (IC + 5 =< 100 ->
+                addItem('rice', 5),
+                write('rice berhasil dipanen'),
+                retract(riceTilePoint(X,Y)),!
+            ;
+                write('inventory penuh, item tidak bisa dipanen'),!
+            )
         ;
-            write('inventory penuh, item tidak bisa dipanen'),!
+            write('Tanaman belum siap panen'),!
         )
     );
         (

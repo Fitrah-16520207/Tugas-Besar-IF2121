@@ -162,7 +162,24 @@ levelUpFarming :-
     asserta(levelUpCapFarming(NewLUC)),
     asserta(experienceFarming(NewExp)),
 
-    format('Congratulation, now your farming level is ~w', [NewLvl]), !.
+    format('Congratulation, now your farming level is ~w', [NewLvl]), !, nl,
+    (
+        (
+            NewLvl = 3, !,
+            unlockedItem(carrot_seed),
+            unlockedItem(best_fertilizer),
+            write('Carrot Seed and Best Fertilizer have been unlocked, please check marketplace for detail')
+        );
+        (
+            NewLvl = 7, !,
+            unlockedItem(rice_seed),
+            unlockedItem(instant_fertilizer),
+            write('Rice Seed and Instant Fertilizer have been unlocked, please check marketplace for a detail')
+        );
+        (
+            write('')
+        )
+    ).
 
 levelUpFishing :-
     levelFishing(CurrLvl),
@@ -181,7 +198,22 @@ levelUpFishing :-
     asserta(levelUpCapFishing(NewLUC)),
     asserta(experienceFishing(NewExp)),
 
-    format('Congratulation, now your fishing level is ~w', [NewLvl]), !.
+    format('Congratulation, now your fishing level is ~w', [NewLvl]), !, nl,
+    (
+        (
+            NewLvl = 3, !,
+            unlockedItem(rare_rod),
+            write('Rare Rod has been unlocked, please check marketplace for detail')
+        );
+        (
+            NewLvl = 7, !,
+            unlockedItem(legend_rod),
+            write('Legend Rode has been unlocked, please check marketplace for a detail')
+        );
+        (
+            write('')
+        )
+    ).
 
 levelUpRanching :-
     levelRanching(CurrLvl),
@@ -200,7 +232,22 @@ levelUpRanching :-
     asserta(levelUpCapRanching(NewLUC)),
     asserta(experienceRanching(NewExp)),
 
-    format('Congratulation, now your ranching level is ~w', [NewLvl]), !.
+    format('Congratulation, now your ranching level is ~w', [NewLvl]), !, nl,
+    (
+        (
+            NewLvl = 3, !,
+            unlockedItem(sheep),
+            write('Sheep has been unlocked, please check marketplace for detail')
+        );
+        (
+            NewLvl = 7, !,
+            unlockedItem(cow),
+            write('Cow has been unlocked, please check marketplace for a detail')
+        );
+        (
+            write('')
+        )
+    ).
 
 % Status Window
 status :-

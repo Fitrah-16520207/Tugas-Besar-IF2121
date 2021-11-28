@@ -8,6 +8,7 @@
 :- include('pemain.pl').
 :- include('quest.pl').
 :- include('ranching.pl').
+:- include('house.pl').
 
 :- dynamic(state/1).
 state(not_started).
