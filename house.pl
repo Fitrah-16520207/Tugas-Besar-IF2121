@@ -46,10 +46,18 @@ sleep :-
     state(house),
     setTeleport(enggak),
     write('Kamu mulai menuju kasur dan mulai menutup mata, kamu pun tertidur dengan lelap\n'),
-    addDays, days(X),
-    periTidur,
-    write('Sekarang adalah hari ke -'),write(' '),write(X),nl,
-    write('Semoga hari kamu menyenangkan').
+    addDays,days(X),
+    (
+        (
+            X<121,periTidur,
+            write('Sekarang adalah hari ke -'),write(' '),write(X),nl,
+            write('Semoga hari kamu menyenangkan')
+        );
+        (
+            write('')
+        )
+    ).
+    
 
 exitHouse :-
     setState(free), !,
