@@ -62,11 +62,11 @@ ranchChicken :-
     (
         (
             Count > 0,
-            format('Kamu dapat ~d telur',[Count])
+            format('Kamu dapat ~d telur\n',[Count])
         );
         (
             Count = 0,
-            format('Kamu tidak dapat telur sama sekali.')    
+            format('Kamu tidak dapat telur sama sekali.\n')    
         )
     ), !.
 
@@ -89,11 +89,11 @@ ranchCow :-
     (
         (
             Count > 0,
-            format('Kamu dapat ~d susu',[Count])
+            format('Kamu dapat ~d susu\n',[Count])
         );
         (
             Count = 0,
-            format('Kamu tidak dapat susu sama sekali.')    
+            format('Kamu tidak dapat susu sama sekali.\n')    
         )
     ).
 
@@ -116,11 +116,11 @@ ranchSheep :-
     (
         (
             Count > 0,
-            format('Kamu dapat ~d wol',[Count])
+            format('Kamu dapat ~d wol\n',[Count])
         );
         (
             Count = 0,
-            format('Kamu tidak dapat wol sama sekali.')    
+            format('Kamu tidak dapat wol sama sekali.\n')    
         )
     ).
 
@@ -571,7 +571,7 @@ ranch :-
 
 ranch :-
     state(free),
-    \+playerCell('Q'), !,
+    \+playerCell('R'), !,
     write('Kamu sedang tidak ada di Peternakan.\n').
 
 ranch :-
