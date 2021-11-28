@@ -8,13 +8,17 @@
 :- dynamic(pregnantCow/2).
 :- dynamic(pregnantSheep/2).
 
+count(P,Count) :-
+    findall(1,P,L),
+    length(L,Count).
+
 lihatHewanTernak :-
-    aggregate_all(count, chicken(_, _), CountChicken),
-    aggregate_all(count, chicks(_, _), CountChicks),
-    aggregate_all(count, cow(_, _), CountCow),
-    aggregate_all(count, calf(_, _), CountCalf),
-    aggregate_all(count, sheep(_, _), CountSheep),
-    aggregate_all(count, lamb(_, _), CountLamb),
+    count(chicken(_, _), CountChicken),
+    count(chicks(_, _), CountChicks),
+    count(cow(_, _), CountCow),
+    count(calf(_, _), CountCalf),
+    count(sheep(_, _), CountSheep),
+    count(lamb(_, _), CountLamb),
     write('Anda memiliki:'), nl,
     format('~d ayam', [CountChicken]), nl,
     format('~d anak ayam', [CountChicks]), nl,
@@ -44,7 +48,7 @@ ambilHasil :-
     ).
 
 ranchChicken :-
-    aggregate_all(count, chicken(_, 0), Count),
+    count(chicken(_, 0), Count),
     forall(chicken(Name, Days),
         (
             (
@@ -66,12 +70,12 @@ ranchChicken :-
         );
         (
             Count = 0,
-            format('Kamu tidak dapat telur sama sekali.\n')    
+            write('Kamu tidak dapat telur sama sekali.\n')    
         )
     ), !.
 
 ranchCow :-
-    aggregate_all(count, cow(_, 0), Count),
+    count(cow(_, 0), Count),
     forall(cow(Name, Days),
         (
             (
@@ -93,12 +97,12 @@ ranchCow :-
         );
         (
             Count = 0,
-            format('Kamu tidak dapat susu sama sekali.\n')    
+            write('Kamu tidak dapat susu sama sekali.\n')    
         )
     ).
 
 ranchSheep :-
-    aggregate_all(count, sheep(_, 0),Count),
+    count(sheep(_, 0),Count),
     forall(sheep(Name, Days),
         (
             (
@@ -120,7 +124,7 @@ ranchSheep :-
         );
         (
             Count = 0,
-            format('Kamu tidak dapat wol sama sekali.\n')    
+            write('Kamu tidak dapat wol sama sekali.\n')    
         )
     ).
 
@@ -220,35 +224,41 @@ addLamb(Name) :-
 grownRanch :-
     forall(chicks(Name, Days),
         (
-            Days = 0,
-            retract(chicks(Name, Days)),
-            assertz(chicken(Name, 3)),
-            format('Anak ayam kamu yang bernama ~w telah tumbuh besar.\n', [Name])
-        );
-        (
-            Days > 0    
+            (
+                Days = 0,
+                retract(chicks(Name, Days)),
+                assertz(chicken(Name, 3)),
+                format('Anak ayam kamu yang bernama ~w telah tumbuh besar.\n', [Name])
+            );
+            (
+                Days > 0    
+            )
         )
     ),
     forall(calf(Name, Days),
         (
-            Days = 0,
-            retract(calf(Name, Days)),
-            assertz(cow(Name, 5)),
-            format('Anak sapi kamu yang bernama ~w telah tumbuh besar.\n', [Name])
-        );
-        (
-            Days > 0    
+            (
+                Days = 0,
+                retract(calf(Name, Days)),
+                assertz(cow(Name, 5)),
+                format('Anak sapi kamu yang bernama ~w telah tumbuh besar.\n', [Name])
+            );
+            (
+                Days > 0    
+            )
         )
     ),
     forall(lamb(Name, Days),
         (
-            Days = 0,
-            retract(lamb(Name, Days)),
-            assertz(sheep(Name, 7)),
-            format('Anak domba kamu yang bernama ~w telah tumbuh besar.\n', [Name])
-        );
-        (
-            Days > 0    
+            (
+                Days = 0,
+                retract(lamb(Name, Days)),
+                assertz(sheep(Name, 7)),
+                format('Anak domba kamu yang bernama ~w telah tumbuh besar.\n', [Name])
+            );
+            (
+                Days > 0    
+            )
         )
     ).
 
@@ -287,11 +297,15 @@ babyRanch :-
     ).
 
 incubator :-
+    \+inventory(_), !,
+    write('Maaf kamu tidak memiliki telur'), nl.
+
+incubator :-
     inventory(Invent),
     ( member([egg, _], Invent) ->
         (
             drop(egg, 1),
-            assertz(incubation(Name, 3)),
+            assertz(incubation(3)),
             write('Telur kamu sedang dikerami.')
         );
         (
@@ -300,10 +314,14 @@ incubator :-
     ).
 
 breedCow :-
+    \+inventory(_), !,
+    write('Maaf kamu tidak memiliki potion breed untuk sapi'), nl.
+
+breedCow :-
     inventory(Invent),
     ( member([potionBreedCow, _], Invent) ->
         (
-            aggregate_all(count, cow(X, _), Count),
+            count(cow(_, _), Count),
             (
                 (
                     Count = 0, !,
@@ -347,10 +365,14 @@ breedCow :-
     ).
 
 breedSheep :-
+    \+inventory(_), !,
+    write('Maaf kamu tidak memiliki potion breed untuk domba'), nl.
+
+breedSheep :-
     inventory(Invent),
     ( member([potionBreedSheep, _], Invent) ->
         (
-            aggregate_all(count, sheep(X, _), Count),
+            count(sheep(_, _), Count),
             (
                 (
                     Count = 0, !,
@@ -576,7 +598,7 @@ ranch :-
 
 ranch :-
     write('Selamat datang di Peternakan !!!'), nl,
-    write('apa yang ingin anda lakukan : '), nl,
+    write('Apa yang ingin kamu lakukan : '), nl,
     write('1. Lihat hewan ternak'), nl,
     write('2. Ambil hasil'), nl,
     write('3. Incubator'), nl,
