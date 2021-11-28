@@ -97,7 +97,7 @@ fishing(good) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(nila,LvlFis
 fishing(good) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(lele,LvlFish,good).
 fishing(normal) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(nila,LvlFish,normal).
 fishing(normal) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(lele,LvlFish,normal).
-fishing(_) :- dapet_ikan(belum),addwrite('Tidak dapat ikan\n').
+fishing(_) :- dapet_ikan(belum),Exp is 5*LvlFish,earnFishingExp(Exp),write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),addwrite('Tidak dapat ikan\n').
 fishing(_) :- set_dapet_ikan(belum).
 
 chance_item(tuna,6).
@@ -119,8 +119,9 @@ random_fish(X,Lv,normal) :-
     write(X),nl,
     addItem(X,1),
     set_dapet_ikan(udah),
-    earnFishingExp(10),
-    write('Mendapat exp fishing sebesar 10 exp'),
+    Exp is 5*LvlFish,
+    earnFishingExp(Exp),
+    write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     fail.
 random_fish(X,Lv,good) :-
     chance_item(X,C),
@@ -131,8 +132,9 @@ random_fish(X,Lv,good) :-
     write(X),
     addItem(X,1),
     set_dapet_ikan(udah),
-    earnFishingExp(15),
-    write('Mendapat exp fishing sebesar 15 exp'),
+    Exp is 5*LvlFish,
+    earnFishingExp(Exp),
+    write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     fail.
 random_fish(X,Lv,rare) :-
     chance_item(X,C),
@@ -143,8 +145,9 @@ random_fish(X,Lv,rare) :-
     write(X),
     addItem(X,1),
     set_dapet_ikan(udah),
-    earnFishingExp(20),
-    write('Mendapat exp fishing sebesar 20 exp'),
+    Exp is 5*LvlFish,
+    earnFishingExp(Exp),
+    write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     fail.
 random_fish(X,Lv,legend) :-
     chance_item(X,C),
@@ -155,7 +158,8 @@ random_fish(X,Lv,legend) :-
     write(X),
     addItem(X,1),
     set_dapet_ikan(udah),
-    earnFishingExp(25),
-    write('Mendapat exp fishing sebesar 25 exp'),
+    Exp is 5*LvlFish,
+    earnFishingExp(Exp),
+    write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     fail.
 
