@@ -6,32 +6,8 @@ set_dapet_ikan(X) :-
     asserta(dapet_ikan(X)).
 
 fish:-
-    playerPoint(R, C),
-    NewR is R + 1,waterTilePoint(NewR, C),
-    state(free),
-    jumlahBarang(bait,X),
-    X>0,
-    drop(bait),
-    mancing.
-fish:-
-    playerPoint(R, C),
-    NewR is R - 1,waterTilePoint(NewR, C),
-    state(free),
-    jumlahBarang(bait,X),
-    X>0,
-    drop(bait),
-    mancing.
-fish:-
-    playerPoint(R, C),
-    NewC is C + 1,waterTilePoint(R, NewC),
-    state(free),
-    jumlahBarang(bait,X),
-    X>0,
-    drop(bait),
-    mancing.
-fish:-
-    playerPoint(R, C),
-    NewC is C - 1,waterTilePoint(R, NewC),
+    playerCell(C),
+    C = ('o'),
     state(free),
     jumlahBarang(bait,X),
     X>0,
@@ -75,29 +51,29 @@ pancingan:-
     cekBarang(X),nl,
     write('Kamu tidak mempunyai pancingan ini').
 
-fishing(legend) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(hiu,LvlFish,legend).
-fishing(legend) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(barracuda,LvlFish,legend).
-fishing(legend) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(tuna,LvlFish,legend).
-fishing(legend) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(salmon,LvlFish,legend).
-fishing(legend) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(pari,LvlFish,legend).
-fishing(legend) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(gurame,LvlFish,legend).
-fishing(legend) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(patin,LvlFish,legend).
-fishing(legend) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(nila,LvlFish,legend).
-fishing(legend) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(lele,LvlFish,legend).
-fishing(rare) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(tuna,LvlFish,rare).
-fishing(rare) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(salmon,LvlFish,rare).
-fishing(rare) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(pari,LvlFish,rare).
-fishing(rare) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(gurame,LvlFish,rare).
-fishing(rare) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(patin,LvlFish,rare).
-fishing(rare) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(nila,LvlFish,rare).
-fishing(rare) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(lele,LvlFish,rare).
-fishing(good) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(patin,LvlFish,good).
-fishing(good) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(gurame,LvlFish,good).
-fishing(good) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(nila,LvlFish,good).
-fishing(good) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(lele,LvlFish,good).
-fishing(normal) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(nila,LvlFish,normal).
-fishing(normal) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(lele,LvlFish,normal).
-fishing(_) :- dapet_ikan(belum),Exp is 5*LvlFish,earnFishingExp(Exp),write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),addwrite('Tidak dapat ikan\n').
+fishing(legend_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(hiu,LvlFish,legend_rod).
+fishing(legend_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(barracuda,LvlFish,legend_rod).
+fishing(legend_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(tuna,LvlFish,legend_rod).
+fishing(legend_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(salmon,LvlFish,legend_rod).
+fishing(legend_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(pari,LvlFish,legend_rod).
+fishing(legend_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(gurame,LvlFish,legend_rod).
+fishing(legend_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(patin,LvlFish,legend_rod).
+fishing(legend_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(nila,LvlFish,legend_rod).
+fishing(legend_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(lele,LvlFish,legend_rod).
+fishing(rare_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(tuna,LvlFish,rare_rod).
+fishing(rare_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(salmon,LvlFish,rare_rod).
+fishing(rare_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(pari,LvlFish,rare_rod).
+fishing(rare_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(gurame,LvlFish,rare_rod).
+fishing(rare_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(patin,LvlFish,rare_rod).
+fishing(rare_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(nila,LvlFish,rare_rod).
+fishing(rare_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(lele,LvlFish,rare_rod).
+fishing(good_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(patin,LvlFish,good_rod).
+fishing(good_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(gurame,LvlFish,good_rod).
+fishing(good_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(nila,LvlFish,good_rod).
+fishing(good_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(lele,LvlFish,good_rod).
+fishing(normal_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(nila,LvlFish,normal_rod).
+fishing(normal_rod) :- levelFishing(LvlFish),dapet_ikan(belum),random_fish(lele,LvlFish,normal_rod).
+fishing(_) :- dapet_ikan(belum),levelFishing(LvlFish),write('Tidak dapat ikan\n'),Exp is 5*LvlFish,earnFishingExp(Exp),write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n').
 fishing(_) :- set_dapet_ikan(belum).
 
 chance_item(tuna,6).
@@ -110,7 +86,7 @@ chance_item(pari,3).
 chance_item(barracuda,2).
 chance_item(hiu,1).
 
-random_fish(X,Lv,normal) :-
+random_fish(X,Lv,normal_rod) :-
     chance_item(X,C),
     Chance is C + Lv*5,
     acak(0,100,R),
@@ -119,11 +95,11 @@ random_fish(X,Lv,normal) :-
     write(X),nl,
     addItem(X,1),
     set_dapet_ikan(udah),
-    Exp is 10*LvlFish,
+    Exp is 10*Lv,
     earnFishingExp(Exp),
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     fail.
-random_fish(X,Lv,good) :-
+random_fish(X,Lv,good_rod) :-
     chance_item(X,C),
     Chance is C + Lv*5,
     acak(0,100,R),
@@ -132,11 +108,11 @@ random_fish(X,Lv,good) :-
     write(X),
     addItem(X,1),
     set_dapet_ikan(udah),
-    Exp is 15*LvlFish,
+    Exp is 15*Lv,
     earnFishingExp(Exp),
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     fail.
-random_fish(X,Lv,rare) :-
+random_fish(X,Lv,rare_rod) :-
     chance_item(X,C),
     Chance is C + Lv*5,
     acak(0,100,R),
@@ -145,11 +121,11 @@ random_fish(X,Lv,rare) :-
     write(X),
     addItem(X,1),
     set_dapet_ikan(udah),
-    Exp is 20*LvlFish,
+    Exp is 20*Lv,
     earnFishingExp(Exp),
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     fail.
-random_fish(X,Lv,legend) :-
+random_fish(X,Lv,legend_rod) :-
     chance_item(X,C),
     Chance is C + Lv*5,
     acak(0,100,R),
@@ -158,7 +134,7 @@ random_fish(X,Lv,legend) :-
     write(X),
     addItem(X,1),
     set_dapet_ikan(udah),
-    Exp is 25*LvlFish,
+    Exp is 25*Lv,
     earnFishingExp(Exp),
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     fail.

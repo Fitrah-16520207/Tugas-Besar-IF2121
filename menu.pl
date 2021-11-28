@@ -121,29 +121,8 @@ help :-
     write('% - marketplace  : masuk ke dalam market                                            %\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
 help:-
-    playerPoint(R, C),
-    NewR is R + 1,waterTilePoint(NewR, C),
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
-    write('%                              ~Fishing~                                            %\n'),
-    write('% - fish  : memancing ikan di sekitar water tile                                    %\n'),
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),fail.
-help:-
-    playerPoint(R, C),
-    NewR is R - 1,waterTilePoint(NewR, C),
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
-    write('%                              ~Fishing~                                            %\n'),
-    write('% - fish  : memancing ikan di sekitar water tile                                    %\n'),
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),fail.
-help:-
-    playerPoint(R, C),
-    NewC is C + 1,waterTilePoint(R, NewC),
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
-    write('%                              ~Fishing~                                            %\n'),
-    write('% - fish  : memancing ikan di sekitar water tile                                    %\n'),
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),fail.
-help:-
-    playerPoint(R, C),
-    NewC is C - 1,waterTilePoint(R, NewC),
+    playerCell(C),
+    C = ('o'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
     write('%                              ~Fishing~                                            %\n'),
     write('% - fish  : memancing ikan di sekitar water tile                                    %\n'),
