@@ -77,9 +77,12 @@ setJob(farmer) :-
 
 setJob(rancher) :-
     asserta(playerJob(rancher)),
-    asserta(inventory([[chicken, 2]])),
     write('Kamu berhasil menjadi rancher\n'),
-    write('Sebagai rancher, kamu berhak memperoleh dua ekor ayam\n').
+    write('Sebagai rancher, kamu berhak memperoleh dua ekor ayam\n'),
+    write('Masukkan nama untuk ayam:\n'), read(Input1),
+    addChicken(Input1), nl,
+    write('Masukkan nama untuk ayam:\n'), read(Input2),
+    addChicken(Input2), nl.
 
 
 % Sistem menambahkan EXP

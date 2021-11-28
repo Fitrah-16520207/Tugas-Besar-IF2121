@@ -1,3 +1,5 @@
+:- dynamic(bisaTeleport/1).
+bisaTeleport(enggak).
 house :-
     state(not_started),!,
     write('Permainan belum dimulai').
@@ -32,11 +34,20 @@ house :-
     );
         write('Masukkan command "sleep." atau "exitHouse."')
     ).
-
+setTeleport(X) :-
+    retractall(bisaTeleport(_)),
+    asserta(bisaTeleport(X)).
+periTidur:-
+    acak(0,20,Chance),
+    Chance <21,
+    write('Semalam peri tidur mendatangimu sehingga kamu mendapat kemampuan teleport selama satu hari\n'),
+    setTeleport(bisa).
 sleep :-
     state(house),
+    setTeleport(enggak),
     write('Kamu mulai menuju kasur dan mulai menutup mata, kamu pun tertidur dengan lelap\n'),
     addDays, days(X),
+    periTidur,
     write('Sekarang adalah hari ke -'),write(' '),write(X),nl,
     write('Semoga hari kamu menyenangkan').
 
