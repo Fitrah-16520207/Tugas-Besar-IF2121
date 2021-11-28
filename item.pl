@@ -62,12 +62,12 @@ buyable(instant_fertilizer).
 
 % farming
 itemPrice(potato_seed,40).
-itemPrice(carrot_seed,60).
 itemPrice(tomato_seed,50).
+itemPrice(carrot_seed,60).
 itemPrice(rice_seed,70).
 itemPrice(potato,80).
-itemPrice(carrot,120).
 itemPrice(tomato,100).
+itemPrice(carrot,120).
 itemPrice(rice,150).
 % ranching
 itemPrice(chicken,200).

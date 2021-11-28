@@ -71,9 +71,9 @@ setJob(fisherman) :-
 
 setJob(farmer) :-
     asserta(playerJob(farmer)),
-    asserta(inventory([[shovel, 1], [rice_seed, 3]])),
+    asserta(inventory([[shovel, 1], [potato_seed, 3]])),
     write('Kamu berhasil menjadi farmer\n'),
-    write('Sebagai farmer, kamu berhak memperoleh satu buah sekop dan tiga biji padi\n').
+    write('Sebagai farmer, kamu berhak memperoleh satu buah sekop dan tiga benih potato\n').
 
 setJob(rancher) :-
     asserta(playerJob(rancher)),

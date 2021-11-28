@@ -2,12 +2,8 @@
 inventoryMarket([
     % [nama item, harga]
     [potato_seed,40],
-    [carrot_seed,60],
     [tomato_seed,50],
-    [rice_seed,70],
     [chicken,200],
-    [sheep,1500],
-    [cow,2000],
     [turkey,750],
     [shovel,300],
     [bait,5],
@@ -17,6 +13,10 @@ inventoryMarket([
 
 :- dynamic(lockedInventoryMarket/1).
 lockedInventoryMarket([
+    [carrot_seed,60],
+    [rice_seed,70],
+    [sheep,1500],
+    [cow,2000],
     [rare_rod,4000],
     [legend_rod,10000],
     [best_fertilizer,70],
