@@ -32,6 +32,7 @@ item(good_rod,fishing).
 item(rare_rod,fishing).
 item(legend_rod,fishing).
 item(shovel,farming).
+item(fertilizer,farming).
 item(good_fertilizer,farming).
 item(best_fertilizer,farming).
 item(instant_fertilizer,farming).
@@ -52,6 +53,7 @@ buyable(good_rod).
 buyable(rare_rod).
 buyable(legend_rod).
 buyable(shovel).
+buyable(fertilizer).
 buyable(good_fertilizer).
 buyable(best_fertilizer).
 buyable(instant_fertilizer).
@@ -79,12 +81,12 @@ itemPrice(egg,50).
 itemPrice(wol,200).
 itemPrice(milk,50).
 % fishing
-itemPrice(tuna,200).
-itemPrice(salmon,175).
-itemPrice(nila,50).
 itemPrice(lele,30).
+itemPrice(nila,50).
 itemPrice(gurame,80).
 itemPrice(patin,80).
+itemPrice(salmon,175).
+itemPrice(tuna,200).
 itemPrice(barracuda,7500).
 itemPrice(hiu,10000).
 itemPrice(pari,1000).
@@ -95,7 +97,7 @@ itemPrice(good_rod,2000).
 itemPrice(rare_rod,4000).
 itemPrice(legend_rod,10000).
 itemPrice(shovel,300).
-itemPrice(Fertilizer,20).
+itemPrice(fertilizer,20).
 itemPrice(good_fertilizer,40).
 itemPrice(best_fertilizer,70).
 itemPrice(instant_fertilizer,100).

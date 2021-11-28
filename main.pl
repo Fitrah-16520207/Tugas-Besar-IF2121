@@ -16,6 +16,9 @@ state(not_started).
 % State dapat berupa:
 % * not_started
 % * free
+% * market
+% * house
+% * quest
 % * finished
 
 setState(X) :-

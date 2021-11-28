@@ -135,6 +135,10 @@ w :-
     !, 
     write('Kamu enggak boleh nyebur ke sungai karena kamu tidak bisa berenang').
 w :-
+    state(S),
+    S \= free, !,
+    format('Kamu harus keluar dulu dari ~w agar bisa bergerak ke utara\n', [S]).
+w :-
     playerPoint(R, C),
     NewR is R - 1,
     retractall(playerPoint(_, _)),
@@ -160,6 +164,10 @@ s :-
     waterTilePoint(NewR, C),
     !, 
     write('Kamu enggak boleh nyebur ke sungai karena kamu tidak bisa berenang').
+s :-
+    state(S),
+    S \= free, !,
+    format('Kamu harus keluar dulu dari ~w agar bisa bergerak ke selatan\n', [S]).
 s :-
     playerPoint(R, C),
     NewR is R + 1,
@@ -187,6 +195,10 @@ a :-
     !, 
     write('Kamu enggak boleh nyebur ke sungai karena kamu tidak bisa berenang').
 a :-
+    state(S),
+    S \= free, !,
+    format('Kamu harus keluar dulu dari ~w agar bisa bergerak ke barat\n', [S]).
+a :-
     playerPoint(R, C),
     NewC is C - 1,
     retractall(playerPoint(_, _)),
@@ -213,6 +225,10 @@ d :-
     !, 
     write('Kamu enggak boleh nyebur ke sungai karena kamu tidak bisa berenang').
 d :-
+    state(S),
+    S \= free, !,
+    format('Kamu harus keluar dulu dari ~w agar bisa bergerak ke timur\n', [S]).
+d :-
     playerPoint(R, C),
     NewC is C + 1,
     retractall(playerPoint(_, _)),
@@ -228,7 +244,8 @@ cellCheck(R, C) :-
     retractall(playerCell(_)),
     asserta(playerCell('H')),
     !,
-    write('Kamu sekarang ada di rumah').
+    write('Kamu sekarang ada di rumah'), nl,
+    write('Tulis house. untuk masuk ke rumah').
 cellCheck(R, C) :-
     ranchPoint(R, C),
     retractall(playerCell(_)),
@@ -240,13 +257,15 @@ cellCheck(R, C) :-
     retractall(playerCell(_)),
     asserta(playerCell('M')),
     !,
-    write('Kamu sekarang ada di pasar').
+    write('Kamu sekarang ada di pasar'), nl,
+    write('Tulis marketplace. untuk masuk ke rumah').
 cellCheck(R, C) :-
     questPoint(R, C),
     retractall(playerCell(_)),
     asserta(playerCell('Q')),
     !,
-    write('Kamu sekarang ada di tempat pengambilan quest').
+    write('Kamu sekarang ada di tempat pengambilan quest'), nl,
+    write('Tulis quest. untuk masuk ke rumah').
 cellCheck(R, C) :-
     waterTilePoint(Rw, Cw),
     (

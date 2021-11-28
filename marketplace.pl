@@ -44,8 +44,8 @@ priceList([
     [nila,50],
     [gurame,80],
     [patin,80],
-    [tuna,200],
     [salmon,175],
+    [tuna,200],
     [pari,1000],
     [barracuda,7500],
     [hiu,10000],
@@ -120,13 +120,6 @@ itemNth(N, [[_Nama, _Harga]|T], Item) :-
     DecrN is N - 1,
     itemNth(DecrN, T, Item).
 
-
-:- dynamic(stateMarket/1).
-% dapat berupa
-% 'di dalam' : ketika di market tapi belum nulis command marketplace.
-% 'di luar' : ketika telah keluar dari market (exitMarket)
-stateMarket('di luar').
-
 marketplace :-
     state(not_started), !,
     write('Command tidak dikenali karena kamu belum memulai permainan').
@@ -138,17 +131,14 @@ marketplace :-
     write('Kamu harus berada di marketplace terlebih dahulu').
 
 marketplace :-
-    state(free),
-    playerCell('M'),
-    stateMarket('di dalam'), !,
+    state(market),
+    playerCell('M'), !,
     write('Kamu sudah berada di dalam pasar').
 
 marketplace :-
     state(free),
     playerCell('M'),
-    stateMarket('di luar'), !,
-    retractall(stateMarket(_)),
-    asserta(stateMarket('di dalam')),
+    setState(market), !,
     gold(UangYangAda),
     write('Selamat datang di pasar sobat miskino\n'),
     format('Kamu punya uang segini : ~w\n', [UangYangAda]),
@@ -169,13 +159,11 @@ buy :-
 
 buy :-
     state(free),
-    playerCell('M'),
-    stateMarket('di luar'), !,
+    playerCell('M'), !,
     write('Kamu harus masuk dulu ke dalam marketplace').
 
 buy :-
-    state(free),
-    stateMarket('di dalam'),
+    state(market),
     write('Apa yang ingin kamu beli?\n'),
     inventoryMarket(InventMart),
     printInventoryMarket(InventMart, 1),
@@ -248,13 +236,11 @@ sell :-
 
 sell :-
     state(free),
-    playerCell('M'),
-    stateMarket('di luar'), !,
+    playerCell('M'), !,
     write('Kamu harus masuk dulu ke dalam marketplace').
 
 sell :-
-    state(free),
-    stateMarket('di dalam'),
+    state(market),
     write('Berikut daftar harga jual item\n'),
     priceList(PL),
     printPriceList(PL, 1),
@@ -311,12 +297,9 @@ exitMarket :-
 
 exitMarket :-
     state(free),
-    playerCell('M'),
-    stateMarket('di luar'), !,
+    playerCell('M'), !,
     write('Kamu sudah ada di luar marketplace').
 
 exitMarket :-
-    stateMarket('di dalam'),
-    write('Terima kasih telah berkunjung ke pasar\n'),
-    retractall(stateMarket(_)),
-    asserta(stateMarket('di luar')).
+    setState(free), !,
+    write('Terima kasih telah berkunjung ke pasar\n').

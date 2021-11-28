@@ -1,7 +1,3 @@
-:- dynamic(stateHouse/1).
-
-stateHouse('di luar').
-
 house :-
     state(not_started),!,
     write('Permainan belum dimulai').
@@ -13,17 +9,14 @@ house :-
     write('Anda harus berada di house terlebih dahulu').
 
 house :-
-    state(free),
-    stateHouse('di dalam'),
+    state(house),
     playerCell('H'),!,
     write('kamu sudah ada di dalam rumah').
 
 house :-
     state(free),
     playerCell('H'),
-    stateHouse('di luar'),!,
-    retractall(stateHouse(_)),
-    asserta(stateHouse('di dalam')),
+    setState(house),!,
     write('Selama datang dirumah !!! \n'),
     write('apa yang ingin anda lakukan : \n'),
     write('1. sleep\n'),
@@ -41,18 +34,14 @@ house :-
     ).
 
 sleep :-
-    state(free),
-    stateHouse('di dalam'),
+    state(house),
     write('Anda mulai menuju kasur dan mulai menutup mata, Anda pun tertidur dengan lelap\n'),
     addDays, days(X),
     write('sekarang adalah hari ke -'),write(' '),write(X),nl,
     write('semoga hari anda menyenangkan').
 
 exitHouse :-
-    state(free),
-    stateHouse('di dalam'),
-    retractall(stateHouse(_)),
-    asserta(stateHouse('di luar')),
+    setState(free), !,
     write('Anda telah berada di luar rumah').
     
 
