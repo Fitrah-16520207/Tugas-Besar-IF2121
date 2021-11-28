@@ -60,6 +60,13 @@ printLockedInventoryMarket([[Nama, Harga, Lvl, Type]|T], Number) :-
     IncNumber is Number + 1,
     nl, printLockedInventoryMarket(T, IncNumber).
 
+itemNth(1, [[Nama, _Harga]|_T], Nama).
+itemNth(N, [[_Nama, _Harga]|T], Item) :-
+    N > 1,
+    DecrN is N - 1,
+    itemNth(DecrN, T, Item).
+
+
 :- dynamic(stateMarket/1).
 % dapat berupa
 % 'di dalam' : ketika di market tapi belum nulis command marketplace.
@@ -101,6 +108,48 @@ buy :-
     write('Apa yang ingin kamu beli?\n'),
     inventoryMarket(InventMart),
     printInventoryMarket(InventMart, 1),
+    write('Masukan berupa angka : '), read(N),
+    length(InventMart, Len),
+    (
+        (
+            N < Len + 1,
+            N > 0,
+            itemNth(N, InventMart, Item),
+            write('Jumlah item yang ingin dibeli : '), read(Qty), nl,
+            gold(UangYangAda),
+            itemPrice(Item, Harga),
+            TotalBayar is Harga * Qty,
+            format('Kamu akan membeli ~w ', [Item]), format('sebanyak ~w.\n', [Qty]),
+            format('total pembayaran adalah : ~w Gold\n', [TotalBayar]),
+            write('Lanjut pembayaran (Y/N) : '), read(Input), nl,
+            (
+                (
+                    Input = 'Y',
+                    (
+                        (
+                            UangYangAda < TotalBayar, !, nl,
+                            format('Kamu masih miskin untuk membeli ~w sebanyak ini\n', [Item]),
+                            write('Transaksi dibatalkan')
+                        );
+                        (
+                            NewGold is UangYangAda - TotalBayar,
+                            retractall(gold(_)),
+                            asserta(gold(NewGold)), nl,
+                            write('Transaksi berhasil'),
+                            addItem(Item, Qty)
+                        )
+                    )
+                );
+                (
+                    Input \= 'Y',
+                    write('Transaksi dibatalkan')
+                )
+            )
+        );
+        (
+            write('Kami tidak menjualnya untuk saat ini')
+        )
+    ),
     nl.
 
 sell :-
@@ -115,7 +164,7 @@ sell :-
         (
             % Item tidak ada di dalam inventory
             \+ member([Item, _JumlahItem], Invent), !,
-            write('Kami tidak dapat membeli barang tersebut karena tidak ada di inventory kamu\n')
+            write('Kami tidak dapat menjual barang tersebut karena tidak ada di inventory kamu\n')
         );
         (
             % item ada di inventory
