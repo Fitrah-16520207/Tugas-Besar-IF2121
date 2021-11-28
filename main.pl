@@ -57,6 +57,7 @@ startGame :-
 
 start :-
     reset,
+    state(not_started),
     setState(free),
     write('Welcome to Harvest Star. Choose your job\n'),
     write('1. Fisherman.\n'),
