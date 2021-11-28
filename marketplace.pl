@@ -13,14 +13,14 @@ inventoryMarket([
 
 :- dynamic(lockedInventoryMarket/1).
 lockedInventoryMarket([
-    [carrot_seed,60, ' Unlock Lvl 3 Farming'],
-    [rice_seed,70, ' Unlock Lvl 7 Farming'],
-    [sheep,1500, ' Unlock Lvl 3 Ranching'],
-    [cow,2000, ' Unlock Lvl 7 Ranching'],
-    [rare_rod,4000, ' Unlock Lvl 3 Fishing'],
-    [legend_rod,10000, ' Unlock Lvl 7 Fishing'],
-    [best_fertilizer,70, ' Unlock Lvl 3 Farming'],
-    [instant_fertilizer,100, ' Unlock Lvl 7 Farming']
+    [carrot_seed,60, 3, farming],
+    [rice_seed,70, 7, farming],
+    [sheep,1500, 3, ranching],
+    [cow,2000, 7, ranching],
+    [rare_rod,4000, 3, fishing],
+    [legend_rod,10000, 7, fishing],
+    [best_fertilizer,70, 3, farming],
+    [instant_fertilizer,100, 7, farming]
 ]).
 
 addItemMarket(Item) :-
@@ -32,7 +32,10 @@ addItemMarket(Item) :-
 
 deletelockedItemMarket(Item) :-
     lockedInventoryMarket(Invent),
-    delete(Invent, [Item, _, _], NewInvent),
+    itemPrice(Item, Harga),
+    unlockedLvl(Item, Lvl),
+    item(Item, Type),
+    delete(Invent, [Item, Harga, Lvl, Type], NewInvent),
     retract(lockedInventoryMarket(Invent)),
     assertz(lockedInventoryMarket(NewInvent)).
 
@@ -51,9 +54,9 @@ printInventoryMarket([[Nama, Harga]|T], Number) :-
     nl, printInventoryMarket(T, IncNumber).
 
 printLockedInventoryMarket([], _) :- !.
-printLockedInventoryMarket([[Nama, Harga, Keterangan]|T], Number) :-
+printLockedInventoryMarket([[Nama, Harga, Lvl, Type]|T], Number) :-
     format('~w. ', [Number]),
-    write(Nama), tab(1), format('(~w Gold)', [Harga]), write(Keterangan),
+    write(Nama), tab(1), format('(~w Gold)', [Harga]), tab(3), format('Unlock Item Lvl ~w ', [Lvl]), write(Type),
     IncNumber is Number + 1,
     nl, printLockedInventoryMarket(T, IncNumber).
 

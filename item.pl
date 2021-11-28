@@ -97,4 +97,12 @@ itemPrice(good_fertilizer,40).
 itemPrice(best_fertilizer,70).
 itemPrice(instant_fertilizer,100).
 
-
+% level unclocked
+unlockedLvl(carrot_seed, 3).
+unlockedLvl(rice_seed, 7).
+unlockedLvl(sheep, 3).
+unlockedLvl(cow, 7).
+unlockedLvl(rare_rod, 3).
+unlockedLvl(legend_rod, 7).
+unlockedLvl(best_fertilizer, 3).
+unlockedLvl(instant_fertilizer, 7).
