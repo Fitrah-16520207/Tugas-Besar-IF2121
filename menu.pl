@@ -121,8 +121,7 @@ help :-
     write('% - marketplace  : masuk ke dalam market                                            %\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
 help:-
-    playerCell(C),
-    C = ('o'),
+    playerCell('o'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
     write('%                              ~Fishing~                                            %\n'),
     write('% - fish  : memancing ikan di sekitar water tile                                    %\n'),

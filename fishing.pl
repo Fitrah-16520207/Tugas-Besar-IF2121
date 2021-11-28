@@ -20,7 +20,7 @@ fish:-
 fish:-
     state(free),
     cekBarang(bait),nl,
-    write('Anda tidak punya umpan untuk memancing'),!.
+    write('Kamu tidak punya umpan untuk memancing'),!.
 fish:-
     state(not_started), !,
     write('Command tidak dikenali karena kamu belum memulai permainan').
