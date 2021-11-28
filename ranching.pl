@@ -66,7 +66,10 @@ ranchChicken :-
     (
         (
             Count > 0,
-            format('Kamu dapat ~d telur\n',[Count])
+            format('Kamu mendapatkan ~d telur\n',[Count]),
+            Exp is Count * 3,
+            earnRanchingExp(Exp),
+            format('Kamu mendapatkan ~d EXP\n',[Exp])
         );
         (
             Count = 0,
@@ -93,7 +96,10 @@ ranchCow :-
     (
         (
             Count > 0,
-            format('Kamu dapat ~d susu\n',[Count])
+            format('Kamu mendapatkan ~d susu\n',[Count]),
+            Exp is Count * 10,
+            earnRanchingExp(Exp),
+            format('Kamu mendapatkan ~d EXP\n',[Exp])
         );
         (
             Count = 0,
@@ -120,7 +126,10 @@ ranchSheep :-
     (
         (
             Count > 0,
-            format('Kamu dapat ~d wol\n',[Count])
+            format('Kamu mendapatkan ~d wol\n',[Count]),
+            Exp is Count * 15,
+            earnRanchingExp(Exp),
+            format('Kamu mendapatkan ~d EXP\n',[Exp])
         );
         (
             Count = 0,
@@ -221,6 +230,55 @@ addLamb(Name) :-
     \+lamb(Name, _),
     assertz(lamb(Name, 14)).
 
+checkBuyRanch :-
+    inventory(Invent),
+    ( member([chicken, Total], Invent) ->
+        (
+            forall(between(1, Total, _),
+                (
+                    write('Masukkan nama untuk ayam:\n'),
+                    read(ChickenName),
+                    addChicken(ChickenName),
+                    drop(chicken, 1)
+                )
+            )
+        );
+        (
+            write('')
+        )
+    ),
+    ( member([sheep, Total], Invent) ->
+        (
+            forall(between(1, Total, _),
+                (
+                    write('Masukkan nama untuk domba:\n'),
+                    read(SheepName),
+                    addSheep(SheepName),
+                    drop(sheep, 1)
+                )
+            )
+        );
+        (
+            write('')
+        )
+    ),
+    ( member([cow, Total], Invent) ->
+        (
+            forall(between(1, Total, _),
+                (
+                    write('Masukkan nama untuk sapi:\n'),
+                    read(CowName),
+                    addCow(CowName),
+                    drop(cow, 1)
+                )
+            )
+        );
+        (
+            write('')
+        )
+    ).
+
+
 grownRanch :-
     forall(chicks(Name, Days),
         (
@@ -228,7 +286,10 @@ grownRanch :-
                 Days = 0,
                 retract(chicks(Name, Days)),
                 assertz(chicken(Name, 3)),
-                format('Anak ayam kamu yang bernama ~w telah tumbuh besar.\n', [Name])
+                format('Anak ayam kamu yang bernama ~w telah tumbuh besar.\n', [Name]),
+                Exp is 30,
+                earnRanchingExp(Exp),
+                format('Kamu mendapatkan ~d EXP\n',[Exp])
             );
             (
                 Days > 0    
@@ -241,7 +302,10 @@ grownRanch :-
                 Days = 0,
                 retract(calf(Name, Days)),
                 assertz(cow(Name, 5)),
-                format('Anak sapi kamu yang bernama ~w telah tumbuh besar.\n', [Name])
+                format('Anak sapi kamu yang bernama ~w telah tumbuh besar.\n', [Name]),
+                Exp is 100,
+                earnRanchingExp(Exp),
+                format('Kamu mendapatkan ~d EXP\n',[Exp]) 
             );
             (
                 Days > 0    
@@ -254,7 +318,10 @@ grownRanch :-
                 Days = 0,
                 retract(lamb(Name, Days)),
                 assertz(sheep(Name, 7)),
-                format('Anak domba kamu yang bernama ~w telah tumbuh besar.\n', [Name])
+                format('Anak domba kamu yang bernama ~w telah tumbuh besar.\n', [Name]),
+                Exp is 100,
+                earnRanchingExp(Exp),
+                format('Kamu mendapatkan ~d EXP\n',[Exp]) 
             );
             (
                 Days > 0    
@@ -267,6 +334,9 @@ babyRanch :-
         (
             Days = 0,
             write('Telur kamu ada yang menetas.'), nl,
+            Exp is 30,
+            earnRanchingExp(Exp),
+            format('Kamu mendapatkan ~d EXP\n',[Exp]),
             write('Masukkan nama:'), nl,
             read(Query),
             addChicks(Query)
@@ -279,6 +349,9 @@ babyRanch :-
             Days = 0,
             retract(pregnantCow(Name, Days)),
             format('Sapi kamu yang bernama ~w telah melahirkan.', [Name]), nl,
+            Exp is 100,
+            earnRanchingExp(Exp),
+            format('Kamu mendapatkan ~d EXP\n',[Exp]),
             write('Masukkan nama:'), nl,
             read(Query),
             addCalf(Query)
@@ -290,6 +363,9 @@ babyRanch :-
             Days = 0,
             retract(pregnantSheep(Name, Days)),
             format('Domba kamu yang bernama ~w telah melahirkan.', [Name]), nl,
+            Exp is 100,
+            earnRanchingExp(Exp),
+            format('Kamu mendapatkan ~d EXP\n',[Exp]),
             write('Masukkan nama:'), nl,
             read(Query),
             addLamb(Query)
@@ -306,7 +382,7 @@ incubator :-
         (
             drop(egg, 1),
             assertz(incubation(3)),
-            write('Telur kamu sedang dikerami.')
+            write('Telur kamu sedang dikerami.'), nl
         );
         (
             write('Maaf kamu tidak memiliki telur'), nl
