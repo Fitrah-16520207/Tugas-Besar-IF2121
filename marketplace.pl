@@ -8,6 +8,7 @@ inventoryMarket([
     [shovel,300],
     [bait,5],
     [good_rod,2000],
+    [fertilizer,20],
     [good_fertilizer,40]
 ]).
 
@@ -44,6 +45,7 @@ priceList([
     [gurame,80],
     [patin,80],
     [tuna,200],
+    [salmon,175],
     [pari,1000],
     [barracuda,7500],
     [hiu,10000],
@@ -53,6 +55,7 @@ priceList([
     [rare_rod,4000],
     [legend_rod,10000],
     [shovel,300],
+    [fertilizer,20],
     [good_fertilizer,40],
     [best_fertilizer,70],
     [instant_fertilizer,100]
