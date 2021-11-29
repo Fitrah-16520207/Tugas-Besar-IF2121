@@ -298,7 +298,7 @@ checkLevelUp :-
     (
         (
             Exp >= LUC,
-            levelUp,
+            levelUp, !,
             checkLevelUp
         );
         (
@@ -308,7 +308,7 @@ checkLevelUp :-
     (
         (
             ExpFarm >= LUCFarm,
-            levelUpFarming,
+            levelUpFarming, !,
             checkLevelUp
         );
         (
@@ -318,7 +318,7 @@ checkLevelUp :-
     (
         (
             ExpFish >= LUCFish,
-            levelUpFarming,
+            levelUpFishing, !,
             checkLevelUp
         );
         (
@@ -328,7 +328,7 @@ checkLevelUp :-
     (
         (
             ExpRanch >= LUCRanch,
-            levelUpRanching,
+            levelUpRanching, !,
             checkLevelUp
         );
         (
