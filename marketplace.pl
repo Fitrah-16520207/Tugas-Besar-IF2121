@@ -16,14 +16,14 @@ inventoryMarket([
 lockedInventoryMarket([
     [carrot_seed,60, 3, farming],
     [rice_seed,70, 7, farming],
-    [sheep,1500, 3, ranching],
-    [cow,2000, 7, ranching],
+    [sheep,3000, 3, ranching],
+    [cow,4000, 7, ranching],
     [rare_rod,4000, 3, fishing],
     [legend_rod,10000, 7, fishing],
     [best_fertilizer,70, 3, farming],
     [instant_fertilizer,100, 7, farming],
-    [potionBreedSheep,5000, 3, ranching],
-    [potionBreedCow,5000, 7, ranching]
+    [potionBreedSheep,2000, 3, ranching],
+    [potionBreedCow,2000, 7, ranching]
 ]).
 
 priceList([
@@ -36,10 +36,10 @@ priceList([
     [carrot,120],
     [rice,150],
     [chicken,200],
-    [sheep,1500],
-    [cow,2000],
+    [sheep,3000],
+    [cow,4000],
     [egg,50],
-    [milk,50],
+    [milk,150],
     [wol,200],
     [lele,30],
     [nila,50],
@@ -60,8 +60,8 @@ priceList([
     [good_fertilizer,40],
     [best_fertilizer,70],
     [instant_fertilizer,100],
-    [potionBreedSheep, 5000],
-    [potionBreedCow, 5000]
+    [potionBreedSheep, 2000],
+    [potionBreedCow, 2000]
 ]).
 
 addItemMarket(Item) :-
