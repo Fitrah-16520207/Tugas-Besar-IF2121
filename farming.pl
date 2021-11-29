@@ -23,8 +23,8 @@ dig :-
     (member(['shovel',_], Invent) ->
         playerPoint(X,Y),
         asserta(diggedTilePoint(X, Y)),
-        cellCheck(X,Y),
-        write('Lokasi berhasil digali')
+        write('Lokasi berhasil digali'),nl,
+        cellCheck(X,Y)
     ;
         write('Kamu harus punya shovel untuk mengggali')
     ).
@@ -83,7 +83,7 @@ cekJumlah('carrot'):-
         playerPoint(X, Y),
         retract(diggedTilePoint(X,Y)),
         asserta(carrotTilePoint(X,Y)),
-        write('carrot berhasil ditanam'),
+        write('carrot berhasil ditanam'),nl,
         drop('carrot_seed'),
         days(A),
         acak(6,7,M),
@@ -100,7 +100,7 @@ cekJumlah('potato'):-
         playerPoint(X, Y),
         retract(diggedTilePoint(X,Y)),
         asserta(potatoTilePoint(X,Y)),
-        write('potato berhasil ditanam'),
+        write('potato berhasil ditanam'),nl,
         drop('potato_seed'),
         days(A),
         acak(3,4,M),
@@ -117,7 +117,7 @@ cekJumlah('tomato'):-
         playerPoint(X, Y),
         retract(diggedTilePoint(X,Y)),
         asserta(tomatoTilePoint(X,Y)),
-        write('tomato berhasil ditanam'),
+        write('tomato berhasil ditanam'),nl,
         drop('tomato_seed'),
         days(A),
         acak(2,3,M),
@@ -134,7 +134,7 @@ cekJumlah('rice'):-
         playerPoint(X, Y),
         retract(diggedTilePoint(X,Y)),
         asserta(riceTilePoint(X,Y)),
-        write('rice berhasil ditanam'),
+        write('rice berhasil ditanam'),nl,
         drop('rice_seed'),
         days(A),
         acak(2,3,M),
@@ -195,15 +195,16 @@ harvest :-
             (IC + N =< 100 ->
                 addItem('carrot',N),
                 write('carrot berhasil dipanen\n'),
-                retract(carrotTilePoint(X,Y)),
+                retract(carrotTilePoint(X,Y)),!,
+                cellCheck(X,Y),
                 playerJob(E),
                 (
                     E = ('farmer'),
                     earnFarmingExp(3),
-                    write('kamu mendapatkan 3 exp'),!
+                    write('kamu mendapatkan 3 exp')
                 ;
                     earnFarmingExp(2),
-                    write('kamu mendapatkan 2 exp'),!
+                    write('kamu mendapatkan 2 exp')
                 )
             ;
                 write('Inventory penuh, item tidak bisa dipanen\n'),!
@@ -224,15 +225,16 @@ harvest :-
             (IC + N =< 100 ->
                 addItem('potato',N),
                 write('potato berhasil dipanen\n'),
-                retract(potatoTilePoint(X,Y)),
+                retract(potatoTilePoint(X,Y)),!,
+                cellCheck(X,Y),
                 playerJob(E),
                 (
                     E = ('farmer'),
                     earnFarmingExp(3),
-                    write('kamu mendapatkan 3 exp'),!
+                    write('kamu mendapatkan 3 exp')
                 ;
                     earnFarmingExp(2),
-                    write('kamu mendapatkan 2 exp'),!
+                    write('kamu mendapatkan 2 exp')
                 )
             ;
                 write('Inventory penuh, item tidak bisa dipanen'),!
@@ -253,15 +255,16 @@ harvest :-
             (IC + N =< 100 ->
                 addItem('tomato',N),
                 write('tomato berhasil dipanen\n'),
-                retract(tomatoTilePoint(X,Y)),
+                retract(tomatoTilePoint(X,Y)),!,
+                cellCheck(X,Y),
                 playerJob(E),
                 (
                     E = ('farmer'),
                     earnFarmingExp(3),
-                    write('Kamu mendapatkan 3 exp'),!
+                    write('Kamu mendapatkan 3 exp')
                 ;
                     earnFarmingExp(2),
-                    write('Kamu mendapatkan 2 exp'),!
+                    write('Kamu mendapatkan 2 exp')
                 )
             ;
                 write('Inventory penuh, item tidak bisa dipanen\n'),!
@@ -282,15 +285,16 @@ harvest :-
             (IC + N =< 100 ->
                 addItem('rice', N),
                 write('rice berhasil dipanen\n'),
-                retract(riceTilePoint(X,Y)),
+                retract(riceTilePoint(X,Y)),!,
+                cellCheck(X,Y),
                 playerJob(E),
                 (
                     E = ('farmer'),
                     earnFarmingExp(3),
-                    write('kamu mendapatkan 3 exp'),!
+                    write('kamu mendapatkan 3 exp')
                 ;
                     earnFarmingExp(2),
-                    write('kamu mendapatkan 2 exp'),!
+                    write('kamu mendapatkan 2 exp')
                 )
             ;
                 write('Inventory penuh, item tidak bisa dipanen'),!
