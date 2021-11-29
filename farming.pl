@@ -201,10 +201,10 @@ harvest :-
                 (
                     E = ('farmer'),
                     earnFarmingExp(3),
-                    write('kamu mendapatkan 3 exp')
+                    write('kamu mendapatkan 3 exp'),!
                 ;
                     earnFarmingExp(2),
-                    write('kamu mendapatkan 2 exp')
+                    write('kamu mendapatkan 2 exp'),!
                 )
             ;
                 write('Inventory penuh, item tidak bisa dipanen\n'),!
@@ -231,10 +231,10 @@ harvest :-
                 (
                     E = ('farmer'),
                     earnFarmingExp(3),
-                    write('kamu mendapatkan 3 exp')
+                    write('kamu mendapatkan 3 exp'),!
                 ;
                     earnFarmingExp(2),
-                    write('kamu mendapatkan 2 exp')
+                    write('kamu mendapatkan 2 exp'),!
                 )
             ;
                 write('Inventory penuh, item tidak bisa dipanen'),!
@@ -261,10 +261,10 @@ harvest :-
                 (
                     E = ('farmer'),
                     earnFarmingExp(3),
-                    write('Kamu mendapatkan 3 exp')
+                    write('Kamu mendapatkan 3 exp'),!
                 ;
                     earnFarmingExp(2),
-                    write('Kamu mendapatkan 2 exp')
+                    write('Kamu mendapatkan 2 exp'),!
                 )
             ;
                 write('Inventory penuh, item tidak bisa dipanen\n'),!
@@ -291,10 +291,10 @@ harvest :-
                 (
                     E = ('farmer'),
                     earnFarmingExp(3),
-                    write('kamu mendapatkan 3 exp')
+                    write('kamu mendapatkan 3 exp'),!
                 ;
                     earnFarmingExp(2),
-                    write('kamu mendapatkan 2 exp')
+                    write('kamu mendapatkan 2 exp'),!
                 )
             ;
                 write('Inventory penuh, item tidak bisa dipanen'),!
