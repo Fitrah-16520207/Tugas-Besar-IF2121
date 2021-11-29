@@ -1,4 +1,4 @@
-# Tugas-Besar-IF2121 Teori Bahasa Formal dan Otomata
+# Tugas-Besar-IF2121 LOGIKA KOMPUTASIONAL
 
 ## Deskripsi
 Program farm simulation role-playing game yang menceritakan seorang programmer yang harus bertani untuk membayar utangnya dalam waktu satu tahun. Program ini menggunakan bahasa pemrograman deklaratif Prolog (GNU Prolog)
