@@ -127,11 +127,14 @@ help :-
     write('%                  yaitu hiu dan barracuda, tiap fishing bertambah 25 fishing exp    %\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
     write('%                           ~Item Ranching~                                          %\n'),
-    write('% 1. chicken. : Dewasa dalam waktu 1 minggu, saat dewasa bertelur tiap 6 hari        %\n'),
-    write('% 2. sheep.   : Dewasa dalam waktu 3 minggu, saat dewasa wol bertumbuh tiap 7 hari   %\n'),
-    write('% 3. cow.     : Dewasa dalam waktu 4 minggu, saat dewasa susu dapat diperah tiap hari%\n'),
+    write('% 1. chicken. : Dewasa dalam waktu 3 hari, saat dewasa bertelur tiap 3 hari dan akan %\n'),
+    write('%               semakin cepat dengan bertambahnya level ranching                     %\n'),
+    write('% 2. sheep.   : Dewasa dalam waktu 2 minggu, saat dewasa wol bertumbuh tiap 7 hari   %\n'),
+    write('%               dan akan semakin cepat dengan bertambahnya level ranching            %\n'),
+    write('% 3. cow.     : Dewasa dalam waktu 2 minggu, saat dewasa susu dapat diperah tiap     %\n'),
+    write('%               5 hari dan akan semakin cepat dengan bertambanya level ranching      %\n'),
     write('% 4. egg.     : Telur.                                                               %\n'),
-    write('% 5. woll.    : Woll.                                                                %\n'),
+    write('% 5. wol.     : Wol.                                                                 %\n'),
     write('% 6. milk.    : Satu liter susu sapi.                                                %\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
 help :-
