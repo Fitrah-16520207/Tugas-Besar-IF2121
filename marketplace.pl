@@ -4,7 +4,6 @@ inventoryMarket([
     [potato_seed,40],
     [tomato_seed,50],
     [chicken,200],
-    [turkey,750],
     [shovel,300],
     [bait,5],
     [good_rod,2000],
@@ -21,7 +20,9 @@ lockedInventoryMarket([
     [rare_rod,4000, 3, fishing],
     [legend_rod,10000, 7, fishing],
     [best_fertilizer,70, 3, farming],
-    [instant_fertilizer,100, 7, farming]
+    [instant_fertilizer,100, 7, farming],
+    [potionBreedSheep,5000, 3, ranching],
+    [potionBreedCow,5000, 7, ranching]
 ]).
 
 priceList([
@@ -34,7 +35,6 @@ priceList([
     [carrot,120],
     [rice,150],
     [chicken,200],
-    [turkey,750],
     [sheep,1500],
     [cow,2000],
     [egg,50],
@@ -58,7 +58,9 @@ priceList([
     [fertilizer,20],
     [good_fertilizer,40],
     [best_fertilizer,70],
-    [instant_fertilizer,100]
+    [instant_fertilizer,100],
+    [potionBreedSheep, 5000],
+    [potionBreedCow, 5000]
 ]).
 
 addItemMarket(Item) :-

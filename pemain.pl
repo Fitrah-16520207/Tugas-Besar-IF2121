@@ -271,12 +271,14 @@ levelUpRanching :-
         (
             NewLvl = 3, 
             unlockedItem(sheep),
-            write('Sheep telah terbuka, silakan cek marketplace untuk lebih detail\n'), !
+            unlockedItem(potionBreedSheep),
+            write('Sheep dan potion breed sheep telah terbuka, silakan cek marketplace untuk lebih detail\n'), !
         );
         (
             NewLvl = 7,
             unlockedItem(cow),
-            write('Cow telah terbuka, silakan cek marketplace untuk lebih detail\n'), !
+            unlockedItem(potionBreedCow),
+            write('Cow dan potion breed cow telah terbuka, silakan cek marketplace untuk lebih detail\n'), !
         );
         (
             write(''), !

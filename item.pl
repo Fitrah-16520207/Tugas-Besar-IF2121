@@ -11,7 +11,6 @@ item(rice,farming).
 item(chicken,ranching).
 item(sheep,ranching).
 item(cow,ranching).
-item(turkey,ranching).
 item(egg,ranching).
 item(wol,ranching).
 item(milk,ranching).
@@ -48,7 +47,6 @@ buyable(rice_seed).
 buyable(chicken).
 buyable(sheep).
 buyable(cow).
-buyable(turkey).
 buyable(bait).
 buyable(potionBreedCow).
 buyable(potionBreedSheep).
@@ -80,12 +78,11 @@ itemPrice(rice,150).
 itemPrice(chicken,200).
 itemPrice(sheep,1500).
 itemPrice(cow,2000).
-itemPrice(turkey,750).
 itemPrice(egg,50).
 itemPrice(wol,200).
 itemPrice(milk,50). 
-itemPrice(potionBreedCow,5000). 
-itemPrice(potionBreedSheep,5000). 
+itemPrice(potionBreedCow,5000).
+itemPrice(potionBreedSheep,5000).
 % fishing
 itemPrice(lele,30).
 itemPrice(nila,50).
@@ -112,7 +109,9 @@ itemPrice(instant_fertilizer,100).
 unlockedLvl(carrot_seed, 3).
 unlockedLvl(rice_seed, 7).
 unlockedLvl(sheep, 3).
+unlockedLvl(potionBreedSheep, 3).
 unlockedLvl(cow, 7).
+unlockedLvl(potionBreedCow, 7).
 unlockedLvl(rare_rod, 3).
 unlockedLvl(legend_rod, 7).
 unlockedLvl(best_fertilizer, 3).
