@@ -337,9 +337,10 @@ babyRanch :-
         (
             Days = 0,
             write('Telur kamu ada yang menetas.'), nl,
+            retract(incubation(Days)),
             Exp is 30,
             earnRanchingExp(Exp),
-            format('Kamu mendapatkan ~d EXP\n',[Exp]),
+            format('Kamu mendapatkan ~w EXP\n',[Exp]),
             write('Masukkan nama:'), nl,
             read(Query),
             addChicks(Query)

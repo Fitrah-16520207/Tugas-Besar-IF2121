@@ -112,7 +112,7 @@ earnFarmingExp(X) :-
     retractall(experience(_)),
     retractall(experienceFarming(_)),
     asserta(experience(NewExp)),
-    asserta(experienceFishing(NewExpFarm)),
+    asserta(experienceFarming(NewExpFarm)),
     checkLevelUp.
 
 earnRanchingExp(X) :-
@@ -382,6 +382,7 @@ addDays :-
     retractall(days(_)),
     NewDays is CurrDays + 1,
     asserta(days(NewDays)),
+    updateRanch, babyRanch, grownRanch,
     (
         (
             NewDays > 120,
