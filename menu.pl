@@ -216,3 +216,12 @@ help :-
     write('%                              ~Housing~                                             %\n'),
     write('% - house.          : Masuk ke rumah                                                 %\n'),
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
+help :-
+    playerCell(C),
+    state(free),
+    C = ('Q'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                              ~Quest~                                               %\n'),
+    write('% - quest.          : Memilih quest yang tersedia                                    %\n'),
+    write('% - printQuest.     : Menampilkan quest yang diambil                                 %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),!.
