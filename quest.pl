@@ -135,7 +135,7 @@ printQuest :-
     earnReward,
     removeActiveQuest, !.
 
-updateActiveQuest(_) :-
+updateActiveQuest(_, _) :-
     \+activeQuest(_, _, _, _, _), !.
 updateActiveQuest(Item, Total) :-
     activeQuest(Fish, Farm, Ranch, Gold, Exp),
