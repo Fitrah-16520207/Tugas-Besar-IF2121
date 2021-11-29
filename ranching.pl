@@ -35,16 +35,18 @@ ambilHasil :-
     write(' 3. Domba'), nl, nl,
     read(InputAmbilHasil),
     (
-        InputAmbilHasil = 1, !,
-        ranchChicken
-    );
-    (
-        InputAmbilHasil = 2, !,
-        ranchCow
-    );
-    (
-        InputAmbilHasil = 3, !,
-        ranchSheep
+        (
+            InputAmbilHasil = 1, !,
+            ranchChicken
+        );
+        (
+            InputAmbilHasil = 2, !,
+            ranchCow
+        );
+        (
+            InputAmbilHasil = 3, !,
+            ranchSheep
+        )
     ).
 
 ranchChicken :-
@@ -178,7 +180,7 @@ addChicken(Name) :-
 addChicken(Name) :- 
     \+chicken(Name, _),
     \+chicks(Name, _),
-    levelFarming(Lvl),
+    levelRanching(Lvl),
     (
         (
             Lvl >= 5,
@@ -223,6 +225,7 @@ addCow(Name) :-
 addCow(Name) :-
     \+cow(Name, _),
     \+calf(Name, _),
+    levelRanching(Lvl),
     (
         (
             Lvl >= 9,
@@ -265,6 +268,7 @@ addSheep(Name) :-
 addSheep(Name) :-
     \+sheep(Name, _),
     \+lamb(Name, _),
+    levelRanching(Lvl),
     (
         (
             Lvl >= 7,
@@ -418,10 +422,10 @@ babyRanch :-
             );
             (
                 Days > 0    
-            )
+            ),
+            retractall(incubation(0))
         )
     ),
-    retractall(incubation(0)),
 
     forall(pregnantCow(Name, Days),
         (
@@ -571,7 +575,7 @@ breedSheep :-
                         );
                         (
                             \+sheep(InputBreedSheep, _), !,
-                            format('Maaf kamu tidak memiliki dowba bernama ~w', [InputBreedSheep]), nl,
+                            format('Maaf kamu tidak memiliki domba bernama ~w', [InputBreedSheep]), nl,
                             write('Masukkan "keluar", jika ingin keluar'), nl,
                             breedSheep
                         );
@@ -585,7 +589,7 @@ breedSheep :-
                             sheep(InputBreedSheep, _), !,
                             assertz(pregnantSheep(InputBreedSheep, 14)),
                             drop(potionBreedSheep, 1),
-                            format('Selamat domba kamu yang bernama ~w sedang mengandung.', [InputBreedSheep])
+                            format('Selamat domba kamu yang bernama ~w sedang mengandung.', [InputBreedSheep]), nl
                         )
                     )
                 )

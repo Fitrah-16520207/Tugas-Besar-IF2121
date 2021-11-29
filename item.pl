@@ -76,13 +76,13 @@ itemPrice(carrot,120).
 itemPrice(rice,150).
 % ranching
 itemPrice(chicken,200).
-itemPrice(sheep,1500).
-itemPrice(cow,2000).
+itemPrice(sheep,3000).
+itemPrice(cow,4000).
 itemPrice(egg,50).
 itemPrice(wol,200).
-itemPrice(milk,50). 
-itemPrice(potionBreedCow,5000).
-itemPrice(potionBreedSheep,5000).
+itemPrice(milk,150). 
+itemPrice(potionBreedCow,2000).
+itemPrice(potionBreedSheep,2000).
 % fishing
 itemPrice(lele,30).
 itemPrice(nila,50).
