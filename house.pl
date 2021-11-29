@@ -38,7 +38,7 @@ setTeleport(X) :-
     retractall(bisaTeleport(_)),
     asserta(bisaTeleport(X)).
 periTidur:-
-    acak(0,20,Chance),
+    acak(0,100,Chance),
     Chance <21,
     write('Semalam peri tidur mendatangimu sehingga kamu mendapat kemampuan teleport selama satu hari\n'),
     setTeleport(bisa).
