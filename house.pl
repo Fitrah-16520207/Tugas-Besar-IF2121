@@ -39,9 +39,13 @@ setTeleport(X) :-
     asserta(bisaTeleport(X)).
 periTidur:-
     acak(0,100,Chance),
-    Chance <21,
-    write('Semalam peri tidur mendatangimu sehingga kamu mendapat kemampuan teleport selama satu hari\n'),
-    setTeleport(bisa).
+    ((
+        Chance <21,
+        write('Semalam peri tidur mendatangimu sehingga kamu mendapat kemampuan teleport selama satu hari\n'),
+        setTeleport(bisa)
+    );
+        (write(''))
+    ).
 sleep :-
     state(house),
     setTeleport(enggak),
@@ -51,7 +55,7 @@ sleep :-
         (
             X<121,periTidur,
             write('Sekarang adalah hari ke -'),write(' '),write(X),nl,
-            write('Semoga hari kamu menyenangkan')
+            write('Semoga hari kamu menyenangkan'),!
         );
         (
             write('')
