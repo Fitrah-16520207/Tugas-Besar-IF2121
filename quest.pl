@@ -52,19 +52,19 @@ generateQuest :-
     removeActiveQuest,
     removeAvailableQuest,
     (
-        random(0, 10, Fish),
+        random(1, 10, Fish),
         Exp1 is round(Fish*3/2),
         Gold1 is Fish*50,
         addQuest([Fish, 0, 0, Gold1, Exp1])
     ),
     (
-        random(0, 5, Farm),
+        random(1, 5, Farm),
         Exp2 is round(Farm * 5 / 3),
         Gold2 is Farm*75,
         addQuest([0, Farm, 0, Gold2, Exp2])
     ),
     (
-        random(0, 7, Ranch),
+        random(1, 7, Ranch),
         Exp3 is Ranch*2,
         Gold3 is Ranch*100,
         addQuest([0, 0, Ranch, Gold3, Exp3])
