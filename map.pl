@@ -261,7 +261,7 @@ cellCheck(R, C) :-
     asserta(playerCell('Q')),
     !,
     write('Kamu sekarang ada di tempat pengambilan quest'), nl,
-    write('Tulis quest. untuk masuk ke rumah').
+    write('Tulis quest. untuk masuk ke quest').
 cellCheck(R, C) :-
     waterTilePoint(Rw, Cw),
     (

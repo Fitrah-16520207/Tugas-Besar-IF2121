@@ -30,24 +30,22 @@ mancing:-
     printRod(normal_rod),
     printRod(rare_rod),
     printRod(legend_rod),
-    pancingan.
+    write('Pilih pancingan yang akan kamu gunakan dengan mengetik nama pancingan'),nl,
+    read(X),
+    pancingan(X).
 
 printRod(X) :-
     inventory(Invent),
     (member([X, _], Invent) ->
-        write(' '), write(X),nl
+        write(X),nl
     ;
         write('')
     ).
-pancingan:-
-    write('Pilih pancingan yang akan kamu gunakan dengan mengetik nama pancingan'),nl,
-    read(X),
+pancingan(X):-
     jumlahBarang(X,Y),
     Y>0,
     fishing(X).
-pancingan:-
-    write('Pilih pancingan yang akan kamu gunakan dengan mengetik nama pancingan'),ml,
-    read(X),
+pancingan(X):-
     cekBarang(X),nl,
     write('Kamu tidak mempunyai pancingan ini').
 
