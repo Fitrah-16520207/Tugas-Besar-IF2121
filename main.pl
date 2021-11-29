@@ -59,6 +59,7 @@ start :-
     reset,
     state(not_started),
     setState(free),
+    baseStats,
     write('Selamat Datand di Harvest Star. Pilih pekerjaanmu\n'),
     write('1. Fisherman.\n'),
     write('     Kamu akan menjadi pemancing handal yang dibekali dengan'),nl,
@@ -86,6 +87,5 @@ start :-
         setJob(rancher)
     )
     ),
-    mainMenu,
-    baseStats.
+    mainMenu.
 

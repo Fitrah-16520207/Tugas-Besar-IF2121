@@ -67,7 +67,15 @@ ranchChicken :-
         (
             Count > 0,
             format('Kamu mendapatkan ~d telur\n',[Count]),
-            Exp is Count * 3,
+            (
+                (
+                    playerJob(rancher), !,
+                    Exp is Count * 3
+                );
+                (
+                    Exp is Count * 2
+                )
+            ),
             earnRanchingExp(Exp),
             format('Kamu mendapatkan ~d EXP\n',[Exp]),
             updateActiveQuest(ranch, Count)
@@ -98,7 +106,15 @@ ranchCow :-
         (
             Count > 0,
             format('Kamu mendapatkan ~d susu\n',[Count]),
-            Exp is Count * 10,
+            (
+                (
+                    playerJob(rancher), !,
+                    Exp is Count * 12
+                );
+                (
+                    Exp is Count * 10
+                )
+            ),
             earnRanchingExp(Exp),
             format('Kamu mendapatkan ~d EXP\n',[Exp]),
             updateActiveQuest(ranch, Count)
@@ -129,7 +145,15 @@ ranchSheep :-
         (
             Count > 0,
             format('Kamu mendapatkan ~d wol\n',[Count]),
-            Exp is Count * 15,
+            (
+                (
+                    playerJob(rancher), !,
+                    Exp is Count * 17
+                );
+                (
+                    Exp is Count * 15
+                )
+            ),
             earnRanchingExp(Exp),
             format('Kamu mendapatkan ~d EXP\n',[Exp]),
             updateActiveQuest(ranch, Count)
@@ -154,7 +178,20 @@ addChicken(Name) :-
 addChicken(Name) :- 
     \+chicken(Name, _),
     \+chicks(Name, _),
-    assertz(chicken(Name, 3)).
+    levelFarming(Lvl),
+    (
+        (
+            Lvl >= 5,
+            assertz(chicken(Name, 1)), !
+        );
+        (
+            Lvl >= 3,
+            assertz(chicken(Name, 2)), !
+        );
+        (
+            assertz(chicken(Name, 3)), !
+        )    
+    ).
 
 addChicks(Name) :- 
     (
@@ -186,7 +223,19 @@ addCow(Name) :-
 addCow(Name) :-
     \+cow(Name, _),
     \+calf(Name, _),
-    assertz(cow(Name, 5)).
+    (
+        (
+            Lvl >= 9,
+            assertz(cow(Name, 2)), !
+        );
+        (
+            Lvl >= 8,
+            assertz(cow(Name, 4)), !
+        );
+        (
+            assertz(cow(Name, 5)), !
+        )    
+    ).
 
 addCalf(Name) :- 
     (
@@ -216,7 +265,19 @@ addSheep(Name) :-
 addSheep(Name) :-
     \+sheep(Name, _),
     \+lamb(Name, _),
-    assertz(sheep(Name, 7)).
+    (
+        (
+            Lvl >= 7,
+            assertz(sheep(Name, 3)), !
+        );
+        (
+            Lvl >= 5,
+            assertz(sheep(Name, 5)), !
+        );
+        (
+            assertz(sheep(Name, 7)), !
+        )    
+    ).
 
 addLamb(Name) :- 
     (
@@ -331,50 +392,91 @@ grownRanch :-
             )
         )
     ).
+grownRanch.
 
 babyRanch :-
     forall(incubation(Days),
         (
-            Days = 0,
-            write('Telur kamu ada yang menetas.'), nl,
-            retract(incubation(Days)),
-            Exp is 30,
-            earnRanchingExp(Exp),
-            format('Kamu mendapatkan ~w EXP\n',[Exp]),
-            write('Masukkan nama:'), nl,
-            read(Query),
-            addChicks(Query)
+            (
+                Days = 0,
+                write('Telur kamu ada yang menetas.'), nl,
+                retract(incubation(Days)),
+                (
+                    (
+                        playerJob(rancher), !,
+                        Exp is 25
+                    );
+                    (
+                        Exp is 20
+                    )
+                ),
+                earnRanchingExp(Exp),
+                format('Kamu mendapatkan ~w EXP\n',[Exp]),
+                write('Masukkan nama:'), nl,
+                read(Query),
+                addChicks(Query)
+            );
+            (
+                Days > 0    
+            )
         )
     ),
     retractall(incubation(0)),
 
     forall(pregnantCow(Name, Days),
         (
-            Days = 0,
-            retract(pregnantCow(Name, Days)),
-            format('Sapi kamu yang bernama ~w telah melahirkan.', [Name]), nl,
-            Exp is 100,
-            earnRanchingExp(Exp),
-            format('Kamu mendapatkan ~d EXP\n',[Exp]),
-            write('Masukkan nama:'), nl,
-            read(Query),
-            addCalf(Query)
+            (
+                Days = 0,
+                retract(pregnantCow(Name, Days)),
+                format('Sapi kamu yang bernama ~w telah melahirkan.', [Name]), nl,
+                (
+                    (
+                        playerJob(rancher), !,
+                        Exp is 100
+                    );
+                    (
+                        Exp is 80
+                    )
+                ),
+                earnRanchingExp(Exp),
+                format('Kamu mendapatkan ~d EXP\n',[Exp]),
+                write('Masukkan nama:'), nl,
+                read(Query),
+                addCalf(Query)
+            );
+            (
+                Days > 0    
+            )
         )
     ),
 
     forall(pregnantSheep(Name, Days),
         (
-            Days = 0,
-            retract(pregnantSheep(Name, Days)),
-            format('Domba kamu yang bernama ~w telah melahirkan.', [Name]), nl,
-            Exp is 100,
-            earnRanchingExp(Exp),
-            format('Kamu mendapatkan ~d EXP\n',[Exp]),
-            write('Masukkan nama:'), nl,
-            read(Query),
-            addLamb(Query)
+            (
+                Days = 0,
+                retract(pregnantSheep(Name, Days)),
+                format('Domba kamu yang bernama ~w telah melahirkan.', [Name]), nl,
+                (
+                    (
+                        playerJob(rancher), !,
+                        Exp is 100
+                    );
+                    (
+                        Exp is 80
+                    )
+                ),
+                earnRanchingExp(Exp),
+                format('Kamu mendapatkan ~d EXP\n',[Exp]),
+                write('Masukkan nama:'), nl,
+                read(Query),
+                addLamb(Query)
+            );
+            (
+                Days > 0    
+            )
         )
     ).
+babyRanch.
 
 incubator :-
     \+inventory(_), !,
