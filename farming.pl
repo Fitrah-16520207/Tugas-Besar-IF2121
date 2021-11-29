@@ -197,6 +197,7 @@ harvest :-
                 write('carrot berhasil dipanen\n'),
                 retract(carrotTilePoint(X,Y)),!,
                 cellCheck(X,Y),
+                updateActiveQuest(farm,N),
                 playerJob(E),
                 (
                     E = ('farmer'),
@@ -227,6 +228,7 @@ harvest :-
                 write('potato berhasil dipanen\n'),
                 retract(potatoTilePoint(X,Y)),!,
                 cellCheck(X,Y),
+                updateActiveQuest(farm,N),
                 playerJob(E),
                 (
                     E = ('farmer'),
@@ -257,6 +259,7 @@ harvest :-
                 write('tomato berhasil dipanen\n'),
                 retract(tomatoTilePoint(X,Y)),!,
                 cellCheck(X,Y),
+                updateActiveQuest(farm,N),
                 playerJob(E),
                 (
                     E = ('farmer'),
@@ -287,6 +290,7 @@ harvest :-
                 write('rice berhasil dipanen\n'),
                 retract(riceTilePoint(X,Y)),!,
                 cellCheck(X,Y),
+                updateActiveQuest(farm,N),
                 playerJob(E),
                 (
                     E = ('farmer'),
