@@ -6,6 +6,7 @@ inventoryMarket([
     [chicken,200],
     [shovel,300],
     [bait,5],
+    [normal_rod,500],
     [good_rod,2000],
     [fertilizer,20],
     [good_fertilizer,40]
