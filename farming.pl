@@ -197,14 +197,15 @@ harvest :-
                 write('carrot berhasil dipanen\n'),
                 retract(carrotTilePoint(X,Y)),!,
                 cellCheck(X,Y),
+                updateActiveQuest(farm,N),
                 playerJob(E),
                 (
                     E = ('farmer'),
                     earnFarmingExp(3),
-                    write('kamu mendapatkan 3 exp')
+                    write('kamu mendapatkan 3 exp'),!
                 ;
                     earnFarmingExp(2),
-                    write('kamu mendapatkan 2 exp')
+                    write('kamu mendapatkan 2 exp'),!
                 )
             ;
                 write('Inventory penuh, item tidak bisa dipanen\n'),!
@@ -227,14 +228,15 @@ harvest :-
                 write('potato berhasil dipanen\n'),
                 retract(potatoTilePoint(X,Y)),!,
                 cellCheck(X,Y),
+                updateActiveQuest(farm,N),
                 playerJob(E),
                 (
                     E = ('farmer'),
                     earnFarmingExp(3),
-                    write('kamu mendapatkan 3 exp')
+                    write('kamu mendapatkan 3 exp'),!
                 ;
                     earnFarmingExp(2),
-                    write('kamu mendapatkan 2 exp')
+                    write('kamu mendapatkan 2 exp'),!
                 )
             ;
                 write('Inventory penuh, item tidak bisa dipanen'),!
@@ -257,14 +259,15 @@ harvest :-
                 write('tomato berhasil dipanen\n'),
                 retract(tomatoTilePoint(X,Y)),!,
                 cellCheck(X,Y),
+                updateActiveQuest(farm,N),
                 playerJob(E),
                 (
                     E = ('farmer'),
                     earnFarmingExp(3),
-                    write('Kamu mendapatkan 3 exp')
+                    write('Kamu mendapatkan 3 exp'),!
                 ;
                     earnFarmingExp(2),
-                    write('Kamu mendapatkan 2 exp')
+                    write('Kamu mendapatkan 2 exp'),!
                 )
             ;
                 write('Inventory penuh, item tidak bisa dipanen\n'),!
@@ -287,14 +290,15 @@ harvest :-
                 write('rice berhasil dipanen\n'),
                 retract(riceTilePoint(X,Y)),!,
                 cellCheck(X,Y),
+                updateActiveQuest(farm,N),
                 playerJob(E),
                 (
                     E = ('farmer'),
                     earnFarmingExp(3),
-                    write('kamu mendapatkan 3 exp')
+                    write('kamu mendapatkan 3 exp'),!
                 ;
                     earnFarmingExp(2),
-                    write('kamu mendapatkan 2 exp')
+                    write('kamu mendapatkan 2 exp'),!
                 )
             ;
                 write('Inventory penuh, item tidak bisa dipanen'),!
