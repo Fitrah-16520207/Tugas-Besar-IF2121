@@ -101,7 +101,7 @@ random_fish(X,Lv,normal_rod) :-
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     earnFishingExp(Exp),
     updateActiveQuest(fish,1),
-    !.
+    fail.
 random_fish(X,Lv,good_rod) :-
     playerJob(E),
     E = ('fisherman'),
@@ -117,7 +117,7 @@ random_fish(X,Lv,good_rod) :-
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     earnFishingExp(Exp),
     updateActiveQuest(fish,1),
-    !.
+    fail.
 random_fish(X,Lv,rare_rod) :-
     playerJob(E),
     E = ('fisherman'),
@@ -133,7 +133,7 @@ random_fish(X,Lv,rare_rod) :-
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     earnFishingExp(Exp),
     updateActiveQuest(fish,1),
-    !.
+    fail.
 random_fish(X,Lv,legend_rod) :-
     playerJob(E),
     E = ('fisherman'),
@@ -149,7 +149,7 @@ random_fish(X,Lv,legend_rod) :-
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     earnFishingExp(Exp),
     updateActiveQuest(fish,1),
-    !.
+    fail.
 
 random_fish(X,Lv,normal_rod) :-
     playerJob(E),
@@ -166,7 +166,7 @@ random_fish(X,Lv,normal_rod) :-
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     earnFishingExp(Exp),
     updateActiveQuest(fish,1),
-    !.
+    fail.
 random_fish(X,Lv,good_rod) :-
     playerJob(E),
     E = ('farmer'),
@@ -182,7 +182,7 @@ random_fish(X,Lv,good_rod) :-
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     earnFishingExp(Exp),
     updateActiveQuest(fish,1),
-    !.
+    fail.
 random_fish(X,Lv,rare_rod) :-
     playerJob(E),
     E = ('farmer'),
@@ -198,7 +198,7 @@ random_fish(X,Lv,rare_rod) :-
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     earnFishingExp(Exp),
     updateActiveQuest(fish,1),
-    !.
+    fail.
 random_fish(X,Lv,legend_rod) :-
     playerJob(E),
     E = ('farmer'),
@@ -214,7 +214,7 @@ random_fish(X,Lv,legend_rod) :-
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     earnFishingExp(Exp),
     updateActiveQuest(fish,1),
-    !.
+    fail.
 
 random_fish(X,Lv,normal_rod) :-
     playerJob(E),
@@ -231,7 +231,7 @@ random_fish(X,Lv,normal_rod) :-
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     earnFishingExp(Exp),
     updateActiveQuest(fish,1),
-    !.
+    fail.
 random_fish(X,Lv,good_rod) :-
     playerJob(E),
     E = ('rancher'),
@@ -247,7 +247,7 @@ random_fish(X,Lv,good_rod) :-
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     earnFishingExp(Exp),
     updateActiveQuest(fish,1),
-    !.
+    fail.
 random_fish(X,Lv,rare_rod) :-
     playerJob(E),
     E = ('rancher'),
@@ -263,7 +263,7 @@ random_fish(X,Lv,rare_rod) :-
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     earnFishingExp(Exp),
     updateActiveQuest(fish,1),
-    !.
+    fail.
 random_fish(X,Lv,legend_rod) :-
     playerJob(E),
     E = ('rancher'),
@@ -279,4 +279,4 @@ random_fish(X,Lv,legend_rod) :-
     write('Mendapat exp fishing sebesar '),write(Exp),write(' Exp \n'),
     earnFishingExp(Exp),
     updateActiveQuest(fish,1),
-    !.
+    fail.
